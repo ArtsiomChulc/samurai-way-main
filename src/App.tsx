@@ -3,8 +3,8 @@ import './App.css';
 import { Description } from './component/Description/Description';
 import Header from "./component/Header/Header";
 import { Main } from './component/Main/Main';
-import { MyPost } from './component/MyPost/MyPost';
 import { Nav } from './component/Nav/Nav';
+import { Profile } from './component/Profile/Profile';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
             <Nav />
             <Main />
             <Description />
-            <MyPost />
+            <Profile />
         </div>
     );
 }

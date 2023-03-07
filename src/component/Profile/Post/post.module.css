@@ -1,0 +1,23 @@
+.post {
+	padding: 15px;
+}
+
+.post>img {
+	width: 50px;
+	margin-right: 20px;
+	border-radius: 50%;
+}
+
+.like {
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+.like img {
+	width: 25px;
+	margin-right: 10px;
+}
+
+.likecount {
+	font-size: 12px;
+}
