@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import s from './navbar.module.css';
 
 
@@ -7,19 +8,19 @@ export const Navbar = () => {
 	return (
 		<div className={s.navbar}>
 			<div className={s.item}>
-				<a href='/Profile'>Profile</a>
-			</div>
-			<div className={`${s.item} ${s.active}`}>
-				<a href='/Dialogs'>Messages</a>
+				<NavLink to='/Profile' activeClassName={s.active}>Profile</NavLink>
 			</div>
 			<div className={s.item}>
-				<a href='/news'>News</a>
+				<NavLink to='/Dialogs' activeClassName={s.active}>Messages</NavLink>
 			</div>
 			<div className={s.item}>
-				<a href='/music'>Music</a>
+				<NavLink to='/news' activeClassName={s.active}>News</NavLink>
 			</div>
 			<div className={s.item}>
-				<a href='/settings'>Settings</a>
+				<NavLink to='/music' activeClassName={s.active}>Music</NavLink>
+			</div>
+			<div className={s.item}>
+				<NavLink to='/settings' activeClassName={s.active}>Settings</NavLink>
 			</div>
 		</div>
 	)

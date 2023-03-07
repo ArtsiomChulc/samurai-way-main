@@ -13,6 +13,25 @@
 	margin-top: 15px;
 	border: 1px solid black;
 	padding: 5px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.item::after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #16141a3e;
+	transition: all .5s ease;
+	z-index: -1;
+}
+
+.item:hover::after {
+	width: 100%;
 }
 
 .item a {
@@ -28,6 +47,6 @@
 	text-transform: capitalize;
 }
 
-.item.active a {
+.item a.active {
 	color: rgb(142, 203, 80);
 }
