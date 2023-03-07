@@ -1,0 +1,13 @@
+.header {
+	grid-area: header;
+	background: rgb(233, 239, 241);
+}
+
+.logo {
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	/* background-image: url('img/logo-header/logo1.png'); */
+	background-repeat: no-repeat;
+	background-size: auto;
+}

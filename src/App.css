@@ -1,7 +1,14 @@
 .App {
   padding: 20px 50px;
-  background: deepskyblue;
   width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav main"
+    "nav desc"
+    "nav my-post";
+  grid-template-rows: 120px 1fr;
+  grid-template-columns: 2fr 10fr;
+  gap: 10px;
 }
-
