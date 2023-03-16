@@ -1,0 +1,34 @@
+.friendsWrap {
+	display: flex;
+	flex-direction: column;
+	margin-top: 60px;
+}
+
+.friendsWrap h3 {
+	text-align: center;
+	font-size: 32px;
+	font-family: 'Pacifico', cursive;
+	color: rgb(173, 142, 6);
+}
+
+.friendFlex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.friend {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+}
+
+.friend img {
+	width: 30px;
+	border-radius: 50%;
+}
+
+.friend p {
+	color: rgb(2, 18, 18);
+	font-size: 12px;
+}
