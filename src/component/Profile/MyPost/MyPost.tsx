@@ -13,6 +13,15 @@ import s from './mypost.module.css';
 // }
 
 export const MyPost = (props: ProfilePageType) => {
+
+	const newPostElement = React.createRef<HTMLTextAreaElement>()
+
+	const addPost = () => {
+		alert(newPostElement.current?.value)
+
+	}
+
+
 	const postElement = props.posts.map(el => {
 		return (
 			<Post key={el.id} message={el.message} likeCount={el.likeCount} />
@@ -20,9 +29,9 @@ export const MyPost = (props: ProfilePageType) => {
 	})
 	return (
 		<div className={s.mypost}>
-			<div>
-				<input type="text" />
-				<button>Add post</button>
+			<div className={s.wrapAddMessage}>
+				<textarea ref={newPostElement}></textarea>
+				<button className={s.btn} onClick={addPost}>Add post</button>
 			</div>
 
 			{postElement}

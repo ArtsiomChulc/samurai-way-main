@@ -1,3 +1,17 @@
 .mypost {
 	padding: 10px;
 }
+
+.wrapAddMessage {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.btn {
+	width: 120px;
+	padding: 7px 12px;
+	margin-left: 15px;
+}
