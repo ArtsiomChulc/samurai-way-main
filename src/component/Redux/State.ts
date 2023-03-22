@@ -1,7 +1,8 @@
+import { rernderEntireTree } from '../../render'
 
 export type PostType = {
 	id: number
-	message: string
+	post: string
 	likeCount: number
 }
 
@@ -62,12 +63,12 @@ let state: RootStateType = {
 	},
 	profilePage: {
 		posts: [
-			{ id: 1, message: 'Hello.....', likeCount: 2 },
-			{ id: 2, message: 'Go to home', likeCount: 8 },
-			{ id: 3, message: 'I am Artsiom', likeCount: 2 },
-			{ id: 4, message: 'Yo Yo Yo Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 4 },
-			{ id: 5, message: 'Mark, how are you?', likeCount: 6 },
-			{ id: 6, message: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
+			{ id: 1, post: 'Hello.....', likeCount: 2 },
+			{ id: 2, post: 'Go to home', likeCount: 8 },
+			{ id: 3, post: 'I am Artsiom', likeCount: 2 },
+			// { id: 4, post: 'Yo Yo Yo Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 4 },
+			// { id: 5, post: 'Mark, how are you?', likeCount: 6 },
+			// { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
 		]
 	},
 	navbarFriends: {
@@ -82,8 +83,10 @@ let state: RootStateType = {
 }
 
 export const addPost = (post: string) => {
-	let newPostObj: PostType = { id: 7, message: post, likeCount: 0 }
+	let newPostObj: PostType = { id: 7, post: post, likeCount: 0 }
 	state.profilePage.posts.push(newPostObj)
+
+	rernderEntireTree(state)
 }
 
 export default state;

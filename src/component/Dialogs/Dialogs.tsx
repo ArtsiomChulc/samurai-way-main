@@ -7,14 +7,14 @@ import { Message } from './Message/Message'
 type DialogsPrpsType = {
 	dialogs: DialogType[]
 	messages: MessageType[]
-	addPost: (value: string) => void
 }
 
 export const Dialogs = (props: DialogsPrpsType) => {
 	const newTextElement = React.createRef<HTMLTextAreaElement>()
 
 	const addMessage = () => {
-		props.addPost(newTextElement.current ? newTextElement.current.value : '---')
+		// props.addPost(newTextElement.current ? newTextElement.current.value : '---')
+		//newTextElement.current.value = ''
 	}
 
 	return (

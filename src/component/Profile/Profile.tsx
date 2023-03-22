@@ -2,9 +2,14 @@ import React from 'react';
 import s from './profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 import { MyPost } from './MyPost/MyPost';
-import { ProfilePageType } from '../Redux/State';
+import { PostType, ProfilePageType } from '../Redux/State';
 
-export const Profile = (props: ProfilePageType) => {
+type ProfilePropsType = {
+	posts: PostType[]
+	addPost: (post: string) => void
+}
+
+export const Profile = (props: ProfilePropsType) => {
 
 	// const postsData: PostData[] = [
 	// 	{ id: 1, message: 'Hello.....', likeCount: 12 },
@@ -26,7 +31,7 @@ export const Profile = (props: ProfilePageType) => {
 	return (
 		<div className={s.profile}>
 			<ProfileInfo />
-			<MyPost posts={props.posts} />
+			<MyPost posts={props.posts} addPost={props.addPost} />
 		</div>
 	)
 }

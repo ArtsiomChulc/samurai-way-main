@@ -25,8 +25,8 @@ function App(props: StateType) {
             <Header />
             <Navbar friends={friends} />
             <div className={s.profile}>
-                <Route path='/Profile' render={() => <Profile posts={posts} />} />
-                <Route path='/Dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages} addPost={addPost} />} />
+                <Route path='/Profile' render={() => <Profile posts={posts} addPost={addPost} />} />
+                <Route path='/Dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages} />} />
                 <Route path='/news' render={() => <News />} />
                 <Route path='/music' render={() => <Music />} />
                 <Route path='/settings' render={() => <Settings />} />

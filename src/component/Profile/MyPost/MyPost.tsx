@@ -1,7 +1,13 @@
 import React from 'react';
-import { ProfilePageType } from '../../Redux/State';
+import { PostType } from '../../Redux/State';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
+
+type MyPostTypeProps = {
+	posts: PostType[]
+	addPost: (post: string) => void
+}
+
 
 // export type PostsDataType = {
 // 	data: PostData[]
@@ -12,19 +18,22 @@ import s from './mypost.module.css';
 // 	likeCount: number
 // }
 
-export const MyPost = (props: ProfilePageType) => {
+export const MyPost = (props: MyPostTypeProps) => {
 
 	const newPostElement = React.createRef<HTMLTextAreaElement>()
 
 	const addPost = () => {
-		alert(newPostElement.current?.value)
+		props.addPost(newPostElement.current ? newPostElement.current.value : '----')
+		newPostElement.current!.value = ''
+		// if (newPostElement.current?.value.length === 0) {
 
+		// }
 	}
 
 
 	const postElement = props.posts.map(el => {
 		return (
-			<Post key={el.id} message={el.message} likeCount={el.likeCount} />
+			<Post key={el.id} message={el.post} likeCount={el.likeCount} />
 		)
 	})
 	return (
