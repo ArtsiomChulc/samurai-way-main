@@ -7,11 +7,18 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
+	position: relative;
 }
 
 .btn {
 	width: 120px;
 	padding: 7px 12px;
 	margin-left: 15px;
+}
+.errorText {
+	color: red;
+	position: absolute;
+	bottom: -20px;
+	left: 20px;
 }

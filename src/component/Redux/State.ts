@@ -1,4 +1,4 @@
-import { rernderEntireTree } from '../../render'
+import { rerenderEntireTree } from '../../render'
 
 export type PostType = {
 	id: number
@@ -84,9 +84,9 @@ let state: RootStateType = {
 
 export const addPost = (post: string) => {
 	let newPostObj: PostType = { id: 7, post: post, likeCount: 0 }
-	state.profilePage.posts.push(newPostObj)
+	state.profilePage.posts.unshift(newPostObj)
 
-	rernderEntireTree(state)
+	rerenderEntireTree(state)
 }
 
 export default state;

@@ -1,6 +1,6 @@
 import state from './component/Redux/State';
-import { rernderEntireTree } from './render';
+import { rerenderEntireTree } from './render';
 
 
 
-rernderEntireTree(state)
+rerenderEntireTree(state)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { PostType } from '../../Redux/State';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
@@ -19,15 +19,18 @@ type MyPostTypeProps = {
 // }
 
 export const MyPost = (props: MyPostTypeProps) => {
+	const [error, setError] = useState<string | null>(null)
 
 	const newPostElement = React.createRef<HTMLTextAreaElement>()
 
 	const addPost = () => {
-		props.addPost(newPostElement.current ? newPostElement.current.value : '----')
-		newPostElement.current!.value = ''
-		// if (newPostElement.current?.value.length === 0) {
-
-		// }
+		if (newPostElement.current?.value.trim() !== '') {
+			props.addPost(newPostElement.current ? newPostElement.current.value : '----')
+			newPostElement.current!.value = ''
+			setError('')
+		} else {
+			setError('Введите текст!!!')
+		}
 	}
 
 
@@ -41,6 +44,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 			<div className={s.wrapAddMessage}>
 				<textarea ref={newPostElement}></textarea>
 				<button className={s.btn} onClick={addPost}>Add post</button>
+				{error && <span className={s.errorText}>{error}</span>}
 			</div>
 
 			{postElement}
