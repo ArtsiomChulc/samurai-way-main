@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import { PostType } from '../../Redux/State';
+import React, {ChangeEvent, useState} from 'react';
+import {PostType, ProfilePageType} from '../../Redux/State';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
 
 type MyPostTypeProps = {
-	posts: PostType[]
-	addPost: (post: string) => void
+	posts: ProfilePageType
+	addPost: () => void
+	updateNewPostText: (text: string) => void
 }
 
 
@@ -25,16 +26,19 @@ export const MyPost = (props: MyPostTypeProps) => {
 
 	const addPost = () => {
 		if (newPostElement.current?.value.trim() !== '') {
-			props.addPost(newPostElement.current ? newPostElement.current.value : '----')
-			newPostElement.current!.value = ''
 			setError('')
 		} else {
 			setError('Введите текст!!!')
 		}
+		props.addPost()
 	}
 
+	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		let newText = e.currentTarget.value
+		props.updateNewPostText(newText)
+	}
 
-	const postElement = props.posts.map(el => {
+	const postElement = props.posts.posts.map(el => {
 		return (
 			<Post key={el.id} message={el.post} likeCount={el.likeCount} />
 		)
@@ -42,7 +46,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 	return (
 		<div className={s.mypost}>
 			<div className={s.wrapAddMessage}>
-				<textarea ref={newPostElement}></textarea>
+				<textarea onChange={onChangeHandler} ref={newPostElement} value={props.posts.newText}/>
 				<button className={s.btn} onClick={addPost}>Add post</button>
 				{error && <span className={s.errorText}>{error}</span>}
 			</div>

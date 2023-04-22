@@ -18,6 +18,7 @@ export type DialogType = {
 
 export type ProfilePageType = {
 	posts: PostType[]
+	newText: string
 }
 
 export type DialogsPageType = {
@@ -29,6 +30,7 @@ export type RootStateType = {
 	dialogsPage: DialogsPageType
 	profilePage: ProfilePageType
 	navbarFriends: NavbarFriendsType
+	messageInInput: string
 }
 
 //for navbar-friends
@@ -60,6 +62,7 @@ let state: RootStateType = {
 			{ id: 5, message: 'I.m OK!!!' },
 			{ id: 6, message: 'Yo!!! Go home!!!' },
 		]
+
 	},
 	profilePage: {
 		posts: [
@@ -69,7 +72,8 @@ let state: RootStateType = {
 			// { id: 4, post: 'Yo Yo Yo Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 4 },
 			// { id: 5, post: 'Mark, how are you?', likeCount: 6 },
 			// { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
-		]
+		],
+		newText: ''
 	},
 	navbarFriends: {
 		friends: [
@@ -77,16 +81,41 @@ let state: RootStateType = {
 			{ id: 2, name: 'Olia', imageUrl: 'https://images.freeimages.com/images/large-previews/d1f/lady-avatar-1632967.jpg' },
 			{ id: 3, name: 'Victor', imageUrl: 'https://media.istockphoto.com/id/1432732353/photo/web-icon-man-middle-aged-man-with-blond-hair.jpg?s=1024x1024&w=is&k=20&c=SPveyNL9BKcZRIYFhIiTAPV6jmKVuJJRXGH1k0Y_OC8=' },
 		]
-	}
-
-
+	},
+	messageInInput: 'string'
 }
 
-export const addPost = (post: string) => {
-	let newPostObj: PostType = { id: 7, post: post, likeCount: 0 }
+// добавление постов в Profile ниже
+export const addPost = () => {
+	let textValue = state.profilePage.newText
+	let newPostObj: PostType = { id: 7, post: textValue, likeCount: 0 }
 	state.profilePage.posts.unshift(newPostObj)
+	state.profilePage.newText = ''
 
 	rerenderEntireTree(state)
 }
+export const updateNewPostText = (text: string) => {
+	state.profilePage.newText = text
+
+	rerenderEntireTree(state)
+}
+//=======///=====///======////=====//////
+
+
+// добавление сообщения в Dialogs ниже
+export const addMessage = () => {
+	let newMessage:MessageType = { id: 7, message: state.messageInInput}
+	state.dialogsPage.messages.push(newMessage)
+	state.messageInInput = ''
+
+	rerenderEntireTree(state)
+}
+export const updateNewMessageText = (textMessage: string) => {
+	state.messageInInput = textMessage
+
+	rerenderEntireTree(state)
+}
+//=====///========///=========///========///=======///======///
+
 
 export default state;
