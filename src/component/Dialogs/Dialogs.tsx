@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import {DialogType, MessageType} from '../Redux/State'
 import { DialogInfo } from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import { Message } from './Message/Message'
 
 type DialogsPropsType = {
+	messageInInput: string
 	dialogs: DialogType[]
 	messages: MessageType[]
 	addMessage: () => void
@@ -12,9 +13,16 @@ type DialogsPropsType = {
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
+
+	const [error, setError] = useState<string | null>(null)
 	const newTextElement = React.createRef<HTMLTextAreaElement>()
 
 	const addMessage = () => {
+		if (newTextElement.current?.value.trim() !== '') {
+			setError('')
+		} else {
+			setError('Введите текст!!!')
+		}
 		props.addMessage()
 	}
 
@@ -38,8 +46,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</div>
 			</div>
 			<div className={s.wrapAddMessage}>
-				<textarea ref={newTextElement} onChange={onChangeHandler}/>
+				<textarea value={props.messageInInput} ref={newTextElement} onChange={onChangeHandler}/>
 				<button onClick={addMessage} className={s.btn}>Add message</button>
+				{error && <span className={s.errorText}>{error}</span>}
 			</div>
 		</>
 

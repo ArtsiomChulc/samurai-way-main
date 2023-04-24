@@ -1,4 +1,14 @@
-import { rerenderEntireTree } from '../../render'
+let render = () => {
+	console.log('render')
+}
+
+//===///====///======//// subscribe, observer
+
+export const subscribe = (observer: () => void) => {
+	render = observer
+}
+
+//======/////==========/////====================///=========================///=============//
 
 export type PostType = {
 	id: number
@@ -62,7 +72,7 @@ let state: RootStateType = {
 			{ id: 5, message: 'I.m OK!!!' },
 			{ id: 6, message: 'Yo!!! Go home!!!' },
 		],
-		messageInInput: 'string'
+		messageInInput: ''
 	},
 	profilePage: {
 		posts: [
@@ -91,12 +101,12 @@ export const addPost = () => {
 	state.profilePage.posts.unshift(newPostObj)
 	state.profilePage.newText = ''
 
-	rerenderEntireTree(state)
+	render()
 }
 export const updateNewPostText = (text: string) => {
 	state.profilePage.newText = text
 
-	rerenderEntireTree(state)
+	render()
 }
 //=======///=====///======////=====//////
 
@@ -108,14 +118,15 @@ export const addMessage = () => {
 	state.dialogsPage.messages.unshift(newMessage)
 	state.dialogsPage.messageInInput = ''
 
-	rerenderEntireTree(state)
+	render()
 }
 export const updateNewMessageText = (textMessage: string) => {
 	state.dialogsPage.messageInInput = textMessage
 
-	rerenderEntireTree(state)
+	render()
 }
 //=====///========///=========///========///=======///======///
+
 
 
 export default state;

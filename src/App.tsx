@@ -23,6 +23,7 @@ function App(props: StateType) {
     let dialogs = props.state.dialogsPage.dialogs;
     let messages = props.state.dialogsPage.messages;
     let friends = props.state.navbarFriends.friends;
+    let messageInInput = props.state.dialogsPage.messageInInput
 
     return (
 
@@ -38,6 +39,7 @@ function App(props: StateType) {
                            />} />
                 <Route path='/Dialogs'
                        render={() => <Dialogs
+                           messageInInput={messageInInput}
                            dialogs={dialogs}
                            messages={messages}
                            addMessage={addMessage}

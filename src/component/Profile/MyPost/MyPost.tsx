@@ -9,16 +9,6 @@ type MyPostTypeProps = {
 	updateNewPostText: (text: string) => void
 }
 
-
-// export type PostsDataType = {
-// 	data: PostData[]
-// }
-// export type PostData = {
-// 	id: number
-// 	message: string
-// 	likeCount: number
-// }
-
 export const MyPost = (props: MyPostTypeProps) => {
 	const [error, setError] = useState<string | null>(null)
 
