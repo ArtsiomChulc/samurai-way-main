@@ -1,11 +1,13 @@
-import { DialogsPageType } from '../../Redux/State'
+import {MessageType} from '../../Redux/State'
 import s from './message.module.css'
 
-
-export const Message = (props: DialogsPageType) => {
+type MessagePropsType = {
+	messages: MessageType[]
+}
+export const Message = (props: MessagePropsType) => {
 	const elMessages = props.messages.map(el => {
 		return (
-			<span>{el.message}</span>
+			<span key={el.id}>{el.message}</span>
 		)
 	})
 	return (

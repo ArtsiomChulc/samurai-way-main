@@ -24,13 +24,13 @@ export type ProfilePageType = {
 export type DialogsPageType = {
 	dialogs: DialogType[]
 	messages: MessageType[]
+	messageInInput: string
 }
 
 export type RootStateType = {
 	dialogsPage: DialogsPageType
 	profilePage: ProfilePageType
 	navbarFriends: NavbarFriendsType
-	messageInInput: string
 }
 
 //for navbar-friends
@@ -61,8 +61,8 @@ let state: RootStateType = {
 			{ id: 4, message: 'How are u?' },
 			{ id: 5, message: 'I.m OK!!!' },
 			{ id: 6, message: 'Yo!!! Go home!!!' },
-		]
-
+		],
+		messageInInput: 'string'
 	},
 	profilePage: {
 		posts: [
@@ -82,7 +82,6 @@ let state: RootStateType = {
 			{ id: 3, name: 'Victor', imageUrl: 'https://media.istockphoto.com/id/1432732353/photo/web-icon-man-middle-aged-man-with-blond-hair.jpg?s=1024x1024&w=is&k=20&c=SPveyNL9BKcZRIYFhIiTAPV6jmKVuJJRXGH1k0Y_OC8=' },
 		]
 	},
-	messageInInput: 'string'
 }
 
 // добавление постов в Profile ниже
@@ -104,14 +103,15 @@ export const updateNewPostText = (text: string) => {
 
 // добавление сообщения в Dialogs ниже
 export const addMessage = () => {
-	let newMessage:MessageType = { id: 7, message: state.messageInInput}
-	state.dialogsPage.messages.push(newMessage)
-	state.messageInInput = ''
+	let textMessage = state.dialogsPage.messageInInput
+	let newMessage:MessageType = { id: 7, message: textMessage}
+	state.dialogsPage.messages.unshift(newMessage)
+	state.dialogsPage.messageInInput = ''
 
 	rerenderEntireTree(state)
 }
 export const updateNewMessageText = (textMessage: string) => {
-	state.messageInInput = textMessage
+	state.dialogsPage.messageInInput = textMessage
 
 	rerenderEntireTree(state)
 }

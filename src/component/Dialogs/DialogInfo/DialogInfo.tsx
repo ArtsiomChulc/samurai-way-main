@@ -1,13 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import { DialogsPageType } from '../../Redux/State';
+import {DialogType} from '../../Redux/State';
 import s from './dialogInfo.module.css';
 
+type DialogInfoPropsType = {
+	dialogs: DialogType[]
+}
 
-export const DialogInfo = (props: DialogsPageType) => {
+export const DialogInfo = (props: DialogInfoPropsType) => {
 
 	const element = props.dialogs.map(el => {
 		return (
-			<NavLink to={"/Dialogs/" + el.id}>{el.name}</NavLink>
+			<NavLink key={el.id} to={"/Dialogs/" + el.id}>{el.name}</NavLink>
 		)
 	})
 	return (

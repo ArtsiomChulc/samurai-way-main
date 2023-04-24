@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react'
-import { DialogType, MessageType } from '../Redux/State'
+import {DialogType, MessageType} from '../Redux/State'
 import { DialogInfo } from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import { Message } from './Message/Message'
@@ -28,12 +28,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 			<div className={s.dialogs}>
 				<div className={s.dialogs_names}>
 
-					<DialogInfo dialogs={props.dialogs} messages={[]} />
+					<DialogInfo dialogs={props.dialogs} />
 
 				</div>
 				<div className={s.messages}>
 
-					<Message messages={props.messages} dialogs={[]} />
+					<Message messages={props.messages}/>
 
 				</div>
 			</div>

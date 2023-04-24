@@ -8,7 +8,7 @@ import { News } from './component/News/News';
 import { Profile } from './component/Profile/Profile';
 import { Settings } from './component/Settings/Settings';
 import { Route } from 'react-router-dom';
-import state, {addMessage, RootStateType, updateNewMessageText} from './component/Redux/State';
+import {addMessage, RootStateType, updateNewMessageText} from './component/Redux/State';
 
 type StateType = {
     state: RootStateType
