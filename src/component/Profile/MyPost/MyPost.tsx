@@ -1,12 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {ProfilePageType} from '../../Redux/store';
+import {ActionTypes, ProfilePageType} from '../../Redux/store';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
 
 type MyPostTypeProps = {
 	posts: ProfilePageType
-	addPost: () => void
-	updateNewPostText: (text: string) => void
+	dispatch: (action: ActionTypes) => void
+	// addPost: (action: ActionTypes) => void
+	// updateNewPostText: (action: ActionTypes) => void
 }
 
 export const MyPost = (props: MyPostTypeProps) => {
@@ -15,24 +16,24 @@ export const MyPost = (props: MyPostTypeProps) => {
 	const newPostElement = React.createRef<HTMLTextAreaElement>()
 
 	const addPost = () => {
+		let el = newPostElement.current ? newPostElement.current.value : '---'
 		if (newPostElement.current?.value.trim() !== '') {
 			setError('')
 		} else {
 			setError('Введите текст!!!')
 		}
-		props.addPost()
+		props.dispatch({type: "ADD-POST", text: el})
 	}
 
 	const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if(e.key === "Enter") {
-			props.addPost()
 			addPost()
 		}
 	}
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let newText = e.currentTarget.value
-		props.updateNewPostText(newText)
+		props.dispatch({type: "UPDATE-NEW-POST", text: newText})
 	}
 
 	const postElement = props.posts.posts.map(el => {

@@ -11,6 +11,8 @@
 
 //======/////==========/////====================///=========================///=============//
 
+
+
 export type PostType = {
 	id: number
 	post: string
@@ -46,13 +48,34 @@ export type RootStateType = {
 
 export type StoreType = {
 	_state: RootStateType
-	addPost: () => void
-	updateNewPostText: (text: string) => void
-	addMessage: () => void
-	updateNewMessageText: (textMessage: string) => void
+	// addPost: (text: string) => void
+	// updateNewPostText: (text: string) => void
+	// addMessage: (messageText: string) => void
+	// updateNewMessageText: (textMessage: string) => void
 	_render: () => void
+	dispatch: (action: ActionTypes) => void
 	subscribe: (observer: () => void) => void
 	getState: () => RootStateType
+}
+
+export type ActionTypes = AddPostType | UpdateNewPostTextType | AddMessageType | UpdateNewMessageText
+
+type AddPostType = {
+	type: "ADD-POST"
+	text: string
+}
+type AddMessageType = {
+	type: "ADD-MESSAGE"
+	text: string
+}
+
+type UpdateNewPostTextType = {
+	type: "UPDATE-NEW-POST"
+	text: string
+}
+type UpdateNewMessageText = {
+	type: "UPDATE-NEW-MESSAGE-TEXT"
+	textMessage: string
 }
 
 //for navbar-friends
@@ -106,42 +129,74 @@ const store: StoreType = {
 			]
 		},
 	},
-	addPost () {
-		let textValue = this._state.profilePage.newText
-		let newPostObj: PostType = { id: 7, post: textValue, likeCount: 0 }
-		if (textValue.length === 0 || textValue.trim() == '') {
-			return
-		} else {
-			this._state.profilePage.posts.unshift(newPostObj)
-		}
-		this._state.profilePage.newText = ''
-
-		this._render()
-	},
-	updateNewPostText(text: string) {
-		this._state.profilePage.newText = text
-
-		this._render()
-	},
-	addMessage() {
-		let textMessage = this._state.dialogsPage.messageInInput
-		let newMessage:MessageType = { id: 7, message: textMessage}
-		if (textMessage.length === 0 || textMessage.trim() == '') {
-			return
-		} else {
-			this._state.dialogsPage.messages.unshift(newMessage)
-		}
-		this._state.dialogsPage.messageInInput = ''
-
-		this._render()
-	},
-	updateNewMessageText(textMessage: string){
-		this._state.dialogsPage.messageInInput = textMessage
-
-		this._render()
-	},
+	// addPost (text: string) {
+	// 	// let textValue = this._state.profilePage.newText
+	// 	// let newPostObj: PostType = { id: 7, post: text, likeCount: 0 }
+	// 	// if (text.length === 0 || text.trim() == '') {
+	// 	// 	return
+	// 	// } else {
+	// 	// 	this._state.profilePage.posts.unshift(newPostObj)
+	// 	// }
+	// 	// this._state.profilePage.newText = ''
+	// 	//
+	// 	// this._render()
+	// },
+	// updateNewPostText(text: string) {
+	// 	// this._state.profilePage.newText = text
+	// 	//
+	// 	// this._render()
+	// },
+	// addMessage(messageText: string) {
+	// 	// let textMessage = this._state.dialogsPage.messageInInput
+	// 	// let newMessage:MessageType = { id: 7, message: messageText}
+	// 	// if (messageText.length === 0 || messageText.trim() == '') {
+	// 	// 	return
+	// 	// } else {
+	// 	// 	this._state.dialogsPage.messages.unshift(newMessage)
+	// 	// }
+	// 	// this._state.dialogsPage.messageInInput = ''
+	// 	//
+	// 	// this._render()
+	// },
+	// updateNewMessageText(textMessage: string){
+	// 	this._state.dialogsPage.messageInInput = textMessage
+	//
+	// 	this._render()
+	// },
 	_render() {
 		console.log('render')
+	},
+	dispatch(action) {
+		switch (action.type) {
+			case "ADD-POST":
+				let newPostObj: PostType = { id: 7, post: action.text, likeCount: 0 }
+				if (action.text.length === 0 || action.text.trim() == '') {
+					return
+				} else {
+					this._state.profilePage.posts.unshift(newPostObj)
+				}
+				this._state.profilePage.newText = ''
+				this._render()
+				break
+			case "UPDATE-NEW-POST":
+				this._state.profilePage.newText = action.text
+				this._render()
+				break
+			case "ADD-MESSAGE":
+				let newMessage:MessageType = { id: 7, message: action.text}
+				if (action.text.length === 0 || action.text.trim() == '') {
+					return
+				} else {
+					this._state.dialogsPage.messages.unshift(newMessage)
+				}
+				this._state.dialogsPage.messageInInput = ''
+
+				this._render()
+				break
+			case "UPDATE-NEW-MESSAGE-TEXT":
+				this._state.dialogsPage.messageInInput = action.textMessage
+				this._render()
+		}
 	},
 	subscribe(observer) {
 		this._render = observer

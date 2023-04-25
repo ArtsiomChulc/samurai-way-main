@@ -31,16 +31,18 @@ function App(props: StateType) {
                 <Route path='/Profile'
                        render={() =>
                            <Profile posts={posts}
-                                    addPost={props.store.addPost.bind(props.store)}
-                                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                    dispatch={props.store.dispatch.bind(props.store)}
+                                    // addPost={props.store.dispatch.bind(props.store)}
+                                    // updateNewPostText={props.store.dispatch.bind(props.store)}
                            />} />
                 <Route path='/Dialogs'
                        render={() => <Dialogs
                            messageInInput={messageInInput}
                            dialogs={dialogs}
                            messages={messages}
-                           addMessage={props.store.addMessage.bind(props.store)}
-                           updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
+                           dispatch={props.store.dispatch.bind(props.store)}
+                           // addMessage={props.store.dispatch.bind(props.store)}
+                           // updateNewMessageText={props.store.dispatch.bind(props.store)}
                        />} />
                 <Route path='/news' render={() => <News />} />
                 <Route path='/music' render={() => <Music />} />
