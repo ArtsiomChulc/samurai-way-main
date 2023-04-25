@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useState} from 'react';
-import {ProfilePageType} from '../../Redux/State';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {ProfilePageType} from '../../Redux/store';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
 
@@ -23,6 +23,12 @@ export const MyPost = (props: MyPostTypeProps) => {
 		props.addPost()
 	}
 
+	const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+		if(e.key === "Enter") {
+			props.addPost()
+		}
+	}
+
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let newText = e.currentTarget.value
 		props.updateNewPostText(newText)
@@ -36,7 +42,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 	return (
 		<div className={s.mypost}>
 			<div className={s.wrapAddMessage}>
-				<textarea onChange={onChangeHandler} ref={newPostElement} value={props.posts.newText}/>
+				<textarea onKeyDown={onkeydownHandler} onChange={onChangeHandler} ref={newPostElement} value={props.posts.newText}/>
 				<button className={s.btn} onClick={addPost}>Add post</button>
 				{error && <span className={s.errorText}>{error}</span>}
 			</div>

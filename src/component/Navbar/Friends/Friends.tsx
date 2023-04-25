@@ -1,4 +1,4 @@
-import { NavbarFriendsType } from '../../Redux/State';
+import { NavbarFriendsType } from '../../Redux/store';
 import s from './friends.module.css';
 
 

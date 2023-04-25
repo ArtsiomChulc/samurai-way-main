@@ -8,22 +8,19 @@ import { News } from './component/News/News';
 import { Profile } from './component/Profile/Profile';
 import { Settings } from './component/Settings/Settings';
 import { Route } from 'react-router-dom';
-import {addMessage, RootStateType, updateNewMessageText} from './component/Redux/State';
+import {StoreType} from './component/Redux/store';
 
 type StateType = {
-    state: RootStateType
-    addPost: () => void
-    updateNewPostText: (text: string) => void
-    addMessage: () => void
-    updateNewMessageText: (text: string) => void
+    store: StoreType
 }
 
 function App(props: StateType) {
-    let posts = props.state.profilePage;
-    let dialogs = props.state.dialogsPage.dialogs;
-    let messages = props.state.dialogsPage.messages;
-    let friends = props.state.navbarFriends.friends;
-    let messageInInput = props.state.dialogsPage.messageInInput
+    const state = props.store.getState()
+    let posts = props.store._state.profilePage;
+    let dialogs = props.store._state.dialogsPage.dialogs;
+    let messages = props.store._state.dialogsPage.messages;
+    let friends = props.store._state.navbarFriends.friends;
+    let messageInInput = props.store._state.dialogsPage.messageInInput
 
     return (
 
@@ -34,16 +31,16 @@ function App(props: StateType) {
                 <Route path='/Profile'
                        render={() =>
                            <Profile posts={posts}
-                                    addPost={props.addPost}
-                                    updateNewPostText={props.updateNewPostText}
+                                    addPost={props.store.addPost.bind(props.store)}
+                                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                            />} />
                 <Route path='/Dialogs'
                        render={() => <Dialogs
                            messageInInput={messageInInput}
                            dialogs={dialogs}
                            messages={messages}
-                           addMessage={addMessage}
-                           updateNewMessageText={updateNewMessageText}
+                           addMessage={props.store.addMessage.bind(props.store)}
+                           updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
                        />} />
                 <Route path='/news' render={() => <News />} />
                 <Route path='/music' render={() => <Music />} />

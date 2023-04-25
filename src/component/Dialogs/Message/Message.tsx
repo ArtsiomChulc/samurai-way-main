@@ -1,4 +1,4 @@
-import {MessageType} from '../../Redux/State'
+import {MessageType} from '../../Redux/store'
 import s from './message.module.css'
 
 type MessagePropsType = {

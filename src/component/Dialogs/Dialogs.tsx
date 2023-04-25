@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useState} from 'react'
-import {DialogType, MessageType} from '../Redux/State'
+import React, {ChangeEvent, useState, KeyboardEvent} from 'react'
+import {DialogType, MessageType} from '../Redux/store'
 import { DialogInfo } from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import { Message } from './Message/Message'
@@ -26,6 +26,10 @@ export const Dialogs = (props: DialogsPropsType) => {
 		props.addMessage()
 	}
 
+	const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === "Enter") props.addMessage()
+	}
+
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let textMessage = e.currentTarget.value
 		props.updateNewMessageText(textMessage)
@@ -46,7 +50,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</div>
 			</div>
 			<div className={s.wrapAddMessage}>
-				<textarea value={props.messageInInput} ref={newTextElement} onChange={onChangeHandler}/>
+				<textarea value={props.messageInInput} onKeyDown={onKeyDownHandler} ref={newTextElement} onChange={onChangeHandler}/>
 				<button onClick={addMessage} className={s.btn}>Add message</button>
 				{error && <span className={s.errorText}>{error}</span>}
 			</div>
