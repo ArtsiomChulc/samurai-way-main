@@ -26,6 +26,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 	const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if(e.key === "Enter") {
 			props.addPost()
+			addPost()
 		}
 	}
 

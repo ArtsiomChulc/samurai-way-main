@@ -27,7 +27,10 @@ export const Dialogs = (props: DialogsPropsType) => {
 	}
 
 	const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-		if (e.key === "Enter") props.addMessage()
+		if (e.key === "Enter") {
+			props.addMessage()
+			addMessage()
+		}
 	}
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
