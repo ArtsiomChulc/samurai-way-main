@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react'
-import {ActionTypes, DialogType, MessageType} from '../Redux/store'
+import {ActionTypes, AddMessageAC, DialogType, MessageType, UpdateNewMessageTextAC} from '../Redux/store'
 import { DialogInfo } from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import { Message } from './Message/Message'
@@ -25,7 +25,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 		} else {
 			setError('Введите текст!!!')
 		}
-		props.dispatch({type: "ADD-MESSAGE", text: el})
+		props.dispatch(AddMessageAC(el))
 	}
 
 	const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -36,7 +36,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let textMessage = e.currentTarget.value
-		props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", textMessage: textMessage})
+		props.dispatch(UpdateNewMessageTextAC(textMessage))
 	}
 
 	return (
@@ -54,7 +54,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 				</div>
 			</div>
 			<div className={s.wrapAddMessage}>
-				<textarea value={props.messageInInput} onKeyDown={onKeyDownHandler} ref={newTextElement} onChange={onChangeHandler}/>
+				<textarea value={props.messageInInput}
+						  onKeyDown={onKeyDownHandler}
+						  ref={newTextElement}
+						  onChange={onChangeHandler}
+						  placeholder={"Enter your message"}
+				/>
 				<button onClick={addMessage} className={s.btn}>Add message</button>
 				{error && <span className={s.errorText}>{error}</span>}
 			</div>

@@ -16,11 +16,11 @@ type StateType = {
 
 function App(props: StateType) {
     const state = props.store.getState()
-    let posts = props.store._state.profilePage;
-    let dialogs = props.store._state.dialogsPage.dialogs;
-    let messages = props.store._state.dialogsPage.messages;
-    let friends = props.store._state.navbarFriends.friends;
-    let messageInInput = props.store._state.dialogsPage.messageInInput
+    let posts = state.profilePage;
+    let dialogs = state.dialogsPage.dialogs;
+    let messages = state.dialogsPage.messages;
+    let friends = state.navbarFriends.friends;
+    let messageInInput = state.dialogsPage.messageInInput
 
     return (
 

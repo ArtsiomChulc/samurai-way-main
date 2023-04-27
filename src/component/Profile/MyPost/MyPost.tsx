@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {ActionTypes, ProfilePageType} from '../../Redux/store';
+import {ActionTypes, AddPostAC, ProfilePageType, UpdateNewPostAC} from '../../Redux/store';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
 
@@ -22,7 +22,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 		} else {
 			setError('Введите текст!!!')
 		}
-		props.dispatch({type: "ADD-POST", text: el})
+		props.dispatch(AddPostAC(el))
 	}
 
 	const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -33,7 +33,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let newText = e.currentTarget.value
-		props.dispatch({type: "UPDATE-NEW-POST", text: newText})
+		props.dispatch(UpdateNewPostAC(newText))
 	}
 
 	const postElement = props.posts.posts.map(el => {
@@ -44,8 +44,17 @@ export const MyPost = (props: MyPostTypeProps) => {
 	return (
 		<div className={s.mypost}>
 			<div className={s.wrapAddMessage}>
-				<textarea onKeyDown={onkeydownHandler} onChange={onChangeHandler} ref={newPostElement} value={props.posts.newText}/>
-				<button className={s.btn} onClick={addPost}>Add post</button>
+				<textarea
+					onKeyDown={onkeydownHandler}
+					onChange={onChangeHandler}
+					ref={newPostElement}
+					value={props.posts.newText}
+					placeholder={"Enter your post"}
+				/>
+				<div>
+					<button className={s.btn} onClick={addPost}>Add post</button>
+				</div>
+
 				{error && <span className={s.errorText}>{error}</span>}
 			</div>
 

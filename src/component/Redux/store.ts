@@ -60,23 +60,11 @@ export type StoreType = {
 
 export type ActionTypes = AddPostType | UpdateNewPostTextType | AddMessageType | UpdateNewMessageText
 
-type AddPostType = {
-	type: "ADD-POST"
-	text: string
-}
-type AddMessageType = {
-	type: "ADD-MESSAGE"
-	text: string
-}
+export type AddPostType = ReturnType<typeof AddPostAC>
+type AddMessageType = ReturnType<typeof AddMessageAC>
 
-type UpdateNewPostTextType = {
-	type: "UPDATE-NEW-POST"
-	text: string
-}
-type UpdateNewMessageText = {
-	type: "UPDATE-NEW-MESSAGE-TEXT"
-	textMessage: string
-}
+type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostAC>
+type UpdateNewMessageText = ReturnType<typeof UpdateNewMessageTextAC>
 
 //for navbar-friends
 export type FriendType = {
@@ -87,6 +75,32 @@ export type FriendType = {
 
 export type NavbarFriendsType = {
 	friends: FriendType[]
+}
+
+export const AddPostAC = (text: string) => {
+	return {
+		type: "ADD-POST",
+		text: text
+	} as const
+}
+
+export const UpdateNewPostAC = (text: string) => {
+	return {
+		type: "UPDATE-NEW-POST",
+		text: text
+	} as const
+}
+export const AddMessageAC = (text: string) => {
+	return {
+		type: "ADD-MESSAGE",
+		text: text
+	} as const
+}
+export const UpdateNewMessageTextAC = (text: string) => {
+	return {
+		type: "UPDATE-NEW-MESSAGE-TEXT",
+		textMessage: text
+	} as const
 }
 
 const store: StoreType = {
