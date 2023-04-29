@@ -13,6 +13,9 @@
 
 
 
+import {AddPostAC, myPostReducer, UpdateNewPostAC} from "./myPost-reducer";
+import {AddMessageAC, dialogsReducer, UpdateNewMessageTextAC} from "./dialogs-reducer";
+
 export type PostType = {
 	id: number
 	post: string
@@ -53,12 +56,13 @@ export type StoreType = {
 	// addMessage: (messageText: string) => void
 	// updateNewMessageText: (textMessage: string) => void
 	_render: () => void
-	dispatch: (action: ActionTypes) => void
+	dispatch: (action: ActionsTypes) => void
 	subscribe: (observer: () => void) => void
 	getState: () => RootStateType
 }
-
-export type ActionTypes = AddPostType | UpdateNewPostTextType | AddMessageType | UpdateNewMessageText
+type ProfilePageActionType = AddPostType | UpdateNewPostTextType
+type DialogsPageActionType = AddMessageType | UpdateNewMessageText
+export type ActionsTypes = AddPostType | UpdateNewPostTextType | AddMessageType | UpdateNewMessageText
 
 export type AddPostType = ReturnType<typeof AddPostAC>
 type AddMessageType = ReturnType<typeof AddMessageAC>
@@ -75,32 +79,6 @@ export type FriendType = {
 
 export type NavbarFriendsType = {
 	friends: FriendType[]
-}
-
-export const AddPostAC = (text: string) => {
-	return {
-		type: "ADD-POST",
-		text: text
-	} as const
-}
-
-export const UpdateNewPostAC = (text: string) => {
-	return {
-		type: "UPDATE-NEW-POST",
-		text: text
-	} as const
-}
-export const AddMessageAC = (text: string) => {
-	return {
-		type: "ADD-MESSAGE",
-		text: text
-	} as const
-}
-export const UpdateNewMessageTextAC = (text: string) => {
-	return {
-		type: "UPDATE-NEW-MESSAGE-TEXT",
-		textMessage: text
-	} as const
 }
 
 const store: StoreType = {
@@ -181,36 +159,39 @@ const store: StoreType = {
 		console.log('render')
 	},
 	dispatch(action) {
-		switch (action.type) {
-			case "ADD-POST":
-				let newPostObj: PostType = { id: 7, post: action.text, likeCount: 0 }
-				if (action.text.length === 0 || action.text.trim() == '') {
-					return
-				} else {
-					this._state.profilePage.posts.unshift(newPostObj)
-				}
-				this._state.profilePage.newText = ''
-				this._render()
-				break
-			case "UPDATE-NEW-POST":
-				this._state.profilePage.newText = action.text
-				this._render()
-				break
-			case "ADD-MESSAGE":
-				let newMessage:MessageType = { id: 7, message: action.text}
-				if (action.text.length === 0 || action.text.trim() == '') {
-					return
-				} else {
-					this._state.dialogsPage.messages.unshift(newMessage)
-				}
-				this._state.dialogsPage.messageInInput = ''
-
-				this._render()
-				break
-			case "UPDATE-NEW-MESSAGE-TEXT":
-				this._state.dialogsPage.messageInInput = action.textMessage
-				this._render()
-		}
+		myPostReducer(this._state.profilePage, action as ProfilePageActionType)
+		dialogsReducer(this._state.dialogsPage, action as DialogsPageActionType)
+		this._render()
+		// switch (action.type) {
+		// 	// case "ADD-POST":
+		// 	// 	let newPostObj: PostType = { id: 7, post: action.text, likeCount: 0 }
+		// 	// 	if (action.text.length === 0 || action.text.trim() == '') {
+		// 	// 		return
+		// 	// 	} else {
+		// 	// 		this._state.profilePage.posts.unshift(newPostObj)
+		// 	// 	}
+		// 	// 	this._state.profilePage.newText = ''
+		// 	// 	this._render()
+		// 	// 	break
+		// 	// case "UPDATE-NEW-POST":
+		// 	// 	this._state.profilePage.newText = action.text
+		// 	// 	this._render()
+		// 	// 	break
+		// 	// case "ADD-MESSAGE":
+		// 	// 	let newMessage:MessageType = { id: 7, message: action.text}
+		// 	// 	if (action.text.length === 0 || action.text.trim() == '') {
+		// 	// 		return
+		// 	// 	} else {
+		// 	// 		this._state.dialogsPage.messages.unshift(newMessage)
+		// 	// 	}
+		// 	// 	this._state.dialogsPage.messageInInput = ''
+		// 	//
+		// 	// 	this._render()
+		// 	// 	break
+		// 	// case "UPDATE-NEW-MESSAGE-TEXT":
+		// 	// 	this._state.dialogsPage.messageInInput = action.textMessage
+		// 	// 	this._render()
+		// }
 	},
 	subscribe(observer) {
 		this._render = observer

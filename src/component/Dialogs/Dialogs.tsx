@@ -1,14 +1,15 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react'
-import {ActionTypes, AddMessageAC, DialogType, MessageType, UpdateNewMessageTextAC} from '../Redux/store'
+import {ActionsTypes, DialogType, MessageType} from '../Redux/store'
 import { DialogInfo } from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import { Message } from './Message/Message'
+import {AddMessageAC, UpdateNewMessageTextAC} from "../Redux/dialogs-reducer";
 
 type DialogsPropsType = {
 	messageInInput: string
 	dialogs: DialogType[]
 	messages: MessageType[]
-	dispatch: (action: ActionTypes) => void
+	dispatch: (action: ActionsTypes) => void
 	// addMessage: (messageText: string) => void
 	// updateNewMessageText: (text: string) => void
 }
