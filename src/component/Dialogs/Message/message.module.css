@@ -11,3 +11,23 @@
 	padding-left: 10px;
 	padding-top: 15px;
 }
+
+.wrapAddMessage {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	position: relative;
+}
+
+.btn {
+	width: 120px;
+	padding: 7px 12px;
+	margin-left: 15px;
+}
+.errorText {
+	color: red;
+	position: absolute;
+	bottom: -20px;
+	left: 20px;
+}

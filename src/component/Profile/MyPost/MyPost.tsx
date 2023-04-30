@@ -1,12 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {ActionsTypes, PostType, ProfilePageType} from '../../Redux/store';
+import {ProfilePageType} from '../../Redux/store';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
-import {AddPostAC, UpdateNewPostAC} from "../../Redux/myPost-reducer";
 
 type MyPostTypeProps = {
 	posts: ProfilePageType
-	dispatch: (action: ActionsTypes) => void
+	addPostCB: (el: string) => void
+	onChangeHandlerCB: (text: string) => void
+	// dispatch: (action: ActionsTypes) => void
 	// addPost: (action: ActionTypes) => void
 	// updateNewPostText: (action: ActionTypes) => void
 }
@@ -23,7 +24,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 		} else {
 			setError('Введите текст!!!')
 		}
-		props.dispatch(AddPostAC(el))
+		props.addPostCB(el)
 	}
 
 	const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -34,7 +35,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let newText = e.currentTarget.value
-		props.dispatch(UpdateNewPostAC(newText))
+		props.onChangeHandlerCB(newText)
 	}
 
 	const postElement = props.posts.posts.map(el => {
