@@ -20,12 +20,12 @@ let initialState: DialogsPageType = {
     messageInInput: ''
 }
 
-export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             let newMessage: MessageType = {id: 7, message: action.text}
             if (action.text.length === 0 || action.text.trim() == '') {
-                return
+                return state
             } else {
                 state.messages.unshift(newMessage)
             }

@@ -12,12 +12,12 @@ let initialState: ProfilePageType = {
     newText: ''
 }
 
-export const myPostReducer = (state = initialState, action: ActionsTypes) => {
+export const myPostReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
             let newPostObj: PostType = {id: 7, post: action.text, likeCount: 0}
             if (action.text.length === 0 || action.text.trim() == '') {
-                return
+                return state
             } else {
                 state.posts.unshift(newPostObj)
             }

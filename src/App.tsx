@@ -8,19 +8,21 @@ import { News } from './component/News/News';
 import { Profile } from './component/Profile/Profile';
 import { Settings } from './component/Settings/Settings';
 import { Route } from 'react-router-dom';
-import {StoreReduxType} from "./component/Redux/redux-store";
+import {AppRootStateType, StoreType} from './component/Redux/redux-store';
 
-type StateType = {
-    store: StoreReduxType
+
+type RootType = {
+    store: StoreType
 }
 
-function App(props: StateType) {
+function App(props: RootType) {
+
     const state = props.store.getState()
     let posts = state.profilePage;
     let dialogs = state.dialogsPage.dialogs;
     let messages = state.dialogsPage.messages;
     let friends = state.navbarFriends.friends;
-    let messageInInput = state.dialogsPage.messageInInput
+    let messageInInput = state.dialogsPage.messageInInput;
 
     return (
 
