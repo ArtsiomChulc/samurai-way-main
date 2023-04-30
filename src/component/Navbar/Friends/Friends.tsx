@@ -2,7 +2,7 @@ import { NavbarFriendsType } from '../../Redux/store';
 import s from './friends.module.css';
 
 
-export const Friends = (props: NavbarFriendsType) => {
+export const Friends = (props:NavbarFriendsType) => {
 
 	return (
 		<div className={s.friendsWrap}>
