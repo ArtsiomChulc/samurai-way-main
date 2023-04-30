@@ -44,7 +44,7 @@ export const MyPost = (props: MyPostTypeProps) => {
 		)
 	})
 	return (
-		<div className={s.mypost}>
+		<div className={s.myPost}>
 			<div className={s.wrapAddMessage}>
 				<textarea
 					onKeyDown={onkeydownHandler}

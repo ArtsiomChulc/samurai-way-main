@@ -15,7 +15,7 @@ export const Post = (props: PostType) => {
 
 			<span className={s.like}>
 				<img src="https://www.svgrepo.com/show/220662/like.svg" alt="" />
-				<span className={s.likecount}>
+				<span className={s.likeCount}>
 					{props.likeCount}
 				</span>
 			</span>
