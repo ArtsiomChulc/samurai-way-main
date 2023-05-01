@@ -1,4 +1,21 @@
-import {ActionsTypes, DialogsPageType, MessageType} from "./store";
+import {ActionsTypes} from "./store";
+
+export type MessageType = {
+    id: number
+    message: string
+}
+
+export type DialogType = {
+    id: number
+    name: string
+}
+
+type DialogsPageType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    messageInInput: string
+}
+
 
 let initialState: DialogsPageType = {
     dialogs: [

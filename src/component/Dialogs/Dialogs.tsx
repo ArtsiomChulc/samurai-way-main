@@ -1,8 +1,9 @@
 import React from 'react'
-import {ActionsTypes, DialogType, MessageType} from '../Redux/store'
+import {ActionsTypes} from '../Redux/store'
 import {DialogInfo} from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
 import {MessageContainer} from "./Message/MessageContainer";
+import {DialogType, MessageType} from "../Redux/dialogs-reducer";
 
 type DialogsPropsType = {
     messageInInput: string

@@ -1,6 +1,6 @@
-import {ActionsTypes, MessageType} from '../../Redux/store'
+import {ActionsTypes} from '../../Redux/store'
 import React from "react";
-import {AddMessageAC, UpdateNewMessageTextAC} from "../../Redux/dialogs-reducer";
+import {AddMessageAC, MessageType, UpdateNewMessageTextAC} from "../../Redux/dialogs-reducer";
 import {Message} from "./Message";
 
 type MessagePropsType = {

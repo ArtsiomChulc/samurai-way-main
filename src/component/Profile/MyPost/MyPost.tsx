@@ -1,18 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {ProfilePageType} from '../../Redux/store';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
+import {UsersPropsType} from "./MyPostContainer";
 
-type MyPostTypeProps = {
-	posts: ProfilePageType
-	addPostCB: (el: string) => void
-	onChangeHandlerCB: (text: string) => void
-	// dispatch: (action: ActionsTypes) => void
-	// addPost: (action: ActionTypes) => void
-	// updateNewPostText: (action: ActionTypes) => void
-}
 
-export const MyPost = (props: MyPostTypeProps) => {
+
+export const MyPost = (props: UsersPropsType) => {
 	const [error, setError] = useState<string | null>(null)
 
 	const newPostElement = React.createRef<HTMLTextAreaElement>()

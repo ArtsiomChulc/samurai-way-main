@@ -1,6 +1,7 @@
-import {MessageType} from '../../Redux/store'
+
 import s from './message.module.css'
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {MessageType} from "../../Redux/dialogs-reducer";
 
 type MessagePropsType = {
 	messages: MessageType[]

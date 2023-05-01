@@ -1,8 +1,10 @@
 import React from 'react';
-import {ActionsTypes, ProfilePageType} from '../../Redux/store';
-import {AddPostAC, UpdateNewPostAC} from "../../Redux/myPost-reducer";
+import {ActionsTypes} from '../../Redux/store';
+import {AddPostAC, ProfilePageType, UpdateNewPostAC} from "../../Redux/myPost-reducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {AppRootStateType} from "../../Redux/redux-store";
 
 // type MyPostTypeProps = {
 //     posts: ProfilePageType
@@ -35,13 +37,23 @@ import {connect} from "react-redux";
 //     />
 // }
 
-let mapStateToProps = (state: any) => {
+type MapStatePropsType = {
+    posts: ProfilePageType
+}
+type MapDispatchPropsType = {
+    addPostCB: (el: string) => void
+    onChangeHandlerCB: (text: string) => void
+}
+
+export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
+
+let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     return {
-        posts: state.posts
+        posts: state.profilePage
     }
 }
 
-let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         addPostCB: (el: string) => {
             dispatch(AddPostAC(el))

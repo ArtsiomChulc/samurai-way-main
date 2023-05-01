@@ -1,4 +1,14 @@
-import {ActionsTypes, NavbarFriendsType} from "./store";
+import {ActionsTypes} from "./store";
+
+export type FriendType = {
+    id: number
+    name: string
+    imageUrl: string
+}
+
+export type NavbarFriendsType = {
+    friends: FriendType[]
+}
 
 let initialState: NavbarFriendsType = {
     friends: [

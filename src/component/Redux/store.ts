@@ -16,40 +16,40 @@
 import {AddPostAC, myPostReducer, UpdateNewPostAC} from "./myPost-reducer";
 import {AddMessageAC, dialogsReducer, UpdateNewMessageTextAC} from "./dialogs-reducer";
 
-export type PostType = {
+type PostType = {
 	id: number
 	post: string
 	likeCount: number
 }
 
-export type MessageType = {
+type MessageType = {
 	id: number
 	message: string
 }
 
-export type DialogType = {
+type DialogType = {
 	id: number
 	name: string
 }
 
-export type ProfilePageType = {
+type ProfilePageType = {
 	posts: PostType[]
 	newText: string
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
 	dialogs: DialogType[]
 	messages: MessageType[]
 	messageInInput: string
 }
 
-export type RootStateType = {
+type RootStateType = {
 	dialogsPage: DialogsPageType
 	profilePage: ProfilePageType
 	navbarFriends: NavbarFriendsType
 }
 
-export type StoreType = {
+type StoreType = {
 	_state: RootStateType
 	// addPost: (text: string) => void
 	// updateNewPostText: (text: string) => void
@@ -71,13 +71,13 @@ type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostAC>
 type UpdateNewMessageText = ReturnType<typeof UpdateNewMessageTextAC>
 
 //for navbar-friends
-export type FriendType = {
+type FriendType = {
 	id: number
 	name: string
 	imageUrl: string
 }
 
-export type NavbarFriendsType = {
+type NavbarFriendsType = {
 	friends: FriendType[]
 }
 
