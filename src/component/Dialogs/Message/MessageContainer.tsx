@@ -1,29 +1,66 @@
-import {ActionsTypes} from '../../Redux/store'
+
 import React from "react";
-import {AddMessageAC, MessageType, UpdateNewMessageTextAC} from "../../Redux/dialogs-reducer";
+import {AddMessageAC, DialogsPageType, UpdateNewMessageTextAC} from "../../Redux/dialogs-reducer";
 import {Message} from "./Message";
+import {connect} from "react-redux";
+import {AppRootStateType} from "../../Redux/redux-store";
+import {Dispatch} from "redux";
 
-type MessagePropsType = {
-	messages: MessageType[]
-	dispatch: (action: ActionsTypes) => void
-	messageInInput: string
+// type MessagePropsType = {
+//     messages: MessageType[]
+//     dispatch: (action: ActionsTypes) => void
+//     messageInInput: string
+// }
+// export const MessageContainer = (props: MessagePropsType) => {
+//
+//     const addMessageCB = (el: string) => {
+//         props.dispatch(AddMessageAC(el))
+//     }
+//
+//     const onChangeHandlerCB = (text: string) => {
+//
+//         props.dispatch(UpdateNewMessageTextAC(text))
+//     }
+//
+//
+//     return <Message
+//         messages={props.messages}
+//         addMessageCB={addMessageCB}
+//         onChangeHandlerCB={onChangeHandlerCB}
+//         messageInInput={props.messageInInput}
+//     />
+// }
+
+export type MapStatePropsType = {
+    dialogsPage: DialogsPageType
 }
-export const MessageContainer = (props: MessagePropsType) => {
-
-	const addMessageCB = (el: string) => {
-		props.dispatch(AddMessageAC(el))
-	}
-
-	const onChangeHandlerCB = (text: string) => {
-
-		props.dispatch(UpdateNewMessageTextAC(text))
-	}
-
-
-	return <Message
-		messages={props.messages}
-		addMessageCB={addMessageCB}
-		onChangeHandlerCB={onChangeHandlerCB}
-		messageInInput={props.messageInInput}
-	/>
+export type MapDispatchPropsType = {
+    addMessageCB: (el: string) => void
+    onChangeHandlerCB: (text: string) => void
 }
+
+export type MessagePropsType = MapStatePropsType & MapDispatchPropsType
+
+let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+}
+
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        addMessageCB: (el: string) => {
+            if (el.length !== 0 || el.trim() !== '') {
+                dispatch(AddMessageAC(el))
+            }
+        },
+        onChangeHandlerCB: (text: string) => {
+
+            dispatch(UpdateNewMessageTextAC(text))
+        }
+    }
+}
+
+const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(Message)
+
+export default MessageContainer

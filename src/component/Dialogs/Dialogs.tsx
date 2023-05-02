@@ -1,20 +1,19 @@
 import React from 'react'
-import {ActionsTypes} from '../Redux/store'
-import {DialogInfo} from './DialogInfo/DialogInfo'
 import s from './dialogs.module.css'
-import {MessageContainer} from "./Message/MessageContainer";
-import {DialogType, MessageType} from "../Redux/dialogs-reducer";
+import MessageContainer from "./Message/MessageContainer";
+import DialogInfoContainer from "./DialogInfo/DialogInfoContainer";
+// import {DialogType, MessageType} from "../Redux/dialogs-reducer";
 
-type DialogsPropsType = {
-    messageInInput: string
-    dialogs: DialogType[]
-    messages: MessageType[]
-    dispatch: (action: ActionsTypes) => void
-    // addMessage: (messageText: string) => void
-    // updateNewMessageText: (text: string) => void
-}
+// type DialogsPropsType = {
+//     messageInInput: string
+//     dialogs: DialogType[]
+//     messages: MessageType[]
+//     dispatch: (action: ActionsTypes) => void
+//     // addMessage: (messageText: string) => void
+//     // updateNewMessageText: (text: string) => void
+// }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = () => {
 
 
     return (
@@ -22,15 +21,15 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.dialogs}>
                 <div className={s.dialogs_names}>
 
-                    <DialogInfo dialogs={props.dialogs}/>
+                    <DialogInfoContainer />
 
                 </div>
                 <div className={s.messages}>
 
                     <MessageContainer
-                        messages={props.messages}
-                        dispatch={props.dispatch}
-                        messageInInput={props.messageInInput}
+                        // messages={props.messages}
+                        // dispatch={props.dispatch}
+                        // messageInInput={props.messageInInput}
                     />
 
                 </div>

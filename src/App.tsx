@@ -4,6 +4,10 @@ import Header from "./component/Header/Header";
 import {Navbar} from './component/Navbar/Navbar';
 import {Profile} from './component/Profile/Profile';
 import {Route} from 'react-router-dom';
+import {News} from "./component/News/News";
+import {Music} from "./component/Music/Music";
+import {Settings} from "./component/Settings/Settings";
+import {Dialogs} from "./component/Dialogs/Dialogs";
 
 
 // type RootType = {
@@ -33,18 +37,18 @@ function App() {
                                // addPost={props.store.dispatch.bind(props.store)}
                                // updateNewPostText={props.store.dispatch.bind(props.store)}
                            />}/>
-                {/*<Route path='/Dialogs'*/}
-                {/*       render={() => <Dialogs*/}
-                {/*           messageInInput={messageInInput}*/}
-                {/*           dialogs={dialogs}*/}
-                {/*           messages={messages}*/}
-                {/*           dispatch={props.store.dispatch.bind(props.store)}*/}
-                {/*           // addMessage={props.store.dispatch.bind(props.store)}*/}
-                {/*           // updateNewMessageText={props.store.dispatch.bind(props.store)}*/}
-                {/*       />} />*/}
-                {/*<Route path='/news' render={() => <News />} />*/}
-                {/*<Route path='/music' render={() => <Music />} />*/}
-                {/*<Route path='/settings' render={() => <Settings />} />*/}
+                <Route path='/Dialogs'
+                       render={() => <Dialogs
+                           // messageInInput={messageInInput}
+                           // dialogs={dialogs}
+                           // messages={messages}
+                           // dispatch={props.store.dispatch.bind(props.store)}
+                           // addMessage={props.store.dispatch.bind(props.store)}
+                           // updateNewMessageText={props.store.dispatch.bind(props.store)}
+                       />} />
+                <Route path='/news' render={() => <News />} />
+                <Route path='/music' render={() => <Music />} />
+                <Route path='/settings' render={() => <Settings />} />
             </div>
         </div>
 

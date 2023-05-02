@@ -1,14 +1,9 @@
 
 import s from './message.module.css'
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {MessageType} from "../../Redux/dialogs-reducer";
+import {MessagePropsType} from "./MessageContainer";
 
-type MessagePropsType = {
-	messages: MessageType[]
-	addMessageCB: (el: string) => void
-	onChangeHandlerCB: (text: string) => void
-	messageInInput: string
-}
+
 export const Message = (props: MessagePropsType) => {
 
 	const [error, setError] = useState<string | null>(null)
@@ -35,7 +30,7 @@ export const Message = (props: MessagePropsType) => {
 		props.onChangeHandlerCB(textMessage)
 	}
 
-	const elMessages = props.messages.map(el => {
+	const elMessages = props.dialogsPage.messages.map(el => {
 		return (
 			<span key={el.id}>{el.message}</span>
 		)
@@ -46,7 +41,7 @@ export const Message = (props: MessagePropsType) => {
 				{elMessages}
 			</div>
 			<div className={s.wrapAddMessage}>
-				<textarea value={props.messageInInput}
+				<textarea value={props.dialogsPage.messageInInput}
 						  onKeyDown={onKeyDownHandler}
 						  ref={newTextElement}
 						  onChange={onChangeHandler}

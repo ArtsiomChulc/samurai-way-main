@@ -10,7 +10,7 @@ export type DialogType = {
     name: string
 }
 
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
     messageInInput: string
@@ -40,17 +40,28 @@ let initialState: DialogsPageType = {
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newMessage: MessageType = {id: 7, message: action.text}
-            if (action.text.length === 0 || action.text.trim() == '') {
-                return state
-            } else {
-                state.messages.unshift(newMessage)
+            return {
+                ...state,
+                messageInInput: '',
+                messages: [...state.messages, {id: 7, message: state.messageInInput}]
             }
-            state.messageInInput = ''
-            return state
+            // let newMessage: MessageType = {id: 7, message: action.text}
+            // if (action.text.length === 0 || action.text.trim() == '') {
+            //     return state
+            // } else {
+            //     let stateCopy = {...state,
+            //         messageInInput: '',
+            //         messages: [...state.messages, {id: 7, message: state.messageInInput}]
+            //     }
+            //     // stateCopy.messages.unshift(newMessage)
+            //     // state.messages.unshift(newMessage)
+            //     // stateCopy.messageInInput = ''
+            //     return stateCopy
+            // }
         case "UPDATE-NEW-MESSAGE-TEXT":
-            state.messageInInput = action.textMessage
-            return state
+            let stateCopy = {...state}
+            stateCopy.messageInInput = action.textMessage
+            return stateCopy
         default:
             return state
     }
