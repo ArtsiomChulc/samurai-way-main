@@ -1,4 +1,3 @@
-import {ActionsTypes} from "./store";
 
 export type FriendType = {
     id: number
@@ -30,7 +29,7 @@ let initialState: NavbarFriendsType = {
     ]
 }
 
-export const navbarReducer = (state = initialState, action: ActionsTypes) => {
+export const navbarReducer = (state = initialState, action: any) => {
     return state
 }
 

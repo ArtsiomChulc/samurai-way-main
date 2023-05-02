@@ -1,4 +1,3 @@
-import {ActionsTypes} from "./store";
 
 export type ProfilePageType = {
     posts: PostsType[]
@@ -44,6 +43,10 @@ export const myPostReducer = (state: ProfilePageType = initialState, action: Act
             return state
     }
 }
+
+type AddPostType = ReturnType<typeof AddPostAC>
+type UpdateNewPostType = ReturnType<typeof UpdateNewPostAC>
+type ActionsTypes = AddPostType | UpdateNewPostType
 
 export const AddPostAC = (text: string) => {
     return {

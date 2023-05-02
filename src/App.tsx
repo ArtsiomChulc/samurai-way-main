@@ -8,6 +8,7 @@ import {News} from "./component/News/News";
 import {Music} from "./component/Music/Music";
 import {Settings} from "./component/Settings/Settings";
 import {Dialogs} from "./component/Dialogs/Dialogs";
+import UsersContainer from "./component/Users/UsersContainer";
 
 
 // type RootType = {
@@ -46,6 +47,7 @@ function App() {
                            // addMessage={props.store.dispatch.bind(props.store)}
                            // updateNewMessageText={props.store.dispatch.bind(props.store)}
                        />} />
+                <Route path='/users' render={() => <UsersContainer/>} />
                 <Route path='/news' render={() => <News />} />
                 <Route path='/music' render={() => <Music />} />
                 <Route path='/settings' render={() => <Settings />} />
