@@ -6,11 +6,12 @@ import {FollowAC, SetUsersAC, UnFollowAC, UsersPageType, UsersType} from "../Red
 import {Dispatch} from "redux";
 
 
+
 type MapStatePropsTypes = {
     users: UsersPageType
 }
 
-type MapDispatchPropsType = {
+export type MapDispatchPropsType = {
     followCB: (userID: number) => void
     unFollowCB: (userID: number) => void
     setUsersCB: (users: Array<UsersType>) => void
