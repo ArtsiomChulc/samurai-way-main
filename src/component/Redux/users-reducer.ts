@@ -1,45 +1,23 @@
-
 export type UsersPageType = {
     users: UsersType[]
 }
 
 export type UsersType = {
-    id: number
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
+    id: number
+    name: string
+    photos: PhotosType
+    status: null
+    uniqueUrlName: null
 }
 
-type LocationType = {
-    city: string
-    country: string
+type PhotosType = {
+    small: null
+    large: null
 }
 
 let initialState: UsersPageType = {
-    users: [
-        {
-            id: 1,
-            followed: true,
-            fullName: 'Artiom',
-            status: 'learning react',
-            location: {city: 'Orsha', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            followed: false,
-            fullName: 'Ivan',
-            status: 'learning JS',
-            location: {city: 'Vitebsk', country: 'Belarus'}
-        },
-        {
-            id: 3,
-            followed: false,
-            fullName: 'Igor',
-            status: 'learning C++',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-    ],
+    users: []
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
