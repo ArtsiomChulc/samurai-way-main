@@ -6,19 +6,51 @@ import axios from "axios";
 
 
 class Users extends React.Component<UsersPropsType> {
-    constructor(props: UsersPropsType) {
-        super(props);
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+
+    componentDidMount() {
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
                 this.props.setUsersCB(response.data.items)
+                this.props.setTotalUserCount(response.data.totalCount)
                 console.log(response)
+            })
+    }
+
+    onPageCount = (page: number) => {
+        this.props.setCurrentPageCB(page)
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsersCB(response.data.items)
             })
     }
 
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
 
             <>
+                <div className={s.wrapNumberPage}>
+                    {pages.map(page => {
+                        return (
+                            <span onClick={() => {this.onPageCount(page)}}
+                                  className={this.props.currentPage === page
+                                      ? s.numberPageBold : s.numberPage}
+                            >
+                            {page}
+                        </span>
+                        )
+                    })}
+                </div>
                 {
                     this.props.users.users.map(user => <div key={user.id} className={s.userWrap}>
                             <div className={s.userPhoto}>
@@ -39,13 +71,15 @@ class Users extends React.Component<UsersPropsType> {
                             </div>
                             <div className={s.btn}>
                                 {user.followed
-                                    ? <button onClick={() =>
-                                    {this.props.unFollowCB(user.id)}
+                                    ? <button onClick={() => {
+                                        this.props.unFollowCB(user.id)
+                                    }
                                     }>
                                         Unfollow
-                                </button>
-                                    : <button onClick={() =>
-                                    {this.props.followCB(user.id)}
+                                    </button>
+                                    : <button onClick={() => {
+                                        this.props.followCB(user.id)
+                                    }
                                     }>
                                         Follow
                                     </button>
@@ -54,9 +88,9 @@ class Users extends React.Component<UsersPropsType> {
                             </div>
                         </div>
                     )}
-                <div className={s.more_btn}>
-                    <button>Add more users</button>
-                </div>
+                {/*<div className={s.more_btn}>*/}
+                {/*    <button>Add more users</button>*/}
+                {/*</div>*/}
             </>
         )
     }
