@@ -13,7 +13,7 @@
 //
 //
 //
-// import {AddPostAC, myPostReducer, UpdateNewPostAC} from "./myPost-reducer";
+// import {AddPostAC, profileReducer, UpdateNewPostAC} from "./myPost-reducer";
 // import {AddMessageAC, dialogsReducer, UpdateNewMessageTextAC} from "./dialogs-reducer";
 //
 // type PostType = {
@@ -159,7 +159,7 @@
 // 		console.log('render')
 // 	},
 // 	dispatch(action) {
-// 		myPostReducer(this._state.profilePage, action as ProfilePageActionType)
+// 		profileReducer(this._state.profilePage, action as ProfilePageActionType)
 // 		dialogsReducer(this._state.dialogsPage, action as DialogsPageActionType)
 // 		this._render()
 // 		// switch (action.type) {

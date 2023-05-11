@@ -26,7 +26,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                 this.props.toggleFetchingCB(false)
                 this.props.setUsersCB(response.data.items)
                 this.props.setTotalUserCount(response.data.totalCount)
-                console.log(response)
             })
     }
 

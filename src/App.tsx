@@ -2,13 +2,13 @@ import React from 'react';
 import s from './App.module.css';
 import Header from "./component/Header/Header";
 import {Navbar} from './component/Navbar/Navbar';
-import {Profile} from './component/Profile/Profile';
 import {Route} from 'react-router-dom';
 import {News} from "./component/News/News";
 import {Music} from "./component/Music/Music";
 import {Settings} from "./component/Settings/Settings";
 import {Dialogs} from "./component/Dialogs/Dialogs";
 import UsersContainer from "./component/Users/UsersContainer";
+import ProfileContainer from "./component/Profile/ProfileContainer";
 
 
 // type RootType = {
@@ -32,7 +32,7 @@ function App() {
             <div className={s.profile}>
                 <Route path='/Profile'
                        render={() =>
-                           <Profile
+                           <ProfileContainer
                                // posts={posts}
                                // dispatch={props.store.dispatch.bind(props.store)}
                                // addPost={props.store.dispatch.bind(props.store)}

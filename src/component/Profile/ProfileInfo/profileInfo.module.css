@@ -12,6 +12,74 @@ img {
 	height: 100%;
 }
 
-.desc {
+.descWrap {
 	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.img_name {
+	display: inline-block;
+	border: 1px solid black;
+	padding: 20px;
+}
+
+.wrap_img {
+	width: 300px;
+	height: 300px;
+	text-align: center;
+}
+
+.wrap_img img {
+	width: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.img_name p {
+	text-align: center;
+}
+
+.lookJob {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.lookJob span {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.smileJob {
+	width: 120px;
+	height: 120px;
+}
+
+.smileJob img {
+	width: 100%;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.wrapContacts {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.wrapContacts ul {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	gap: 15px;
+	flex-direction: column;
+}
+
+.wrapContacts ul li {
+	list-style: none;
 }

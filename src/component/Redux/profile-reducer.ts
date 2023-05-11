@@ -1,7 +1,32 @@
+type PhotosType = {
+    small: string
+    large: string
+}
 
+type ContactsType = {
+    facebook: string
+    website: null
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: null
+    github: string
+    mainLink: null
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: true
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosType
+}
 export type ProfilePageType = {
     posts: PostsType[]
     newText: string
+    profile: ProfileType | null
 }
 
 export type PostsType = {
@@ -19,10 +44,11 @@ let initialState: ProfilePageType = {
         // { id: 5, post: 'Mark, how are you?', likeCount: 6 },
         // { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
     ],
-    newText: ''
+    newText: '',
+    profile: null
 }
 
-export const myPostReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
             // let newPostObj: PostsType = {id: 7, post: action.text, likeCount: 0}
@@ -39,6 +65,11 @@ export const myPostReducer = (state: ProfilePageType = initialState, action: Act
             let stateCopy = {...state}
             stateCopy.newText = action.text
             return stateCopy
+        case "SET-USERS-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state
     }
@@ -46,7 +77,8 @@ export const myPostReducer = (state: ProfilePageType = initialState, action: Act
 
 type AddPostType = ReturnType<typeof AddPostAC>
 type UpdateNewPostType = ReturnType<typeof UpdateNewPostAC>
-type ActionsTypes = AddPostType | UpdateNewPostType
+type SetUsersProfileType = ReturnType<typeof SetUsersProfileAC>
+type ActionsTypes = AddPostType | UpdateNewPostType | SetUsersProfileType
 
 export const AddPostAC = (text: string) => {
     return {
@@ -58,5 +90,11 @@ export const UpdateNewPostAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST",
         text: text
+    } as const
+}
+export const SetUsersProfileAC = (profile: ProfileType) => {
+    return {
+        type: "SET-USERS-PROFILE",
+        profile
     } as const
 }
