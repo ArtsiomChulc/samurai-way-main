@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './App.module.css';
-import Header from "./component/Header/Header";
 import {Navbar} from './component/Navbar/Navbar';
 import {Route} from 'react-router-dom';
 import {News} from "./component/News/News";
@@ -9,6 +8,7 @@ import {Settings} from "./component/Settings/Settings";
 import {Dialogs} from "./component/Dialogs/Dialogs";
 import UsersContainer from "./component/Users/UsersContainer";
 import ProfileContainer from "./component/Profile/ProfileContainer";
+import HeaderContainer from "./component/Header/HeaderContainer";
 
 
 // type RootType = {
@@ -27,7 +27,7 @@ function App() {
     return (
 
         <div className={s.App}>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className={s.profile}>
                 <Route path='/Profile/:userId?'

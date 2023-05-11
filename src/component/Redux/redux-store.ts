@@ -3,21 +3,23 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {profileReducer} from "./profile-reducer";
 import {navbarReducer} from "./navbar-reducer";
 import usersReducer from "./users-reducer";
+import authReducer from "./auth-reducer";
 
 let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     navbarFriends: navbarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 
 
 let store = createStore(reducers)
 
-let state = store.getState()
+// let state = store.getState()
 
-export type StoreType = typeof store
+// export type StoreType = typeof store
 export type AppRootStateType = ReturnType<typeof reducers>
 
 // @ts-ignore
