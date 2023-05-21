@@ -61,6 +61,11 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
             let stateCopy = {...state}
             stateCopy.messageInInput = action.textMessage
             return stateCopy
+        case "CHANGE-MESSAGE":
+            let copyStateWithMessage = {...state}
+            let newMessage = copyStateWithMessage.messages.find(m => m.id === action.id)
+            if (newMessage) newMessage.message = action.newMessage
+            return copyStateWithMessage
         default:
             return state
     }
@@ -68,7 +73,8 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
 
 type AddMessageType = ReturnType<typeof AddMessageAC>
 type UpdateNewMessageType = ReturnType<typeof UpdateNewMessageTextAC>
-type ActionsType = AddMessageType | UpdateNewMessageType
+type ChangMessageType = ReturnType<typeof ChangMessageAC>
+type ActionsType = AddMessageType | UpdateNewMessageType | ChangMessageType
 
 export const AddMessageAC = (text: string) => {
     return {
@@ -80,5 +86,12 @@ export const UpdateNewMessageTextAC = (text: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
         textMessage: text
+    } as const
+}
+export const ChangMessageAC = (newMessage: string, id: number) => {
+    return {
+        type: "CHANGE-MESSAGE",
+        newMessage,
+        id
     } as const
 }

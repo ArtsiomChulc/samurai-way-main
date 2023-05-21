@@ -1,5 +1,5 @@
 import React from 'react';
-import {AddPostAC, ProfilePageType, UpdateNewPostAC} from "../../Redux/profile-reducer";
+import {AddPostAC, ChangeMessageAC, ProfilePageType, UpdateNewPostAC} from "../../Redux/profile-reducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -42,6 +42,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     addPostCB: (el: string) => void
     onChangeHandlerCB: (text: string) => void
+    onChangeMessageCB: (newMessage: string, id: number) => void
 }
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
@@ -57,9 +58,13 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         addPostCB: (el: string) => {
             dispatch(AddPostAC(el))
         },
+
         onChangeHandlerCB: (text: string) => {
             dispatch(UpdateNewPostAC(text))
-        }
+        },
+        onChangeMessageCB: (newMessage: string, id: number) => {
+            dispatch(ChangeMessageAC(newMessage, id))
+        },
     }
 }
 

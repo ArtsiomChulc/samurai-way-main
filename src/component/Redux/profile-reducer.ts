@@ -70,6 +70,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 profile: action.profile
             }
+        case "CHANGE-MESSAGE":
+            let copyStateWithMessage = {...state}
+            let newPost = copyStateWithMessage.posts.find(p => p.id === action.id)
+            if (newPost) newPost.post = action.newMessage
+            return copyStateWithMessage
         default:
             return state
     }
@@ -78,23 +83,32 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 type AddPostType = ReturnType<typeof AddPostAC>
 type UpdateNewPostType = ReturnType<typeof UpdateNewPostAC>
 type SetUsersProfileType = ReturnType<typeof SetUsersProfileAC>
-type ActionsTypes = AddPostType | UpdateNewPostType | SetUsersProfileType
+type ChangeMessageType = ReturnType<typeof ChangeMessageAC>
+type ActionsTypes = AddPostType | UpdateNewPostType | SetUsersProfileType | ChangeMessageType
 
 export const AddPostAC = (text: string) => {
     return {
         type: "ADD-POST",
-        text: text
+        text
     } as const
 }
 export const UpdateNewPostAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST",
-        text: text
+        text
     } as const
 }
 export const SetUsersProfileAC = (profile: ProfileType) => {
     return {
         type: "SET-USERS-PROFILE",
         profile
+    } as const
+}
+
+export const ChangeMessageAC = (newMessage: string, id: number) => {
+    return {
+        type: "CHANGE-MESSAGE",
+        newMessage,
+        id
     } as const
 }

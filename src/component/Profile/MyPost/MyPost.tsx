@@ -32,8 +32,15 @@ export const MyPost = (props: UsersPropsType) => {
 	}
 
 	const postElement = props.posts.posts.map(el => {
+		const onChangeMessage = (newMessage: string) => {
+			props.onChangeMessageCB(newMessage, el.id)
+		}
 		return (
-			<Post key={el.id} message={el.post} likeCount={el.likeCount} />
+			<Post key={el.id}
+				  message={el.post}
+				  likeCount={el.likeCount}
+				  onChangeMessage={onChangeMessage}
+			/>
 		)
 	})
 	return (

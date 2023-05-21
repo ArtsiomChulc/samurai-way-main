@@ -2,6 +2,7 @@
 import s from './message.module.css'
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {MessagePropsType} from "./MessageContainer";
+import EditableSpanPost from "../../common/EditableSpanPost";
 
 
 export const Message = (props: MessagePropsType) => {
@@ -31,8 +32,12 @@ export const Message = (props: MessagePropsType) => {
 	}
 
 	const elMessages = props.dialogsPage.messages.map(el => {
+		const onChangeMessage = (newMessage: string) => {
+			props.onChangeMessageCB(newMessage, el.id)
+		}
 		return (
-			<span key={el.id}>{el.message}</span>
+			// <span key={el.id}>{el.message}</span>
+			<EditableSpanPost message={el.message} onChangeMessageCB={onChangeMessage}/>
 		)
 	})
 	return (
