@@ -20,11 +20,6 @@
 	position: relative;
 }
 
-.btn {
-	width: 120px;
-	padding: 7px 12px;
-	margin-left: 15px;
-}
 .errorText {
 	color: red;
 	position: absolute;

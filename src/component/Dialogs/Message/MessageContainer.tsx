@@ -1,9 +1,9 @@
 
 import React from "react";
-import {AddMessageAC, ChangMessageAC, DialogsPageType, UpdateNewMessageTextAC} from "../../Redux/dialogs-reducer";
+import {AddMessageAC, ChangMessageAC, DialogsPageType, UpdateNewMessageTextAC} from "../../../Redux/dialogs-reducer";
 import {Message} from "./Message";
 import {connect} from "react-redux";
-import {AppRootStateType} from "../../Redux/redux-store";
+import {AppRootStateType} from "../../../Redux/redux-store";
 import {Dispatch} from "redux";
 
 // type MessagePropsType = {

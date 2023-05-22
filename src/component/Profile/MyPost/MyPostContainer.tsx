@@ -1,9 +1,9 @@
 import React from 'react';
-import {AddPostAC, ChangeMessageAC, ProfilePageType, UpdateNewPostAC} from "../../Redux/profile-reducer";
+import {AddPostAC, ChangeMessageAC, ProfilePageType, UpdateNewPostAC} from "../../../Redux/profile-reducer";
 import {MyPost} from "./MyPost";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {AppRootStateType} from "../../Redux/redux-store";
+import {AppRootStateType} from "../../../Redux/redux-store";
 
 // type MyPostTypeProps = {
 //     posts: ProfilePageType

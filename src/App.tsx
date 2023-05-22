@@ -9,6 +9,7 @@ import {Dialogs} from "./component/Dialogs/Dialogs";
 import UsersContainer from "./component/Users/UsersContainer";
 import ProfileContainer from "./component/Profile/ProfileContainer";
 import HeaderContainer from "./component/Header/HeaderContainer";
+import LogIn from "./component/Header/login/LogIn";
 
 
 // type RootType = {
@@ -51,6 +52,7 @@ function App() {
                 <Route path='/news' render={() => <News />} />
                 <Route path='/music' render={() => <Music />} />
                 <Route path='/settings' render={() => <Settings />} />
+                <Route path='/login' render={() => <LogIn />} />
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './post.module.css';
-import EditableSpanPost from "../../common/EditableSpanPost";
+import EditableSpanPost from "../../common/editableSpan/EditableSpanPost";
 
 type PostType = {
 	message: string

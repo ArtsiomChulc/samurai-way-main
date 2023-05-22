@@ -1,8 +1,11 @@
 import s from "./users.module.css";
+import btn from "../common/styles/btn.module.css";
 import userPhoto from "../../assets/images/userPhoto/user-icon.jpg";
 import React from "react";
-import {UsersPageType} from "../Redux/users-reducer";
+import {UsersPageType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {deleteFollowStatus, postFollowStatus} from "../../api/api";
+import DotPreloader from "../common/dotPreloader/DotPreloader";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -12,6 +15,8 @@ type UsersPropsType = {
     onPageCount: (page: number) => void
     unFollowCB: (userID: number) => void
     followCB: (userID: number) => void
+    toggleFollowingCB: (isFollowing: boolean, id: number) => void
+    followingProgress: Array<number>
 }
 
 
@@ -58,19 +63,37 @@ export const Users = (props: UsersPropsType) => {
                                 <p>{"user.location.city"}</p>
                             </div>
                         </div>
-                        <div className={s.btn}>
+                        <div className={s.btns}>
                             {user.followed
-                                ? <button onClick={() => {
-                                    props.unFollowCB(user.id)
+                                ? <button disabled={props.followingProgress.some(id => id === user.id)}
+                                          className={`${btn.btn} ${s.btn}`} onClick={() => {
+
+                                    props.toggleFollowingCB(true, user.id)
+                                    deleteFollowStatus(user.id).then(data => {
+                                        if (data.resultCode === 0) {
+                                            props.unFollowCB(user.id)
+                                        }
+                                        props.toggleFollowingCB(false, user.id)
+                                    })
                                 }
                                 }>
-                                    Unfollow
+                                    {props.followingProgress.some(id => id === user.id) ? <DotPreloader/> : 'Unfollow'}
+
                                 </button>
-                                : <button onClick={() => {
-                                    props.followCB(user.id)
+                                : <button disabled={props.followingProgress.some(id => id === user.id)}
+                                          className={`${btn.btn} ${s.btn}`} onClick={() => {
+
+                                    props.toggleFollowingCB(true, user.id)
+                                    postFollowStatus(user.id).then(data => {
+                                        if (data.resultCode === 0) {
+                                            props.followCB(user.id)
+                                        }
+                                        props.toggleFollowingCB(false, user.id)
+                                    })
                                 }
                                 }>
-                                    Follow
+                                    {props.followingProgress.some(id => id === user.id) ? <DotPreloader/> : 'Follow'}
+
                                 </button>
                             }
 

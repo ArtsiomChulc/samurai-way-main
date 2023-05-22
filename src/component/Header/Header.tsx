@@ -1,6 +1,7 @@
 import React from "react";
 import s from './header.module.css'
 import {NavLink} from "react-router-dom";
+import LogIn from "./login/LogIn";
 
 type HeaderPropsType = {
     id: number | null
@@ -15,7 +16,7 @@ function Header(props: HeaderPropsType) {
         <div className={s.header}>
 
             <span className={s.logo}>
-                <img src="https://thumbs.dreamstime.com/b/flame-vector-eps-flame-vector-eps-146467297.jpg" alt="logo" />
+                <img src="https://thumbs.dreamstime.com/b/flame-vector-eps-flame-vector-eps-146467297.jpg" alt="logo"/>
             </span>
             <p className={s.title_header}>Social network</p>
 

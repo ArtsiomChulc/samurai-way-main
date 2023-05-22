@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './profileInfo.module.css';
-import {ProfileType} from "../../Redux/profile-reducer";
+import {ProfileType} from "../../../Redux/profile-reducer";
 import Preloader from "../../common/preloader/Preloader";
 import PhotoUserProfile from '../../../assets/images/userPhoto/user-icon.jpg'
 import JobTruePhoto from '../../../img/profileUser/profileInfo/job_true.png'

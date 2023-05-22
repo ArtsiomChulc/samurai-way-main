@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import { Post } from '../Post/Post';
 import s from './mypost.module.css';
+import btn from '../../common/styles/btn.module.css'
 import {UsersPropsType} from "./MyPostContainer";
 
 
@@ -54,7 +55,7 @@ export const MyPost = (props: UsersPropsType) => {
 					placeholder={"Enter your post"}
 				/>
 				<div>
-					<button className={s.btn} onClick={addPost}>Add post</button>
+					<button className={btn.btn} onClick={addPost}>Add post</button>
 				</div>
 
 				{error && <span className={s.errorText}>{error}</span>}

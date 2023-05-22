@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import s from "../Profile/Post/post.module.css";
+import s from "../../Profile/Post/post.module.css";
 
 type EditableSpanPostPropsType = {
     message: string
