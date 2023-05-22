@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type UsersPageType = {
     users: UsersType[]
     pageSize: number
@@ -27,7 +30,7 @@ let initialState: UsersPageType = {
     totalUserCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingProgress: [1]
+    followingProgress: []
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
@@ -75,8 +78,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
     }
 }
 
-type FollowType = ReturnType<typeof FollowAC>
-type UnFollowType = ReturnType<typeof UnFollowAC>
+type FollowType = ReturnType<typeof FollowSuccessAC>
+type UnFollowType = ReturnType<typeof UnFollowSuccessAC>
 type SetUsersType = ReturnType<typeof SetUsersAC>
 type SetCurrentPageType = ReturnType<typeof SetCurrentPageAC>
 type SetUsersTotalCountType = ReturnType<typeof SetUsersTotalCountAC>
@@ -90,13 +93,16 @@ type ActionsType = FollowType
     | ToggleFetchingType
     | ToggleFollowingProgressType
 
-export const FollowAC = (userID: number) => {
+
+// Action Creators
+
+export const FollowSuccessAC = (userID: number) => {
     return {
         type: "FOLLOW",
         userID
     } as const
 }
-export const UnFollowAC = (userID: number) => {
+export const UnFollowSuccessAC = (userID: number) => {
     return {
         type: "UNFOLLOW",
         userID
@@ -137,6 +143,47 @@ export const ToggleFollowingProgressAC = (isFollowing: boolean, userId: number) 
         isFollowing,
         userId
     } as const
+}
+
+// THUNK
+
+export const getUsersThunkCreator = ( currentPage: number, pageSize: number ) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(ToggleFetchingAC(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(SetCurrentPageAC(currentPage))
+            dispatch(ToggleFetchingAC(false))
+            dispatch(SetUsersAC(data.items))
+            dispatch(SetUsersTotalCountAC(data.totalCount))
+        })
+    }
+}
+
+export const followThunkCreator = (id: number) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(ToggleFollowingProgressAC(true, id))
+        usersAPI.postFollowStatus(id).then(data => {
+            if (data.resultCode === 0) {
+               dispatch(FollowSuccessAC(id))
+            }
+            dispatch(ToggleFollowingProgressAC(false, id))
+        })
+    }
+}
+
+export const unFollowThunkCreator = (id: number) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(ToggleFollowingProgressAC(true, id))
+        usersAPI.deleteFollowStatus(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(UnFollowSuccessAC(id))
+            }
+            dispatch(ToggleFollowingProgressAC(false, id))
+        })
+    }
 }
 
 export default usersReducer

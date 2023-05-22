@@ -2,37 +2,40 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
-    FollowAC,
+    followThunkCreator,
+    getUsersThunkCreator,
     SetCurrentPageAC,
     SetUsersAC,
     SetUsersTotalCountAC,
-    ToggleFetchingAC, ToggleFollowingProgressAC,
-    UnFollowAC,
+    ToggleFetchingAC,
+    ToggleFollowingProgressAC,
+    unFollowThunkCreator,
     UsersPageType,
     UsersType
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {getUsers} from "../../api/api";
 
 class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.toggleFetchingCB(true)
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleFetchingCB(false)
-            this.props.setUsersCB(data.items)
-            this.props.setTotalUserCount(data.totalCount)
-        })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        // this.props.toggleFetchingCB(true)
+        // getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.toggleFetchingCB(false)
+        //     this.props.setUsersCB(data.items)
+        //     this.props.setTotalUserCount(data.totalCount)
+        // })
     }
 
     onPageCount = (page: number) => {
-        this.props.setCurrentPageCB(page)
-        this.props.toggleFetchingCB(true)
-        getUsers(page, this.props.pageSize).then(data => {
-            this.props.toggleFetchingCB(false)
-            this.props.setUsersCB(data.items)
-        })
+        this.props.getUsers(page, this.props.pageSize)
+        // this.props.setCurrentPageCB(page)
+        // this.props.toggleFetchingCB(true)
+        // getUsers(page, this.props.pageSize).then(data => {
+        //     this.props.toggleFetchingCB(false)
+        //     this.props.setUsersCB(data.items)
+        // })
     }
 
     render() {
@@ -46,10 +49,10 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                     currentPage={this.props.currentPage}
                     users={this.props.users}
                     onPageCount={this.onPageCount}
-                    unFollowCB={this.props.unFollowCB}
-                    followCB={this.props.followCB}
                     toggleFollowingCB={this.props.toggleFollowingCB}
                     followingProgress={this.props.followingProgress}
+                    follow={this.props.follow}
+                    unFollow={this.props.unFollow}
                 />
         )
     }
@@ -66,13 +69,14 @@ type MapStatePropsTypes = {
 }
 
 export type MapDispatchPropsType = {
-    followCB: (userID: number) => void
-    unFollowCB: (userID: number) => void
     setUsersCB: (users: Array<UsersType>) => void
     setCurrentPageCB: (currentPage: number) => void
     setTotalUserCount: (totalUserCount: number) => void
     toggleFetchingCB: (isFetching: boolean) => void
     toggleFollowingCB: (isFollowing: boolean, id: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+    follow: (id: number) => void
+    unFollow: (id: number) => void
 }
 
 export type UsersPropsType = MapStatePropsTypes & MapDispatchPropsType
@@ -113,11 +117,12 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsTypes => {
 
 
 export default connect(mapStateToProps, {
-    followCB: FollowAC,
-    unFollowCB: UnFollowAC,
     setUsersCB: SetUsersAC,
     setCurrentPageCB: SetCurrentPageAC,
     setTotalUserCount: SetUsersTotalCountAC,
     toggleFetchingCB: ToggleFetchingAC,
-    toggleFollowingCB: ToggleFollowingProgressAC
+    toggleFollowingCB: ToggleFollowingProgressAC,
+    getUsers:  getUsersThunkCreator,
+    follow: followThunkCreator,
+    unFollow: unFollowThunkCreator
 })(UsersAPIComponent)

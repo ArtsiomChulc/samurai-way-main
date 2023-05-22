@@ -1,17 +1,16 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {SetUserDataAC, ToggleFetchAC} from "../../Redux/auth-reducer";
-import {getAuthMe} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
         this.props.isFetchingCB(true)
-        getAuthMe().then(response => {
+        usersAPI.getAuthMe().then(response => {
                 this.props.isFetchingCB(false)
                 if (response.data.resultCode === 0) {
                     this.props.setAuthUserDataCB(response.data.data.id, response.data.data.login, response.data.data.email)
