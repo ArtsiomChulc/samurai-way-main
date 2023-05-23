@@ -38,13 +38,15 @@ type MapDispatchPropsType = {
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 
 export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
     }
 }
 

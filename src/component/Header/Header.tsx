@@ -1,7 +1,7 @@
 import React from "react";
 import s from './header.module.css'
 import {NavLink} from "react-router-dom";
-import LogIn from "./login/LogIn";
+import LogIn from "../common/login/LogIn";
 
 type HeaderPropsType = {
     id: number | null

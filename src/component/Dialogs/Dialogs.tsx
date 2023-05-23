@@ -13,6 +13,7 @@ import DialogInfoContainer from "./DialogInfo/DialogInfoContainer";
 //     // updateNewMessageText: (text: string) => void
 // }
 
+
 export const Dialogs = () => {
 
 

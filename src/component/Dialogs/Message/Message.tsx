@@ -3,6 +3,7 @@ import s from './message.module.css'
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {MessagePropsType} from "./MessageContainer";
 import EditableSpanPost from "../../common/editableSpan/EditableSpanPost";
+import {Redirect} from "react-router-dom";
 
 
 export const Message = (props: MessagePropsType) => {
@@ -40,6 +41,11 @@ export const Message = (props: MessagePropsType) => {
             <EditableSpanPost message={el.message} onChangeMessageCB={onChangeMessage}/>
         )
     })
+
+    //REDIRECT
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div>
             <div className={s.message}>
