@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
+
 type PhotosType = {
     small: string
     large: string
@@ -98,7 +101,7 @@ export const UpdateNewPostAC = (text: string) => {
         text
     } as const
 }
-export const SetUsersProfileAC = (profile: ProfileType) => {
+const SetUsersProfileAC = (profile: ProfileType) => {
     return {
         type: "SET-USERS-PROFILE",
         profile
@@ -111,4 +114,13 @@ export const ChangeMessageAC = (newMessage: string, id: number) => {
         newMessage,
         id
     } as const
+}
+
+// THUNK
+
+export const getUsersProfileThunkCreator = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(SetUsersProfileAC(data))
+        })
 }

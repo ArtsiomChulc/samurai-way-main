@@ -2,20 +2,20 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
-import {SetUserDataAC, ToggleFetchAC} from "../../Redux/auth-reducer";
-import {usersAPI} from "../../api/api";
+import {authMeThunkCreator, ToggleFetchAC} from "../../Redux/auth-reducer";
 
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-        this.props.isFetchingCB(true)
-        usersAPI.getAuthMe().then(response => {
-                this.props.isFetchingCB(false)
-                if (response.data.resultCode === 0) {
-                    this.props.setAuthUserDataCB(response.data.data.id, response.data.data.login, response.data.data.email)
-                }
-            })
+        this.props.authMe()
+       //  this.props.isFetchingCB(true)
+       // authAPI.getAuthMe().then(response => {
+       //          this.props.isFetchingCB(false)
+       //          if (response.data.resultCode === 0) {
+       //              this.props.setAuthUserDataCB(response.data.data.id, response.data.data.login, response.data.data.email)
+       //          }
+       //      })
     }
 
     render() {
@@ -38,8 +38,9 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    setAuthUserDataCB: (id: number, login: string, email: string) => void
+    // setAuthUserDataCB: (id: number, login: string, email: string) => void
     isFetchingCB: (isFetching: boolean) => void
+    authMe: () => void
 }
 
 const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
@@ -54,6 +55,7 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 }
 
 export default connect(mapStateToProps, {
-    setAuthUserDataCB: SetUserDataAC,
-    isFetchingCB: ToggleFetchAC
+    // setAuthUserDataCB: SetUserDataAC,
+    isFetchingCB: ToggleFetchAC,
+    authMe: authMeThunkCreator
 })(HeaderContainer);

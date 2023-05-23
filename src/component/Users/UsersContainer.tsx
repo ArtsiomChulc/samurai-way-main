@@ -4,17 +4,17 @@ import {AppRootStateType} from "../../Redux/redux-store";
 import {
     followThunkCreator,
     getUsersThunkCreator,
-    SetCurrentPageAC,
-    SetUsersAC,
+    SetCurrentPageAC, SetUsersAC,
     SetUsersTotalCountAC,
     ToggleFetchingAC,
     ToggleFollowingProgressAC,
     unFollowThunkCreator,
-    UsersPageType,
-    UsersType
+    UsersPageType, UsersType
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import Preloader from "../common/preloader/Preloader";
+
+
 
 class UsersAPIComponent extends React.Component<UsersPropsType> {
 

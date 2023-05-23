@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 export type AuthPageType = {
     id: number | null
     login: string | null
@@ -39,7 +42,7 @@ type ToggleFetchType = ReturnType<typeof ToggleFetchAC>
 type ActionsType = SetUserDataType | ToggleFetchType
 
 
-export const SetUserDataAC = (id: number, login: string, email: string) => {
+const SetUserDataAC = (id: number, login: string, email: string) => {
     return {
         type: "SET-USER-DATA",
         data: {
@@ -57,4 +60,18 @@ export const ToggleFetchAC = (isFetching: boolean) => {
     } as const
 }
 
+
+// THUNK
+
+export const authMeThunkCreator = () => (dispatch: Dispatch) => {
+    dispatch(ToggleFetchAC(true))
+    authAPI.getAuthMe().then(data => {
+        dispatch(ToggleFetchAC(false))
+        if (data.resultCode === 0) {
+            dispatch(SetUserDataAC(data.data.id, data.data.login, data.data.email))
+        }
+    })
+}
+
 export default authReducer
+
