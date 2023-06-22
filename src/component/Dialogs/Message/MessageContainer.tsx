@@ -1,4 +1,3 @@
-
 import React from "react";
 import {AddMessageAC, ChangMessageAC, DialogsPageType, UpdateNewMessageTextAC} from "../../../Redux/dialogs-reducer";
 import {Message} from "./Message";

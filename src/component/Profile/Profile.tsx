@@ -8,6 +8,8 @@ import {ProfileStatus} from "./ProfileInfo/ProfileStatus";
 
 type ProfileInfoPropsType = {
 	profile: ProfileType | null
+	status: string
+	updateStatus: (status: string) => void
 	// isAuth: boolean
 }
 
@@ -18,8 +20,10 @@ export const Profile = (props: ProfileInfoPropsType) => {
 
 	return (
 		<div className={s.profile}>
-			<ProfileInfo profile={props.profile}/>
-			<ProfileStatus/>
+			<ProfileInfo
+				profile={props.profile}
+			/>
+			<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
 			<MyPostContainer />
 
 		</div>

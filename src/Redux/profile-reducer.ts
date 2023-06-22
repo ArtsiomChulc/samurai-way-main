@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {stat} from "fs";
 
 type PhotosType = {
     small: string
@@ -30,6 +31,7 @@ export type ProfilePageType = {
     posts: PostsType[]
     newText: string
     profile: ProfileType | null
+    status: string
 }
 
 export type PostsType = {
@@ -48,7 +50,8 @@ let initialState: ProfilePageType = {
         // { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
     ],
     newText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
@@ -73,6 +76,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 profile: action.profile
             }
+        case "SET-STATUS":
+            return {
+                ...state,
+                status: action.status
+            }
         case "CHANGE-MESSAGE":
             let copyStateWithMessage = {...state}
             let newPost = copyStateWithMessage.posts.find(p => p.id === action.id)
@@ -87,7 +95,12 @@ type AddPostType = ReturnType<typeof AddPostAC>
 type UpdateNewPostType = ReturnType<typeof UpdateNewPostAC>
 type SetUsersProfileType = ReturnType<typeof SetUsersProfileAC>
 type ChangeMessageType = ReturnType<typeof ChangeMessageAC>
-type ActionsTypes = AddPostType | UpdateNewPostType | SetUsersProfileType | ChangeMessageType
+type SetStatusType = ReturnType<typeof SetStatusAC>
+type ActionsTypes = AddPostType
+    | UpdateNewPostType
+    | SetUsersProfileType
+    | ChangeMessageType
+    | SetStatusType
 
 export const AddPostAC = (text: string) => {
     return {
@@ -116,11 +129,31 @@ export const ChangeMessageAC = (newMessage: string, id: number) => {
     } as const
 }
 
+export const SetStatusAC = (status: string) => {
+    return {
+        type: "SET-STATUS",
+        status
+    } as const
+}
+
+
 // THUNK
 
 export const getUsersProfileThunkCreator = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId)
         .then(data => {
             dispatch(SetUsersProfileAC(data))
+        })
+}
+export const getStatusProfileThunkCreator = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(data => {
+            dispatch(SetStatusAC(data))
+        })
+}
+export const updateStatusProfileThunkCreator = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(data => {
+            dispatch(SetStatusAC(data))
         })
 }
