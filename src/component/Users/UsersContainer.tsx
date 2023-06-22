@@ -4,20 +4,22 @@ import {AppRootStateType} from "../../Redux/redux-store";
 import {
     followThunkCreator,
     getUsersThunkCreator,
-    SetCurrentPageAC, SetUsersAC,
+    SetCurrentPageAC,
+    SetUsersAC,
     SetUsersTotalCountAC,
     ToggleFetchingAC,
     ToggleFollowingProgressAC,
     unFollowThunkCreator,
-    UsersPageType, UsersType
+    UsersPageType,
+    UsersType
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthredirect";
+import {compose} from "redux";
 
 
-
-class UsersAPIComponent extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -42,7 +44,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
     render() {
 
         //REDIRECT
-        if (!this.props.isAuth) return <Redirect to={'login'}/>
+        // if (!this.props.isAuth) return <Redirect to={'login'}/>
 
         return (
             this.props.isFetching
@@ -70,7 +72,7 @@ type MapStatePropsTypes = {
     currentPage: number
     isFetching: boolean
     followingProgress: Array<number>
-    isAuth: boolean
+    // isAuth: boolean
 }
 
 export type MapDispatchPropsType = {
@@ -94,7 +96,7 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsTypes => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingProgress: state.usersPage.followingProgress,
-        isAuth: state.auth.isAuth
+        // isAuth: state.auth.isAuth
     }
 }
 
@@ -121,14 +123,29 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsTypes => {
 //     }
 // }
 
+// const DoubleConnectComponent = withAuthRedirect(UsersContainer)
+//
+// export default connect(mapStateToProps, {
+//     setUsersCB: SetUsersAC,
+//     setCurrentPageCB: SetCurrentPageAC,
+//     setTotalUserCount: SetUsersTotalCountAC,
+//     toggleFetchingCB: ToggleFetchingAC,
+//     toggleFollowingCB: ToggleFollowingProgressAC,
+//     getUsers:  getUsersThunkCreator,
+//     follow: followThunkCreator,
+//     unFollow: unFollowThunkCreator
+// })(DoubleConnectComponent)
 
-export default connect(mapStateToProps, {
-    setUsersCB: SetUsersAC,
-    setCurrentPageCB: SetCurrentPageAC,
-    setTotalUserCount: SetUsersTotalCountAC,
-    toggleFetchingCB: ToggleFetchingAC,
-    toggleFollowingCB: ToggleFollowingProgressAC,
-    getUsers:  getUsersThunkCreator,
-    follow: followThunkCreator,
-    unFollow: unFollowThunkCreator
-})(UsersAPIComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setUsersCB: SetUsersAC,
+        setCurrentPageCB: SetCurrentPageAC,
+        setTotalUserCount: SetUsersTotalCountAC,
+        toggleFetchingCB: ToggleFetchingAC,
+        toggleFollowingCB: ToggleFollowingProgressAC,
+        getUsers:  getUsersThunkCreator,
+        follow: followThunkCreator,
+        unFollow: unFollowThunkCreator
+    }),
+    withAuthRedirect
+)(UsersContainer)

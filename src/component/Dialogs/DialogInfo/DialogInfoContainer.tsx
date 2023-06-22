@@ -4,16 +4,17 @@ import {DialogInfo} from "./DialogInfo";
 import {DialogsPageType} from "../../../Redux/dialogs-reducer";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../Redux/redux-store";
+import {log} from "util";
 
 
 type MapStatePropsType = {
 	dialogs: DialogsPageType
 }
-type MapDispatchToProps = {
-
+type MapDispatchPropsType = {
+	v: () => void
 }
 
-export type DialogInfoPropsType = MapStatePropsType & MapDispatchToProps
+export type DialogInfoPropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 	return {
@@ -21,8 +22,10 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 	}
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
-
+let mapDispatchToProps = () => {
+	return {
+		v: () => console.log('dialog-test')
+	}
 }
 
 

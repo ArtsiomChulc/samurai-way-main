@@ -8,7 +8,7 @@ type MapStatePropsType = {
 	friends: FriendType[]
 }
 type MapDispatchPropsType = {
-	friends: FriendType[]
+	v: () => void
 }
 
 export type FriendsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -20,7 +20,11 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 }
 
 let mapDispatchToProps = () => {
-
+	return {
+		v: () => {
+			console.log('friend-test')
+		}
+	}
 }
 
 const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends)

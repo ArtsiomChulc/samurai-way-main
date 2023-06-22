@@ -1,12 +1,18 @@
 import React from 'react';
-import s from './settings.module.css';
+import {withAuthRedirect} from "../../HOC/withAuthredirect";
+import {compose} from "redux";
 
+const Settings = () => {
 
+    return (
+        <div>
+            <h1>TEST</h1>
+            <button onClick={() => {
+                console.log('test')}}>test</button>
+        </div>
+    );
+};
 
-export const Settings = () => {
-	return (
-		<div className={s.settings}>
-			<h1>SETTINGS</h1>
-		</div>
-	)
-}
+export default compose<React.ComponentType>(withAuthRedirect)(Settings)
+
+// export default withAuthRedirect(Settings);

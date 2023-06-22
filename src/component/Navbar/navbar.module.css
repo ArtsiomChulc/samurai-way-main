@@ -10,6 +10,7 @@
 	align-self: center;
 	margin-bottom: 30px;
 	margin-top: 15px;
+	border-radius: 3px;
 	border: 1px solid black;
 	padding: 5px;
 	box-sizing: border-box;
@@ -34,9 +35,9 @@
 }
 
 .item a {
-	font-family: 'Pacifico', cursive;
+	font-family: 'Bitter', serif;
 	font-size: 18px;
-	letter-spacing: 9px;
+	letter-spacing: 4px;
 	word-spacing: 0px;
 	color: #16141a;
 	font-weight: normal;

@@ -2,6 +2,8 @@ import React from 'react'
 import s from './dialogs.module.css'
 import MessageContainer from "./Message/MessageContainer";
 import DialogInfoContainer from "./DialogInfo/DialogInfoContainer";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../HOC/withAuthredirect";
 // import {DialogType, MessageType} from "../Redux/dialogs-reducer";
 
 // type DialogsPropsType = {
@@ -13,8 +15,7 @@ import DialogInfoContainer from "./DialogInfo/DialogInfoContainer";
 //     // updateNewMessageText: (text: string) => void
 // }
 
-
-export const Dialogs = () => {
+const Dialogs = () => {
 
 
     return (
@@ -39,3 +40,5 @@ export const Dialogs = () => {
 
     )
 }
+
+export default compose<React.ComponentType>(withAuthRedirect)(Dialogs)

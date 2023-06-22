@@ -11,7 +11,7 @@ export const Friends = (props:FriendsPropsType) => {
 			<div className={s.friendFlex}>
 				{props.friends.map(el => {
 					return (
-						<div key={el.id} className={s.friend}>
+						<div onClick={props.v} key={el.id} className={s.friend}>
 							<img src={el.imageUrl} alt="Avatar" />
 							<p>{el.name}</p>
 						</div>
