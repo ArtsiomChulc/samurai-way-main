@@ -154,6 +154,8 @@ export const getStatusProfileThunkCreator = (userId: string) => (dispatch: Dispa
 export const updateStatusProfileThunkCreator = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then(data => {
-            dispatch(SetStatusAC(data))
+            if(data.resultCode === 0) {
+                dispatch(SetStatusAC(status))
+            }
         })
 }

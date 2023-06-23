@@ -18,8 +18,12 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) userId = '22695'
-		this.props.getUsersProfile(userId)
-        this.props.getStatusProfile(userId)
+
+            this.props.getUsersProfile(userId)
+
+            this.props.getStatusProfile(userId)
+
+
         // profileAPI.getProfile(userId)
         //     .then(data => {
         //         this.props.SetUsersProfileAC(data)
@@ -70,7 +74,7 @@ export default compose<React.ComponentType>(
         getStatusProfile: getStatusProfileThunkCreator,
         updateStatusProfile: updateStatusProfileThunkCreator
     }),
-    withAuthRedirect,
+    // withAuthRedirect,
     withRouter
 )(ProfileContainer)
 

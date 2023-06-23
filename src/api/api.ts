@@ -10,6 +10,12 @@ const instance = axios.create({
     }
 })
 
+type ApiType = {
+    resultCode: number
+    messages: string[],
+    data: {}
+}
+
 export const authAPI = {
     getAuthMe() {
         return instance.get(`auth/me`)
@@ -27,7 +33,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put(`/profile/status`, {status: status})
+        return instance.put<ApiType>(`/profile/status`, {status: status})
             .then(response => response.data)
     },
 
@@ -39,11 +45,11 @@ export const usersAPI = {
             .then(response => response.data)
     },
     postFollowStatus(id: number) {
-        return instance.post(`follow/${id}`, {})
+        return instance.post<ApiType>(`follow/${id}`, {})
             .then(response => response.data)
     },
     deleteFollowStatus(id: number) {
-        return instance.delete(`follow/${id}`)
+        return instance.delete<ApiType>(`follow/${id}`)
             .then(response => response.data)
     },
 }

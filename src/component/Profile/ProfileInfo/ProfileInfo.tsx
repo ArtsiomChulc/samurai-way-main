@@ -5,10 +5,13 @@ import Preloader from "../../common/preloader/Preloader";
 import PhotoUserProfile from '../../../assets/images/userPhoto/user-icon.jpg'
 import JobTruePhoto from '../../../img/profileUser/profileInfo/job_true.png'
 import JobFalsePhoto from '../../../img/profileUser/profileInfo/job_false.jpg'
+import {ProfileStatus} from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -18,10 +21,11 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     return (
         <div className={s.profile_info}>
-            <div className={s.avatar}>
-                <img
-                    src='https://img3.akspic.ru/previews/0/2/0/2/7/172020/172020-sntis-gora-priroda-peyzash-sammit-x750.jpg'
-                    alt="dffdd"/>
+            <div className={s.status}>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                {/*<img*/}
+                {/*    src='https://img3.akspic.ru/previews/0/2/0/2/7/172020/172020-sntis-gora-priroda-peyzash-sammit-x750.jpg'*/}
+                {/*    alt="dffdd"/>*/}
             </div>
             <div className={s.descWrap}>
                 <div className={s.img_name}>
