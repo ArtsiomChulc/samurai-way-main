@@ -3,33 +3,34 @@ import s from './message.module.css'
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {MessagePropsType} from "./MessageContainer";
 import EditableSpanPost from "../../common/editableSpan/EditableSpanPost";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 export const Message = (props: MessagePropsType) => {
 
-    const [error, setError] = useState<string | null>(null)
-    const newTextElement = React.createRef<HTMLTextAreaElement>()
-
-    const addMessage = () => {
-        let el = newTextElement.current ? newTextElement.current.value : '---'
-        if (newTextElement.current?.value.trim() !== '') {
-            setError('')
-        } else {
-            setError('Введите текст!!!')
-        }
-        props.addMessageCB(el)
-    }
-
-    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
-            addMessage()
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let textMessage = e.currentTarget.value
-        props.onChangeHandlerCB(textMessage)
-    }
+    // const [error, setError] = useState<string | null>(null)
+    // const newTextElement = React.createRef<HTMLTextAreaElement>()
+    //
+    // const addMessage = () => {
+    //     let el = newTextElement.current ? newTextElement.current.value : '---'
+    //     if (newTextElement.current?.value.trim() !== '') {
+    //         setError('')
+    //     } else {
+    //         setError('Введите текст!!!')
+    //     }
+    //     props.addMessageCB(el)
+    // }
+    //
+    // const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === "Enter") {
+    //         addMessage()
+    //     }
+    // }
+    //
+    // const onChangeHandler = (formData: MessageType) => {
+    //     let textMessage = formData.newMessage
+    //     props.onChangeHandlerCB(textMessage)
+    // }
 
     const elMessages = props.dialogsPage.messages.map(el => {
         const onChangeMessage = (newMessage: string) => {
@@ -41,23 +42,45 @@ export const Message = (props: MessagePropsType) => {
         )
     })
 
+    const onSubmit = (formData: MessageType) => {
+        props.addMessageCB(formData.newMessage)
+    }
+
     return (
         <div>
             <div className={s.message}>
                 {elMessages}
             </div>
             <div className={s.wrapAddMessage}>
-				<textarea value={props.dialogsPage.messageInInput}
-                          onKeyDown={onKeyDownHandler}
-                          ref={newTextElement}
-                          onChange={onChangeHandler}
-                          placeholder={"Enter your message"}
-                />
-                <div>
-                    <button onClick={addMessage} className={btn.btn}>Add message</button>
-                </div>
-                {error && <span className={s.errorText}>{error}</span>}
+				<MessageReduxForm onSubmit = {onSubmit}/>
+                {/*{error && <span className={s.errorText}>{error}</span>}*/}
             </div>
         </div>
     )
 }
+
+
+type MessageType = {
+    newMessage: string
+}
+
+const MessageForm = (props: InjectedFormProps<MessageType>) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            {/*<textarea value={props.dialogsPage.messageInInput}*/}
+            {/*          onKeyDown={onKeyDownHandler}*/}
+            {/*          ref={newTextElement}*/}
+            {/*          onChange={onChangeHandler}*/}
+            {/*          placeholder={"Enter your message"}*/}
+            {/*/>*/}
+            <Field component = 'textarea' name = 'newMessage' placeholder = "Enter your message"/>
+            <div>
+                <button className={btn.btn}>Add message</button>
+            </div>
+        </form>
+    );
+};
+
+const MessageReduxForm = reduxForm<MessageType>({form: 'messageForm'})(MessageForm)
+
+export default Message;

@@ -12,7 +12,6 @@ export type DialogType = {
 export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
-    messageInInput: string
 }
 
 
@@ -31,9 +30,8 @@ let initialState: DialogsPageType = {
         {id: 3, message: 'Goood!! '},
         {id: 4, message: 'How are u?'},
         {id: 5, message: 'I.m OK!!!'},
-        {id: 6, message: 'Yo!!! Go home!!!'},
+        {id: 6, message: 'okay'},
     ],
-    messageInInput: ''
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
@@ -41,8 +39,7 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
         case "ADD-MESSAGE":
             return {
                 ...state,
-                messageInInput: '',
-                messages: [...state.messages, {id: 7, message: state.messageInInput}]
+                messages: [...state.messages, {id: 7, message: action.text}]
             }
             // let newMessage: MessageType = {id: 7, message: action.text}
             // if (action.text.length === 0 || action.text.trim() == '') {
@@ -57,10 +54,6 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
             //     // stateCopy.messageInInput = ''
             //     return stateCopy
             // }
-        case "UPDATE-NEW-MESSAGE-TEXT":
-            let stateCopy = {...state}
-            stateCopy.messageInInput = action.textMessage
-            return stateCopy
         case "CHANGE-MESSAGE":
             let copyStateWithMessage = {...state}
             let newMessage = copyStateWithMessage.messages.find(m => m.id === action.id)
@@ -72,20 +65,13 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
 }
 
 type AddMessageType = ReturnType<typeof AddMessageAC>
-type UpdateNewMessageType = ReturnType<typeof UpdateNewMessageTextAC>
 type ChangMessageType = ReturnType<typeof ChangMessageAC>
-type ActionsType = AddMessageType | UpdateNewMessageType | ChangMessageType
+type ActionsType = AddMessageType | ChangMessageType
 
 export const AddMessageAC = (text: string) => {
     return {
         type: "ADD-MESSAGE",
         text: text
-    } as const
-}
-export const UpdateNewMessageTextAC = (text: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        textMessage: text
     } as const
 }
 export const ChangMessageAC = (newMessage: string, id: number) => {

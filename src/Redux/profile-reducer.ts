@@ -29,7 +29,6 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: PostsType[]
-    newText: string
     profile: ProfileType | null
     status: string
 }
@@ -49,7 +48,6 @@ let initialState: ProfilePageType = {
         // { id: 5, post: 'Mark, how are you?', likeCount: 6 },
         // { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
     ],
-    newText: '',
     profile: null,
     status: ''
 }
@@ -63,14 +61,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             } else {
                 return {
                     ...state,
-                    newText: '',
                     posts: [...state.posts, {id: 7, post: action.text, likeCount: 0}]
                 }
             }
-        case "UPDATE-NEW-POST":
-            let stateCopy = {...state}
-            stateCopy.newText = action.text
-            return stateCopy
+        // case "UPDATE-NEW-POST":
+        //     let stateCopy = {...state}
+        //     stateCopy.newText = action.text
+        //     return stateCopy
         case "SET-USERS-PROFILE":
             return {
                 ...state,

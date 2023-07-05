@@ -41,7 +41,7 @@ type MapStatePropsType = {
 }
 type MapDispatchPropsType = {
     addPostCB: (el: string) => void
-    onChangeHandlerCB: (text: string) => void
+    // onChangeHandlerCB: (text: string) => void
     onChangeMessageCB: (newMessage: string, id: number) => void
 }
 
@@ -59,9 +59,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
             dispatch(AddPostAC(el))
         },
 
-        onChangeHandlerCB: (text: string) => {
-            dispatch(UpdateNewPostAC(text))
-        },
+        // onChangeHandlerCB: (text: string) => {
+        //     dispatch(UpdateNewPostAC(text))
+        // },
         onChangeMessageCB: (newMessage: string, id: number) => {
             dispatch(ChangeMessageAC(newMessage, id))
         },
