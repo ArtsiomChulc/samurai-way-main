@@ -1,10 +1,14 @@
 import btn from '../../common/styles/btn.module.css';
 import s from './message.module.css'
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React from "react";
 import {MessagePropsType} from "./MessageContainer";
 import EditableSpanPost from "../../common/editableSpan/EditableSpanPost";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthTC, minLengthTC, required} from "../../../utils/validators/validatorsForReduxForm";
+import {Textarea} from "../../common/formControls/FormControl";
 
+const maxLength15 = maxLengthTC(15)
+const minLength15 = minLengthTC(2)
 
 export const Message = (props: MessagePropsType) => {
 
@@ -73,7 +77,11 @@ const MessageForm = (props: InjectedFormProps<MessageType>) => {
             {/*          onChange={onChangeHandler}*/}
             {/*          placeholder={"Enter your message"}*/}
             {/*/>*/}
-            <Field component = 'textarea' name = 'newMessage' placeholder = "Enter your message"/>
+            <Field component = {Textarea}
+                   name = 'newMessage'
+                   placeholder = "Enter your message"
+                   validate={[required, maxLength15, minLength15]}
+            />
             <div>
                 <button className={btn.btn}>Add message</button>
             </div>

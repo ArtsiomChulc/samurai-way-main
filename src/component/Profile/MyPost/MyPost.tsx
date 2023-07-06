@@ -94,7 +94,7 @@ const MyPostForm = (props: MyPostType ) => {
             />
             {formik.errors.newPostFormik && <div className={s.error}>{formik.errors.newPostFormik}</div>}
             <div>
-                <button className={btn.btn}>Add post</button>
+                <button type={"submit"} className={btn.btn}>Add post</button>
             </div>
         </form>
     );

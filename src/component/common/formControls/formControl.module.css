@@ -1,0 +1,8 @@
+.error {
+    color: red
+}
+
+.error>div>input,
+.error>div>textarea {
+    border: 2px solid red;
+}
