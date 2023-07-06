@@ -42,13 +42,14 @@ type ToggleFetchType = ReturnType<typeof ToggleFetchAC>
 type ActionsType = SetUserDataType | ToggleFetchType
 
 
-const SetUserDataAC = (id: number, login: string, email: string) => {
+const SetUserDataAC = (id: number | null, login: string | null, email: string | null, isAuth: boolean) => {
     return {
         type: "SET-USER-DATA",
         data: {
             id,
             login,
             email,
+            isAuth
         }
     } as const
 }
@@ -68,7 +69,27 @@ export const authMeThunkCreator = () => (dispatch: Dispatch) => {
     authAPI.getAuthMe().then(data => {
         dispatch(ToggleFetchAC(false))
         if (data.resultCode === 0) {
-            dispatch(SetUserDataAC(data.data.id, data.data.login, data.data.email))
+            dispatch(SetUserDataAC(data.data.id, data.data.login, data.data.email, true))
+        }
+    })
+}
+
+export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    dispatch(ToggleFetchAC(true))
+    authAPI.login(email, password, rememberMe).then(data => {
+        dispatch(ToggleFetchAC(false))
+        if (data.resultCode === 0) {
+            dispatch(SetUserDataAC(data.data.id, data.data.login, data.data.email, true))
+        }
+    })
+}
+
+export const logOutTCr = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    dispatch(ToggleFetchAC(true))
+    authAPI.logOut().then(data => {
+        dispatch(ToggleFetchAC(false))
+        if (data.resultCode === 0) {
+            dispatch(SetUserDataAC(null, null, null, false))
         }
     })
 }

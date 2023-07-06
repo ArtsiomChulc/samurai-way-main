@@ -21,6 +21,14 @@ export const authAPI = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logOut() {
+        return instance.delete(`auth/login`)
+            .then(response => response.data)
+    },
 }
 
 export const profileAPI = {
