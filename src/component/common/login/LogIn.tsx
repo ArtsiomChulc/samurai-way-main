@@ -5,15 +5,26 @@ import {Input} from "../formControls/FormControl";
 import {mailError, required} from "../../../utils/validators/validatorsForReduxForm";
 import {connect} from "react-redux";
 import {loginTC} from "../../../Redux/auth-reducer";
+import {AppRootStateType} from "../../../Redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 type LogInPropsType = {
     loginTC: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
+
+type MapStateToPropsType = {
+    isAuth: boolean
 }
 
 const LogIn = (props: LogInPropsType) => {
 
     const onSubmit = (formData: LoginFormType) => {
         props.loginTC(formData.login, formData.password, formData.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
 
     return (
@@ -25,7 +36,13 @@ const LogIn = (props: LogInPropsType) => {
     );
 };
 
-export default connect(null, {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps, {
     loginTC
 })(LogIn);
 

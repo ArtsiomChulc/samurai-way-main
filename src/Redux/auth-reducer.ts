@@ -22,8 +22,7 @@ const authReducer = (state: AuthPageType = initialState, action: ActionsType): A
         case "SET-USER-DATA":
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
 
         case "TOGGLE-FETCHING":
@@ -84,7 +83,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     })
 }
 
-export const logOutTCr = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const logOutTC = () => (dispatch: Dispatch) => {
     dispatch(ToggleFetchAC(true))
     authAPI.logOut().then(data => {
         dispatch(ToggleFetchAC(false))

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
-import {authMeThunkCreator, ToggleFetchAC} from "../../Redux/auth-reducer";
+import {authMeThunkCreator, logOutTC, ToggleFetchAC} from "../../Redux/auth-reducer";
 
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
@@ -41,6 +41,7 @@ type MapDispatchPropsType = {
     // setAuthUserDataCB: (id: number, login: string, email: string) => void
     isFetchingCB: (isFetching: boolean) => void
     authMe: () => void
+    logOutTC: () => void
 }
 
 const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
@@ -57,5 +58,6 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 export default connect(mapStateToProps, {
     // setAuthUserDataCB: SetUserDataAC,
     isFetchingCB: ToggleFetchAC,
-    authMe: authMeThunkCreator
+    authMe: authMeThunkCreator,
+    logOutTC
 })(HeaderContainer);

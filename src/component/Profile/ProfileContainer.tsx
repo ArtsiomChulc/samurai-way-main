@@ -36,6 +36,7 @@ class ProfileContainer extends React.Component<PropsType> {
                      profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.updateStatusProfile}
+                     isAuth={this.props.isAuth}
             />
         )
     }
@@ -57,6 +58,7 @@ type MapDispatchPropsType = {
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    isAuth: boolean
 }
 
 export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType
@@ -64,7 +66,8 @@ export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType
 const mapStateToProps = (state: AppRootStateType) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        isAuth: state.auth.isAuth
     }
 }
 

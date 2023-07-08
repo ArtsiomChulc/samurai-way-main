@@ -1,15 +1,16 @@
 import React from "react";
 import s from './header.module.css'
 import {NavLink} from "react-router-dom";
-import LogIn from "../common/login/LogIn";
+import btn from '../common/styles/btn.module.css';
+import {HeaderPropsType} from "./HeaderContainer";
 
-type HeaderPropsType = {
-    id: number | null
-    login: string | null
-    email: string | null
-    isFetching: boolean
-    isAuth: boolean
-}
+// type HeaderPropsType = {
+//     id: number | null
+//     login: string | null
+//     email: string | null
+//     isFetching: boolean
+//     isAuth: boolean
+// }
 
 function Header(props: HeaderPropsType) {
     return (
@@ -22,7 +23,11 @@ function Header(props: HeaderPropsType) {
 
             <div className={s.login_block}>
                 {props.isAuth
-                    ? props.login
+                    ? <div className={s.authBlock}>
+                        <span>{props.login}</span>
+                        <button onClick={props.logOutTC} className={btn.btn}>LogOut</button>
+                    </div>
+
                     : <NavLink to={'/login'}>LogIn</NavLink>
                 }
 
