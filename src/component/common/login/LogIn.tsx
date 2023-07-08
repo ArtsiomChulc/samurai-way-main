@@ -53,7 +53,7 @@ type LoginFormType = {
 }
 
 export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
-    return(
+    return (
         <form onSubmit={props.handleSubmit} className={s.inputs}>
             <label>EMAIL</label>
             <Field className={s.input}
@@ -72,8 +72,10 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
                    validate={[required]}
             />
             <div className={s.checkWrap}>
-                <Field className={s.checkbox} type="checkbox" name={'rememberMe'} component={Input}/> <span>remember me</span>
+                <Field className={s.checkbox} type="checkbox" name={'rememberMe'} component={Input}/>
+                <span>remember me</span>
             </div>
+            {props.error && <div>{props.error}</div>}
 
             <button className={s.button} type="submit">LOGIN</button>
         </form>
