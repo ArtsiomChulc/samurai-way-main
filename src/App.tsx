@@ -12,6 +12,7 @@ import LogIn from "./component/common/login/LogIn";
 import Settings from "./component/Settings/Settings";
 import {connect} from "react-redux";
 import {authMeThunkCreator} from "./Redux/auth-reducer";
+import {initializeAppTC} from "./Redux/app-reducer";
 
 
 // type RootType = {
@@ -21,7 +22,7 @@ import {authMeThunkCreator} from "./Redux/auth-reducer";
 class App extends React.Component<AppPropsType> {
 
     componentDidMount() {
-        this.props.authMe()
+        this.props.initializeAppTC()
         //  this.props.isFetchingCB(true)
         // authAPI.getAuthMe().then(response => {
         //          this.props.isFetchingCB(false)
@@ -76,11 +77,11 @@ class App extends React.Component<AppPropsType> {
 }
 
 type AppPropsType = {
-    authMe: () => void
+    initializeAppTC: () => void
 }
 
 
 
 export default connect(null, {
-    authMe: authMeThunkCreator
+    initializeAppTC
 })(App);
