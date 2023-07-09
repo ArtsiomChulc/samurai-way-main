@@ -75,8 +75,7 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
                 <Field className={s.checkbox} type="checkbox" name={'rememberMe'} component={Input}/>
                 <span>remember me</span>
             </div>
-            {props.error && <div>{props.error}</div>}
-
+            {props.error && <div className={s.errorWrapper}><span className={s.errorForm}>{props.error}</span></div>}
             <button className={s.button} type="submit">LOGIN</button>
         </form>
     )
