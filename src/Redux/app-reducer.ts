@@ -36,7 +36,11 @@ export const InitializedSuccessAC = () => {
 // THUNK
 
 export const initializeAppTC = () => (dispatch: ThunkDispatch<any, any, any>) => {
-    dispatch(authMeThunkCreator())
+    let promiseApp = dispatch(authMeThunkCreator())
+    Promise.all([promiseApp])
+        .then(() => {
+            dispatch(InitializedSuccessAC())
+        })
 }
 
 

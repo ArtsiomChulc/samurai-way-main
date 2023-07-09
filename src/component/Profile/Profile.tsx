@@ -15,7 +15,7 @@ type ProfileInfoPropsType = {
 export const Profile = (props: ProfileInfoPropsType) => {
 
     // REDIRECT
-    if(!props.isAuth) return <Redirect to={'login'}/>
+    // if(!props.isAuth) return <Redirect to={'login'}/>
 
     return (
         <div className={s.profile}>

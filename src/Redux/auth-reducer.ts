@@ -66,7 +66,7 @@ export const ToggleFetchAC = (isFetching: boolean) => {
 
 export const authMeThunkCreator = () => (dispatch: Dispatch) => {
     dispatch(ToggleFetchAC(true))
-    authAPI.getAuthMe().then(data => {
+    return authAPI.getAuthMe().then(data => {
         dispatch(ToggleFetchAC(false))
         if (data.resultCode === 0) {
             dispatch(SetUserDataAC(data.data.id, data.data.login, data.data.email, true))

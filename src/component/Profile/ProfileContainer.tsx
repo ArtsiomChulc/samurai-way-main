@@ -16,14 +16,18 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
+
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId
+            if (!userId) {
+                this.props.history.push('/users')
+            }
         }
 
-            this.props.getUsersProfile(userId)
+        this.props.getUsersProfile(userId)
 
-            this.props.getStatusProfile(userId)
+        this.props.getStatusProfile(userId)
 
 
         // profileAPI.getProfile(userId)
@@ -52,7 +56,7 @@ type MatchParamsType = {
 type PropsType = RouteComponentProps<MatchParamsType> & ProfileInfoPropsType
 
 type MapDispatchPropsType = {
-	getUsersProfile: (id: string) => void
+    getUsersProfile: (id: string) => void
     getStatusProfile: (id: string) => void
     updateStatusProfile: (status: string) => void
 }
@@ -81,7 +85,7 @@ export default compose<React.ComponentType>(
         getStatusProfile: getStatusProfileThunkCreator,
         updateStatusProfile: updateStatusProfileThunkCreator
     }),
-    // withAuthRedirect,
+    withAuthRedirect,
     withRouter
 )(ProfileContainer)
 

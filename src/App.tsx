@@ -13,6 +13,8 @@ import Settings from "./component/Settings/Settings";
 import {connect} from "react-redux";
 import {authMeThunkCreator} from "./Redux/auth-reducer";
 import {initializeAppTC} from "./Redux/app-reducer";
+import {AppRootStateType} from "./Redux/redux-store";
+import Preloader from "./component/common/preloader/Preloader";
 
 
 // type RootType = {
@@ -33,6 +35,9 @@ class App extends React.Component<AppPropsType> {
     }
 
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
 
         // const state = props.store.getState()
         // let posts = state.profilePage;
@@ -76,12 +81,23 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-type AppPropsType = {
+type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
+type MapStateToPropsType = {
+    initialized: boolean
+}
+
+type MapDispatchToPropsType = {
     initializeAppTC: () => void
+}
+
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+    return {
+        initialized: state.app.initialized
+    }
 }
 
 
 
-export default connect(null, {
+export default connect(mapStateToProps, {
     initializeAppTC
 })(App);

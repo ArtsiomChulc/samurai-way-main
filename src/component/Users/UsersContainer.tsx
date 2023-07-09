@@ -147,5 +147,5 @@ export default compose<React.ComponentType>(
         follow: followThunkCreator,
         unFollow: unFollowThunkCreator
     }),
-    withAuthRedirect
+    // withAuthRedirect
 )(UsersContainer)
