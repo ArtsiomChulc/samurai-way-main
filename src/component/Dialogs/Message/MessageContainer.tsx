@@ -4,6 +4,7 @@ import {Message} from "./Message";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../../Redux/redux-store";
 import {Dispatch} from "redux";
+import {getDialogsPageSelector, getIsAuthSelector} from "../../../Redux/selectors/selectors";
 
 // type MessagePropsType = {
 //     messages: MessageType[]
@@ -43,8 +44,8 @@ export type MessagePropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     return {
-        dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
+        dialogsPage: getDialogsPageSelector(state),
+        isAuth: getIsAuthSelector(state)
     }
 }
 

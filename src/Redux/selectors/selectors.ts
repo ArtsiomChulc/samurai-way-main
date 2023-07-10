@@ -1,6 +1,7 @@
 import {AppRootStateType} from "../redux-store";
 import {UsersPageType} from "../users-reducer";
 import {ProfileType} from "../profile-reducer";
+import {DialogsPageType} from "../dialogs-reducer";
 
 
 //usersPage
@@ -39,6 +40,14 @@ export const getProfileSelector = (state: AppRootStateType): ProfileType | null 
 export const getStatus = (state: AppRootStateType): string => {
     return state.profilePage.status
 }
+
+
+//dialogsPage
+
+export const getDialogsPageSelector = (state: AppRootStateType): DialogsPageType => {
+    return state.dialogsPage
+}
+
 
 
 //auth
