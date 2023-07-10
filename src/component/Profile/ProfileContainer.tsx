@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {getAuthId, getIsAuthSelector, getProfileSelector, getStatus} from "../../Redux/selectors/selectors";
 
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -71,10 +72,10 @@ export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        isAuth: state.auth.isAuth,
-        authorizedUserId: state.auth.id
+        profile: getProfileSelector(state),
+        status: getStatus(state),
+        isAuth: getIsAuthSelector(state),
+        authorizedUserId: getAuthId(state)
     }
 }
 
@@ -93,4 +94,3 @@ export default compose<React.ComponentType>(
 // let WithReDirect = withAuthRedirect(ProfileContainerWithRouter)
 //
 // export default connect(mapStateToProps, {getUsersProfile: getUsersProfileThunkCreator})(WithReDirect)
-

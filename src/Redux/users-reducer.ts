@@ -166,7 +166,7 @@ export const followThunkCreator = (id: number) => {
         dispatch(ToggleFollowingProgressAC(true, id))
         usersAPI.postFollowStatus(id).then(data => {
             if (data.resultCode === 0) {
-               dispatch(FollowSuccessAC(id))
+                dispatch(FollowSuccessAC(id))
             }
             dispatch(ToggleFollowingProgressAC(false, id))
         })
