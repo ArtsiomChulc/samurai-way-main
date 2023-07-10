@@ -11,10 +11,10 @@ import HeaderContainer from "./component/Header/HeaderContainer";
 import LogIn from "./component/common/login/LogIn";
 import Settings from "./component/Settings/Settings";
 import {connect} from "react-redux";
-import {authMeThunkCreator} from "./Redux/auth-reducer";
 import {initializeAppTC} from "./Redux/app-reducer";
 import {AppRootStateType} from "./Redux/redux-store";
 import Preloader from "./component/common/preloader/Preloader";
+import {loginTC} from "./Redux/auth-reducer";
 
 
 // type RootType = {
@@ -99,5 +99,6 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 
 
 export default connect(mapStateToProps, {
-    initializeAppTC
+    initializeAppTC,
+    loginTC
 })(App);

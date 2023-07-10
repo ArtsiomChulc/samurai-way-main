@@ -9,7 +9,6 @@ import {
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../HOC/withAuthredirect";
 import {compose} from "redux";
 
 
@@ -21,7 +20,7 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId = this.props.authorizedUserId
             if (!userId) {
-                this.props.history.push('/users')
+                this.props.history.push('/login')
             }
         }
 
@@ -85,7 +84,7 @@ export default compose<React.ComponentType>(
         getStatusProfile: getStatusProfileThunkCreator,
         updateStatusProfile: updateStatusProfileThunkCreator
     }),
-    withAuthRedirect,
+    // withAuthRedirect,
     withRouter
 )(ProfileContainer)
 

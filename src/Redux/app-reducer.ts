@@ -1,4 +1,3 @@
-import {Dispatch} from "redux";
 import {authMeThunkCreator} from "./auth-reducer";
 import {ThunkDispatch} from "redux-thunk";
 
