@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './profileInfo.module.css';
 import Preloader from "../../common/preloader/Preloader";
 
@@ -17,6 +17,10 @@ export const ProfileStatusWithHook = (props: PropsType) => {
     const [editeMode, setEditeMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
 
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     const activateEditeMode = () => {
         setEditeMode(true)
     }
@@ -32,27 +36,26 @@ export const ProfileStatusWithHook = (props: PropsType) => {
     }
 
 
-
-        return (
-            <div className={s.profile_status}>
-                { !editeMode ?
-                    <div>
-                        <p>Status: </p>
-                        <span className={s.status_text}>{status || 'No status'}</span>
-                        <button onClick={activateEditeMode}>Изменить статус</button>
-                    </div>
+    return (
+        <div className={s.profile_status}>
+            {!editeMode ?
+                <div>
+                    <p>Status: </p>
+                    <span className={s.status_text}>{props.status || 'No status'}</span>
+                    <button onClick={activateEditeMode}>Изменить статус</button>
+                </div>
                 :
-                    <div>
-                        <p>Edite status: </p>
-                        <input
-                            onBlur={deActivateEditeMode}
-                            onChange={onStatusChange}
-                            value={status}
-                            autoFocus
-                        />
-                        <button>Сохранить статус</button>
-                    </div>
-                }
-            </div>
-        )
+                <div>
+                    <p>Edite status: </p>
+                    <input
+                        onBlur={deActivateEditeMode}
+                        onChange={onStatusChange}
+                        value={status}
+                        autoFocus
+                    />
+                    <button>Сохранить статус</button>
+                </div>
+            }
+        </div>
+    )
 }
