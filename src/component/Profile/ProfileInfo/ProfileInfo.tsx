@@ -6,6 +6,7 @@ import PhotoUserProfile from '../../../assets/images/userPhoto/user-icon.jpg'
 import JobTruePhoto from '../../../img/profileUser/profileInfo/job_true.png'
 import JobFalsePhoto from '../../../img/profileUser/profileInfo/job_false.jpg'
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHook} from "./ProfileStatusWithHooks";
 
 
 type ProfileInfoPropsType = {
@@ -22,7 +23,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={s.profile_info}>
             <div className={s.status}>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
                 {/*<img*/}
                 {/*    src='https://img3.akspic.ru/previews/0/2/0/2/7/172020/172020-sntis-gora-priroda-peyzash-sammit-x750.jpg'*/}
                 {/*    alt="dffdd"/>*/}
