@@ -10,7 +10,12 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {getAuthId, getIsAuthSelector, getProfileSelector, getStatus} from "../../Redux/selectors/selectors";
+import {
+    getAuthId,
+    getIsAuthSelector,
+    getProfileReselect,
+    getStatus
+} from "../../Redux/selectors/selectors";
 
 
 class ProfileContainer extends React.Component<PropsType> {
@@ -72,7 +77,7 @@ export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        profile: getProfileSelector(state),
+        profile: getProfileReselect(state),
         status: getStatus(state),
         isAuth: getIsAuthSelector(state),
         authorizedUserId: getAuthId(state)

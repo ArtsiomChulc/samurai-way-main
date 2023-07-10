@@ -2,13 +2,22 @@ import {AppRootStateType} from "../redux-store";
 import {UsersPageType} from "../users-reducer";
 import {ProfileType} from "../profile-reducer";
 import {DialogsPageType} from "../dialogs-reducer";
+import {createSelector} from "reselect";
 
 
 //usersPage
 
-export const getUsersSelector = (state: AppRootStateType): UsersPageType => {
+const getUsersSelector = (state: AppRootStateType): UsersPageType => {
     return state.usersPage
 }
+
+            //     ===== with reselect =====   /////
+
+export const getUsersReselect = createSelector(getUsersSelector, (users) => {
+    return users
+})
+
+
 
 export const getPageSize = (state: AppRootStateType): number => {
     return state.usersPage.pageSize
@@ -33,9 +42,15 @@ export const getFollowingProgress = (state: AppRootStateType): number[] => {
 
 //profilePage
 
-export const getProfileSelector = (state: AppRootStateType): ProfileType | null => {
+const getProfileSelector = (state: AppRootStateType): ProfileType | null => {
     return state.profilePage.profile
 }
+
+            //     ===== with reselect =====   /////
+
+export const getProfileReselect = createSelector(getProfileSelector, (profile) => {
+    return profile
+})
 
 export const getStatus = (state: AppRootStateType): string => {
     return state.profilePage.status

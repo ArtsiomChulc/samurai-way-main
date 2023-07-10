@@ -15,14 +15,14 @@ import {
 } from "../../Redux/users-reducer";
 import {Users} from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/withAuthredirect";
 import {compose} from "redux";
 import {
-    getCurrentPage, getFollowingProgress,
+    getCurrentPage,
+    getFollowingProgress,
     getIsFetching,
     getPageSize,
     getTotalUserCount,
-    getUsersSelector
+    getUsersReselect,
 } from "../../Redux/selectors/selectors";
 
 
@@ -97,7 +97,7 @@ export type UsersPropsType = MapStatePropsTypes & MapDispatchPropsType
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsTypes => {
     return {
-        users: getUsersSelector(state),
+        users: getUsersReselect(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUserCount(state),
         currentPage: getCurrentPage(state),
