@@ -1,60 +1,68 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React from 'react';
 import {Post} from '../Post/Post';
 import s from './mypost.module.css';
 import btn from '../../common/styles/btn.module.css'
 import {UsersPropsType} from "./MyPostContainer";
 import {useFormik} from "formik";
 
-export const MyPost = (props: UsersPropsType) => {
-    // const [error, setError] = useState<string | null>(null)
+export class MyPost extends React.Component<UsersPropsType> {
+    shouldComponentUpdate(nextProps: Readonly<UsersPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps != this.props || nextState != this.state
+    }
 
-    // const newPostElement = React.createRef<HTMLTextAreaElement>()
+    render() {
 
-    // const addPost = (value: MyPostType) => {
-    //     let el = value.newPostFormik
-    //     // if (newPostElement.current?.value.trim() !== '') {
-    //     //     setError('')
-    //     // } else {
-    //     //     setError('Введите текст!!!')
-    //     // }
-    //     props.addPostCB(el)
-    // }
+        console.log('render')
+        // const [error, setError] = useState<string | null>(null)
 
-    // const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    //     if (e.key === "Enter") {
-    //         addPost()
-    //     }
-    // }
+        // const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    // const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     let newText = e.currentTarget.value
-    //     props.onChangeHandlerCB(newText)
-    // }
+        // const addPost = (value: MyPostType) => {
+        //     let el = value.newPostFormik
+        //     // if (newPostElement.current?.value.trim() !== '') {
+        //     //     setError('')
+        //     // } else {
+        //     //     setError('Введите текст!!!')
+        //     // }
+        //     props.addPostCB(el)
+        // }
 
-    const postElement = props.posts.posts.map(el => {
-        const onChangeMessage = (newMessage: string) => {
-            props.onChangeMessageCB(newMessage, el.id)
-        }
+        // const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        //     if (e.key === "Enter") {
+        //         addPost()
+        //     }
+        // }
+
+        // const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        //     let newText = e.currentTarget.value
+        //     props.onChangeHandlerCB(newText)
+        // }
+
+        const postElement = this.props.posts.posts.map(el => {
+            const onChangeMessage = (newMessage: string) => {
+                this.props.onChangeMessageCB(newMessage, el.id)
+            }
+            return (
+                <Post key={el.id}
+                      message={el.post}
+                      likeCount={el.likeCount}
+                      onChangeMessage={onChangeMessage}
+                />
+            )
+        })
+
         return (
-            <Post key={el.id}
-                  message={el.post}
-                  likeCount={el.likeCount}
-                  onChangeMessage={onChangeMessage}
-            />
-        )
-    })
+            <div className={s.myPost}>
+                <div>
+                    <MyPostForm addPost={this.props.addPostCB}/>
+                    {/*{error && <span className={s.errorText}>{error}</span>}*/}
+                </div>
 
-    return (
-        <div className={s.myPost}>
-            <div>
-                <MyPostForm addPost={props.addPostCB}/>
-                {/*{error && <span className={s.errorText}>{error}</span>}*/}
+                {postElement}
+
             </div>
-
-            {postElement}
-
-        </div>
-    )
+        )
+    }
 }
 
 export type MyPostType = {
