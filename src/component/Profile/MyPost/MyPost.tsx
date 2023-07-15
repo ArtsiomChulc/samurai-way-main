@@ -6,7 +6,6 @@ import { UsersPropsType } from "./MyPostContainer";
 import { useFormik } from "formik";
 
 const MyPost = React.memo((props: UsersPropsType) => {
-    console.log("render");
     // const [error, setError] = useState<string | null>(null)
 
     // const newPostElement = React.createRef<HTMLTextAreaElement>()
@@ -32,7 +31,8 @@ const MyPost = React.memo((props: UsersPropsType) => {
     //     props.onChangeHandlerCB(newText)
     // }
 
-    const postElement = props.posts.posts.map((el) => {
+    const postElement = [...props.posts.posts].reverse().map((el) => {
+        // делаем имутабельно (не меняем наш state, делаем копию)
         const onChangeMessage = (newMessage: string) => {
             props.onChangeMessageCB(newMessage, el.id);
         };
