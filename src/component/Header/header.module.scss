@@ -1,0 +1,73 @@
+.header {
+  grid-area: header;
+  background: rgb(182, 228, 243);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  margin-bottom: 5px;
+
+
+  .logo {
+    width: 90px;
+    height: 90px;
+
+    img {
+      width: 100%;
+      //height: 120px;
+      border-radius: 50%;
+    }
+  }
+
+  .title_header {
+    min-width: 500px;
+    margin: 0 auto;
+    font-family: "Comforter", cursive;
+    font-size: calc(28px + 28 * (100vw / 1440));
+    letter-spacing: 3px;
+    word-spacing: 0px;
+    color: #16141a;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    padding: 15px;
+  }
+
+  .login_block {
+    a {
+      text-decoration: none;
+      font-size: 34px;
+    }
+
+    .authBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .loginName {
+        color: #1cb0f6;
+      }
+
+      .logOut,
+      .loginName {
+        display: inline-block;
+        padding: 5px;
+        background-color: #e4f6f0;
+        border: 1px solid blue;
+        border-radius: 5px;
+      }
+
+      .logOut {
+        color: #0f0f3f;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out;
+        &:hover {
+          background-color: #b9d7f6;
+        }
+      }
+    }
+  }
+
+
+}

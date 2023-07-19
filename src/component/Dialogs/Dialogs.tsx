@@ -1,9 +1,9 @@
-import React from 'react'
-import s from './dialogs.module.css'
+import React from "react";
+import s from "./dialogs.module.css";
 import MessageContainer from "./Message/MessageContainer";
 import DialogInfoContainer from "./DialogInfo/DialogInfoContainer";
-import {compose} from "redux";
-import {withAuthRedirect} from "../../HOC/withAuthredirect";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../HOC/withAuthredirect";
 // import {DialogType, MessageType} from "../Redux/dialogs-reducer";
 
 // type DialogsPropsType = {
@@ -16,29 +16,22 @@ import {withAuthRedirect} from "../../HOC/withAuthredirect";
 // }
 
 const Dialogs = () => {
+  return (
+    <>
+      <div className={s.dialogs}>
+        <div className={s.dialogs_names}>
+          <DialogInfoContainer />
+        </div>
+        <div className={s.messages}>
+          <MessageContainer
+          // messages={props.messages}
+          // dispatch={props.dispatch}
+          // messageInInput={props.messageInInput}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
 
-
-    return (
-        <>
-            <div className={s.dialogs}>
-                <div className={s.dialogs_names}>
-
-                    <DialogInfoContainer />
-
-                </div>
-                <div className={s.messages}>
-
-                    <MessageContainer
-                        // messages={props.messages}
-                        // dispatch={props.dispatch}
-                        // messageInInput={props.messageInInput}
-                    />
-
-                </div>
-            </div>
-        </>
-
-    )
-}
-
-export default compose<React.ComponentType>(withAuthRedirect)(Dialogs)
+export default compose<React.ComponentType>(withAuthRedirect)(Dialogs);

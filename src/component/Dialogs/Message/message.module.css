@@ -1,28 +1,28 @@
 .message {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .message span {
-	color: black;
-	text-decoration: none;
-	font-size: 18px;
-	padding-left: 10px;
-	padding-top: 15px;
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-top: 15px;
 }
 
 .wrapAddMessage {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 20px;
-	position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  position: relative;
 }
 
 .errorText {
-	color: red;
-	position: absolute;
-	bottom: -20px;
-	left: 20px;
+  color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
 }

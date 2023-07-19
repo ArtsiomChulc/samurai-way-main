@@ -1,61 +1,60 @@
 .post {
-	padding: 15px;
-	display: flex;
-	align-items: center;
+  padding: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .message_text {
-	width: 350px;
-	margin-left: 26px;
-	background: #B5DDD4;
-	position: relative;
-	border-radius: 10px;
-	padding: 15px;
-	text-align: center;
-	font-family: Monotype Corsiva;
-	font-size: 20px;
-	letter-spacing: 1px;
-	word-spacing: 1px;
-	color: #000000;
-	font-weight: normal;
-	text-decoration: none;
-	font-style: normal;
-	font-variant: normal;
-	text-transform: capitalize;
-
+  width: 350px;
+  margin-left: 26px;
+  background: #b5ddd4;
+  position: relative;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  font-family: Monotype Corsiva;
+  font-size: 20px;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  color: #000000;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: capitalize;
 }
 
 .message_text::before {
-	content: "";
-	width: 0;
-	height: 0;
-	position: absolute;
-	right: 100%;
-	top: calc(50% - 12px);
-	border-top: 12px solid transparent;
-	border-right: 24px solid #B5DDD4;
-	border-bottom: 12px solid transparent;
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 100%;
+  top: calc(50% - 12px);
+  border-top: 12px solid transparent;
+  border-right: 24px solid #b5ddd4;
+  border-bottom: 12px solid transparent;
 }
 
-.post>img {
-	width: 50px;
-	margin-right: 20px;
-	border-radius: 50%;
+.post > img {
+  width: 50px;
+  margin-right: 20px;
+  border-radius: 50%;
 }
 
 .like {
-	margin-left: 20px;
-	cursor: pointer;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .like img {
-	width: 15px;
-	border-radius: 50%;
-	margin-right: 10px;
-	padding: 5px;
-	background-color: rgba(68, 255, 0, 0.649)
+  width: 15px;
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: rgba(68, 255, 0, 0.649);
 }
 
 .likeCount {
-	font-size: 12px;
+  font-size: 12px;
 }

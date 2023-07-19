@@ -236,4 +236,4 @@
 //
 // export default store;
 
-export {}
+export {};

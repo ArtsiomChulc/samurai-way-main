@@ -1,31 +1,31 @@
 .myPost {
-	padding: 10px;
+  padding: 10px;
 }
 
 .wrapAddMessage {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 20px;
-	margin-bottom: 40px;
-	position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  position: relative;
 }
 
 .btn {
-	width: 120px;
-	padding: 7px 12px;
-	margin-left: 15px;
+  width: 120px;
+  padding: 7px 12px;
+  margin-left: 15px;
 }
 .errorText {
-	color: red;
-	position: absolute;
-	bottom: -20px;
-	left: 20px;
+  color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
 }
 
 .error {
-	color: red;
-	position: absolute;
-	top: 100%;
-	left: 10px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 10px;
 }

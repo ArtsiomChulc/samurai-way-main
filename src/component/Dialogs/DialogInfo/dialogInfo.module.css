@@ -1,17 +1,17 @@
 .dialog_name {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .dialog_name a {
-	color: rgb(0, 0, 0);
-	text-decoration: none;
-	font-size: 18px;
-	padding-left: 10px;
-	padding-top: 15px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-top: 15px;
 }
 
 a:hover {
-	color: rgb(142, 203, 80);
+  color: rgb(142, 203, 80);
 }

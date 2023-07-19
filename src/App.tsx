@@ -1,7 +1,7 @@
-import React from 'react';
-import s from './App.module.css';
-import {Navbar} from './component/Navbar/Navbar';
-import {Route} from 'react-router-dom';
+import React from "react";
+import s from "./App.module.css";
+import { Navbar } from "./component/Navbar/Navbar";
+import { Route } from "react-router-dom";
 import News from "./component/News/News";
 import Music from "./component/Music/Music";
 import Dialogs from "./component/Dialogs/Dialogs";
@@ -10,21 +10,19 @@ import ProfileContainer from "./component/Profile/ProfileContainer";
 import HeaderContainer from "./component/Header/HeaderContainer";
 import LogIn from "./component/common/login/LogIn";
 import Settings from "./component/Settings/Settings";
-import {connect} from "react-redux";
-import {initializeAppTC} from "./Redux/app-reducer";
-import {AppRootStateType} from "./Redux/redux-store";
+import { connect } from "react-redux";
+import { initializeAppTC } from "./Redux/app-reducer";
+import { AppRootStateType } from "./Redux/redux-store";
 import Preloader from "./component/common/preloader/Preloader";
-import {loginTC} from "./Redux/auth-reducer";
-
+import { loginTC } from "./Redux/auth-reducer";
 
 // type RootType = {
 //     store: StoreType
 // }
 
 class App extends React.Component<AppPropsType> {
-
     componentDidMount() {
-        this.props.initializeAppTC()
+        this.props.initializeAppTC();
         //  this.props.isFetchingCB(true)
         // authAPI.getAuthMe().then(response => {
         //          this.props.isFetchingCB(false)
@@ -36,7 +34,7 @@ class App extends React.Component<AppPropsType> {
 
     render() {
         if (!this.props.initialized) {
-            return <Preloader/>
+            return <Preloader />;
         }
 
         // const state = props.store.getState()
@@ -47,58 +45,63 @@ class App extends React.Component<AppPropsType> {
         // let messageInInput = state.dialogsPage.messageInInput;
 
         return (
-
             <div className={s.App}>
-                <HeaderContainer/>
-                <Navbar/>
-                <div className={s.profile}>
-                    <Route path='/Profile/:userId?'
-                           render={() =>
-                               <ProfileContainer
-                                   // posts={posts}
-                                   // dispatch={props.store.dispatch.bind(props.store)}
-                                   // addPost={props.store.dispatch.bind(props.store)}
-                                   // updateNewPostText={props.store.dispatch.bind(props.store)}
-                               />}/>
-                    <Route path='/Dialogs'
-                           render={() => <Dialogs
-                               // messageInInput={messageInInput}
-                               // dialogs={dialogs}
-                               // messages={messages}
-                               // dispatch={props.store.dispatch.bind(props.store)}
-                               // addMessage={props.store.dispatch.bind(props.store)}
-                               // updateNewMessageText={props.store.dispatch.bind(props.store)}
-                           />}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <LogIn/>}/>
+                <HeaderContainer />
+                <div className={s.flexWrap}>
+                    <Navbar />
+                    <div className={s.profile}>
+                        <Route
+                            path="/Profile/:userId?"
+                            render={() => (
+                                <ProfileContainer
+                                // posts={posts}
+                                // dispatch={props.store.dispatch.bind(props.store)}
+                                // addPost={props.store.dispatch.bind(props.store)}
+                                // updateNewPostText={props.store.dispatch.bind(props.store)}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/Dialogs"
+                            render={() => (
+                                <Dialogs
+                                // messageInInput={messageInInput}
+                                // dialogs={dialogs}
+                                // messages={messages}
+                                // dispatch={props.store.dispatch.bind(props.store)}
+                                // addMessage={props.store.dispatch.bind(props.store)}
+                                // updateNewMessageText={props.store.dispatch.bind(props.store)}
+                                />
+                            )}
+                        />
+                        <Route path="/users" render={() => <UsersContainer />} />
+                        <Route path="/news" render={() => <News />} />
+                        <Route path="/music" render={() => <Music />} />
+                        <Route path="/settings" render={() => <Settings />} />
+                        <Route path="/login" render={() => <LogIn />} />
+                    </div>
                 </div>
             </div>
-
-        )
+        );
     }
 }
 
-type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
+type AppPropsType = MapStateToPropsType & MapDispatchToPropsType;
 type MapStateToPropsType = {
-    initialized: boolean
-}
+    initialized: boolean;
+};
 
 type MapDispatchToPropsType = {
-    initializeAppTC: () => void
-}
+    initializeAppTC: () => void;
+};
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
-        initialized: state.app.initialized
-    }
-}
-
-
+        initialized: state.app.initialized,
+    };
+};
 
 export default connect(mapStateToProps, {
     initializeAppTC,
-    loginTC
+    loginTC,
 })(App);

@@ -1,6 +1,11 @@
 import { Dispatch } from "redux";
 import { profileAPI } from "../api/api";
-import { stat } from "fs";
+
+const ADD_POST = "PROFILE/ADD-POST" as const;
+const DELETE_POST = "PROFILE/DELETE-POST" as const;
+const SET_USER_PROFILE = "PROFILE/SET-USERS-PROFILE" as const;
+const SET_STATUS = "PROFILE/SET-STATUS" as const;
+const CHANGE_MESSAGE = "PROFILE/CHANGE-MESSAGE" as const;
 
 type PhotosType = {
     small: string;
@@ -58,7 +63,7 @@ let initialState: ProfilePageType = {
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
-        case "ADD-POST":
+        case ADD_POST:
             // let newPostObj: PostsType = {id: 7, post: action.text, likeCount: 0}
             if (action.text.length === 0 || action.text.trim() == "") {
                 return state;
@@ -68,23 +73,23 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                     posts: [...state.posts, { id: 7, post: action.text, likeCount: 0 }],
                 };
             }
-        case "DELETE-POST":
+        case DELETE_POST:
             return { ...state, posts: state.posts.filter((p) => p.id != action.id) };
         // case "UPDATE-NEW-POST":
         //     let stateCopy = {...state}
         //     stateCopy.newText = action.text
         //     return stateCopy
-        case "SET-USERS-PROFILE":
+        case SET_USER_PROFILE:
             return {
                 ...state,
                 profile: action.profile,
             };
-        case "SET-STATUS":
+        case SET_STATUS:
             return {
                 ...state,
                 status: action.status,
             };
-        case "CHANGE-MESSAGE":
+        case CHANGE_MESSAGE:
             let copyStateWithMessage = { ...state };
             let newPost = copyStateWithMessage.posts.find((p) => p.id === action.id);
             if (newPost) newPost.post = action.newMessage;
@@ -110,13 +115,13 @@ type ActionsTypes =
 
 export const AddPostAC = (text: string) => {
     return {
-        type: "ADD-POST",
+        type: ADD_POST,
         text,
     } as const;
 };
 export const DeletePostAC = (id: number) => {
     return {
-        type: "DELETE-POST",
+        type: DELETE_POST,
         id,
     } as const;
 };
@@ -128,14 +133,14 @@ export const UpdateNewPostAC = (text: string) => {
 };
 const SetUsersProfileAC = (profile: ProfileType) => {
     return {
-        type: "SET-USERS-PROFILE",
+        type: SET_USER_PROFILE,
         profile,
     } as const;
 };
 
 export const ChangeMessageAC = (newMessage: string, id: number) => {
     return {
-        type: "CHANGE-MESSAGE",
+        type: CHANGE_MESSAGE,
         newMessage,
         id,
     } as const;
@@ -143,27 +148,24 @@ export const ChangeMessageAC = (newMessage: string, id: number) => {
 
 export const SetStatusAC = (status: string) => {
     return {
-        type: "SET-STATUS",
+        type: SET_STATUS,
         status,
     } as const;
 };
 
 // THUNK
 
-export const getUsersProfileThunkCreator = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getProfile(userId).then((data) => {
-        dispatch(SetUsersProfileAC(data));
-    });
+export const getUsersProfileThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.getProfile(userId);
+    dispatch(SetUsersProfileAC(data));
 };
-export const getStatusProfileThunkCreator = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId).then((data) => {
-        dispatch(SetStatusAC(data));
-    });
+export const getStatusProfileThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.getStatus(userId);
+    dispatch(SetStatusAC(data));
 };
-export const updateStatusProfileThunkCreator = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status).then((data) => {
-        if (data.resultCode === 0) {
-            dispatch(SetStatusAC(status));
-        }
-    });
+export const updateStatusProfileThunkCreator = (status: string) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.updateStatus(status);
+    if (data.resultCode === 0) {
+        dispatch(SetStatusAC(status));
+    }
 };
