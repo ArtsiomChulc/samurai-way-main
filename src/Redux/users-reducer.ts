@@ -18,6 +18,7 @@ export type UsersPageType = {
     currentPage: number;
     isFetching: boolean;
     followingProgress: Array<number>;
+    portionSize: number;
 };
 
 export type UsersType = {
@@ -41,6 +42,7 @@ let initialState: UsersPageType = {
     currentPage: 1,
     isFetching: false,
     followingProgress: [],
+    portionSize: 12,
 };
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {

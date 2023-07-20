@@ -23,6 +23,7 @@ import {
     getPageSize,
     getTotalUserCount,
     getUsersReselect,
+    getPortionSize,
 } from "Redux/selectors/selectors";
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -63,6 +64,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 followingProgress={this.props.followingProgress}
                 follow={this.props.follow}
                 unFollow={this.props.unFollow}
+                portionSize={this.props.portionSize}
             />
         );
     }
@@ -75,6 +77,7 @@ type MapStatePropsTypes = {
     currentPage: number;
     isFetching: boolean;
     followingProgress: Array<number>;
+    portionSize: number;
     // isAuth: boolean
 };
 
@@ -99,6 +102,7 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsTypes => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingProgress: getFollowingProgress(state),
+        portionSize: getPortionSize(state),
         // isAuth: state.auth.isAuth
     };
 };

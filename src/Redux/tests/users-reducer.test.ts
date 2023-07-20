@@ -16,6 +16,7 @@ const state: UsersPageType = {
     currentPage: 1,
     isFetching: false,
     followingProgress: [],
+    portionSize: 2,
 };
 
 it("status should be changed ", function () {

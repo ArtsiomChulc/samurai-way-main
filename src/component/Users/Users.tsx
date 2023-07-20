@@ -14,6 +14,7 @@ type UsersPropsType = {
     followingProgress: Array<number>;
     follow: (id: number) => void;
     unFollow: (id: number) => void;
+    portionSize: number;
 };
 
 export const Users = (props: UsersPropsType) => {
@@ -27,11 +28,13 @@ export const Users = (props: UsersPropsType) => {
         followingProgress,
         follow,
         unFollow,
+        portionSize,
     } = props;
 
     return (
         <>
             <Paginator
+                portionSize={portionSize}
                 totalUsersCount={totalUsersCount}
                 pageSize={pageSize}
                 currentPage={currentPage}

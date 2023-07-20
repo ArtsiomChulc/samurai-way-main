@@ -7,10 +7,18 @@
   padding: 10px;
   overflow: auto;
 
+  .btnPaginator {
+    display: inline-block;
+    max-width: 60px;
+    height: 40px;
+    align-self: center;
+  }
+
   .numberPage {
     cursor: pointer;
     font-size: 20px;
     transition: all 0.3s ease;
+    align-self: center;
   }
 
   .numberPageBold {
@@ -22,6 +30,7 @@
     text-decoration: underline;
     transform: scale(1.3);
     border: 1px solid black;
+    align-self: center;
   }
 }
 
