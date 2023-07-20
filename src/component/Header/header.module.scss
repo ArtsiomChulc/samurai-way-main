@@ -5,6 +5,11 @@
   flex-wrap: wrap;
   padding: 15px;
   margin-bottom: 5px;
+  
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: center;
+  }
 
 
   .logo {
@@ -15,11 +20,12 @@
       width: 100%;
       //height: 120px;
       border-radius: 50%;
+      mix-blend-mode: color-burn;
     }
   }
 
   .title_header {
-    min-width: 500px;
+    //min-width: 500px;
     margin: 0 auto;
     font-family: "Comforter", cursive;
     font-size: calc(28px + 28 * (100vw / 1440));
@@ -62,9 +68,30 @@
         color: #0f0f3f;
         cursor: pointer;
         transition: background-color .3s ease-in-out;
-        &:hover {
-          background-color: #b9d7f6;
+        position: relative;
+
+        &::before {
+          content: 'OUT?';
+          line-height: 30px;
+          text-align: center;
+          color: #b5ddd4;
+          font-size: 12px;
+          position: absolute;
+          display: inline-block;
+          width: 0;
+          height: 100%;
+          background-color: #4343a4;
+          top: 0;
+          left: 0;
+          transition: all .5s ease-in-out;
+          border-radius: 8px;
         }
+
+        &:hover:before {
+          width: 100%;
+          top: 100%;
+        }
+
       }
     }
   }

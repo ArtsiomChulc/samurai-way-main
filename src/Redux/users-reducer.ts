@@ -42,7 +42,7 @@ let initialState: UsersPageType = {
     currentPage: 1,
     isFetching: false,
     followingProgress: [],
-    portionSize: 12,
+    portionSize: 20,
 };
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {

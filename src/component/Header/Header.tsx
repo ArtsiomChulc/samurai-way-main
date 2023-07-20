@@ -1,16 +1,7 @@
 import React from "react";
 import s from "component/Header/header.module.scss";
 import { NavLink } from "react-router-dom";
-import btn from "../common/styles/btn.module.css";
 import { HeaderPropsType } from "./HeaderContainer";
-
-// type HeaderPropsType = {
-//     id: number | null
-//     login: string | null
-//     email: string | null
-//     isFetching: boolean
-//     isAuth: boolean
-// }
 
 function Header(props: HeaderPropsType) {
     return (
