@@ -37,20 +37,22 @@ export const Paginator = (props: PropsType) => {
                         Prev
                     </button>
                 )}
-                {pages
-                    .filter((p) => p >= leftPortionPageNumber && p <= rightPortionNumber)
-                    .map((page) => {
-                        return (
-                            <span
-                                onClick={() => {
-                                    onPageCount(page);
-                                }}
-                                className={currentPage === page ? s.numberPageBold : s.numberPage}
-                            >
-                                {page}
-                            </span>
-                        );
-                    })}
+                <div className={s.wrapPageNumber}>
+                    {pages
+                        .filter((p) => p >= leftPortionPageNumber && p <= rightPortionNumber)
+                        .map((page) => {
+                            return (
+                                <span
+                                    onClick={() => {
+                                        onPageCount(page);
+                                    }}
+                                    className={currentPage === page ? s.numberPageBold : s.numberPage}
+                                >
+                                    {page}
+                                </span>
+                            );
+                        })}
+                </div>
                 {portionCount > portionNumber && (
                     <button
                         className={s.btnPaginator}
