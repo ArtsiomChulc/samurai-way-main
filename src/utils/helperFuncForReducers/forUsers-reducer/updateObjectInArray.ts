@@ -10,5 +10,5 @@ export const updateObjectInArray = (
     objPropName: keyof UsersType,
     newObjProps: NewObjType,
 ) => {
-    return items.map((u) => (u[objPropName] === itemId ? { ...u, newObjProps } : u));
+    return items.map((u) => (u[objPropName] === itemId ? { ...u, ...newObjProps } : u));
 };

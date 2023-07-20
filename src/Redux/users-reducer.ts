@@ -1,6 +1,7 @@
 import { ApiType, usersAPI } from "../api/api";
 import { AnyAction, Dispatch } from "redux";
 import { AxiosResponse } from "axios";
+import { updateObjectInArray } from "utils/helperFuncForReducers/forUsers-reducer/updateObjectInArray";
 
 const FOLLOW = "USERS/FOLLOW" as const;
 const UNFOLLOW = "USERS/UNFOLLOW" as const;
@@ -47,12 +48,14 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map((u) => (u.id === action.userID ? { ...u, followed: true } : u)),
+                // users: state.users.map((u) => (u.id === action.userID ? { ...u, followed: true } : u)),
+                users: updateObjectInArray(state.users, action.userID, "id", { followed: true }),
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map((u) => (u.id === action.userID ? { ...u, followed: false } : u)),
+                // users: state.users.map((u) => (u.id === action.userID ? { ...u, followed: false } : u)),
+                users: updateObjectInArray(state.users, action.userID, "id", { followed: false }),
             };
         case SET_USERS:
             return {
