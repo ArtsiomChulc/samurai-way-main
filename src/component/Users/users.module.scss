@@ -1,20 +1,24 @@
 .flexUsersWrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 15px;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 
     .userCard {
-        flex: 1 1 320px;
+        flex: 0 1 320px;
+        box-shadow: 0 -6px 13px rgba(0, 0, 0, 0.8), 0 5px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
 
         .userWrap {
             background-color: #b3f1de;
             display: flex;
             flex-direction: column;
+            min-height: 450px;
 
             .cardContent {
-                margin-bottom: auto;
+                flex: 1;
 
                 .userName {
                     white-space: nowrap;
