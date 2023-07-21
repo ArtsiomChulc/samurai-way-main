@@ -1,4 +1,4 @@
-import s from "./users.module.css";
+import s from "component/Users/users.module.scss";
 import btn from "../common/styles/btn.module.css";
 import userPhoto from "../../assets/images/userPhoto/user-icon.jpg";
 import React from "react";
@@ -19,7 +19,7 @@ export const User = (props: UserPropsType) => {
 
     return (
         // <div key={user.id} className={s.userWrap}>
-        <div>
+        <div className={s.userCard}>
             {/*<div className={s.userPhoto}>*/}
             {/*    <NavLink to={"/Profile/" + user.id}>*/}
             {/*        <img src={user.photos.small != null ? user.photos.small : userPhoto} alt="User photo" />*/}
@@ -58,22 +58,22 @@ export const User = (props: UserPropsType) => {
             {/*        </button>*/}
             {/*    )}*/}
             {/*</div>*/}
-            <Card sx={{ maxWidth: 245 }}>
+            <Card className={s.userWrap}>
                 <CardMedia
                     sx={{ height: 180 }}
                     image={user.photos.small != null ? user.photos.small : userPhoto}
-                    title="users"
+                    title={user.name}
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                <CardContent className={s.cardContent}>
+                    <Typography gutterBottom variant="h5" component="div" className={s.userName}>
                         {user.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all
-                        continents except Antarctica
+                    <Typography variant="body1" color="text.secondary">
+                        <span className={s.textStatus}>Status: </span>
+                        {user.status ? user.status : "the user has not yet been determined"}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions className={s.wrapBtn}>
                     {user.followed ? (
                         <Button
                             size="small"
@@ -82,7 +82,7 @@ export const User = (props: UserPropsType) => {
                                 unFollow(user.id);
                             }}
                         >
-                            {followingProgress.some((id) => id === user.id) ? <DotPreloader /> : "Unfollow"}
+                            Unfollow
                         </Button>
                     ) : (
                         <Button
@@ -92,7 +92,7 @@ export const User = (props: UserPropsType) => {
                                 follow(user.id);
                             }}
                         >
-                            {followingProgress.some((id) => id === user.id) ? <DotPreloader /> : "Follow"}
+                            Follow
                         </Button>
                     )}
 
