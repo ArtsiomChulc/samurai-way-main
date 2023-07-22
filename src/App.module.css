@@ -12,9 +12,12 @@
 /*  gap: 5px;*/
 /*  background-color: #a8bcc9;*/
 /*}*/
-
+* {
+    box-sizing: border-box;
+}
 .profile {
   background-color: #d2ecfb;
+    width: 100vw;
 }
 
 .flexWrap {

@@ -32,7 +32,7 @@ export const Users = (props: UsersPropsType) => {
     } = props;
 
     return (
-        <>
+        <div className={s.usersBlock}>
             <Paginator
                 portionSize={portionSize}
                 totalUsersCount={totalUsersCount}
@@ -51,6 +51,6 @@ export const Users = (props: UsersPropsType) => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 };

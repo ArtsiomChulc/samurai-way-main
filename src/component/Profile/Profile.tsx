@@ -1,8 +1,10 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import s from "./profile.module.css";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
-import MyPostContainer from "./MyPost/MyPostContainer";
+// import MyPostContainer from "./MyPost/MyPostContainer";
 import { ProfileType } from "Redux/profile-reducer";
+import Preloader from "component/common/preloader/Preloader";
+const MyPostContainer = lazy(() => import("./MyPost/MyPostContainer"));
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null;
@@ -17,7 +19,9 @@ export const Profile = (props: ProfileInfoPropsType) => {
 
     return (
         <div className={s.profile}>
-            <ProfileInfo status={props.status} updateStatus={props.updateStatus} profile={props.profile} />
+            <Suspense fallback={<Preloader />}>
+                <ProfileInfo status={props.status} updateStatus={props.updateStatus} profile={props.profile} />
+            </Suspense>
             <MyPostContainer />
         </div>
     );
