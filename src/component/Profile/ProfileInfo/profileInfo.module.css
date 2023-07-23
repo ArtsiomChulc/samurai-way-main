@@ -119,3 +119,31 @@ img {
 .profile_status button:hover {
   background-color: #1773a2;
 }
+
+.customFileUpload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #413e3e;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #444;
+  background-color: #bbdcec;
+  transition: background-color, color .3s ease-in-out;
+}
+.customFileUpload::before {
+  content: "Update profile photo";
+}
+.customFileUpload:hover {
+  border-color: #2bb6b6;
+  background-color: #146286;
+  color: #e4f6f0;
+}
+.customFileUpload:hover::before {
+  content: "Click to update photo";
+}
+input[type="file"] {
+  display: none;
+}

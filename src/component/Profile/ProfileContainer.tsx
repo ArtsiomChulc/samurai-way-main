@@ -4,6 +4,7 @@ import {
     getStatusProfileThunkCreator,
     getUsersProfileThunkCreator,
     ProfileType,
+    savePhotoTC,
     updateStatusProfileThunkCreator,
 } from "Redux/profile-reducer";
 import { connect } from "react-redux";
@@ -40,6 +41,7 @@ class ProfileContainer extends React.Component<PropsType> {
                 status={this.props.status}
                 updateStatus={this.props.updateStatusProfile}
                 isAuth={this.props.isAuth}
+                isOwner={!this.props.match.params.userId}
             />
         );
     }
@@ -55,6 +57,7 @@ type MapDispatchPropsType = {
     getUsersProfile: (id: string) => void;
     getStatusProfile: (id: string) => void;
     updateStatusProfile: (status: string) => void;
+    savePhoto: (file: File) => void;
 };
 
 type MapStatePropsType = {
@@ -80,6 +83,7 @@ export default compose<React.ComponentType>(
         getUsersProfile: getUsersProfileThunkCreator,
         getStatusProfile: getStatusProfileThunkCreator,
         updateStatusProfile: updateStatusProfileThunkCreator,
+        savePhoto: savePhotoTC,
     }),
     // withAuthRedirect,
     withRouter,

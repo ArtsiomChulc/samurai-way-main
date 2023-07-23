@@ -1,13 +1,14 @@
 import { Dispatch } from "redux";
-import { profileAPI } from "../api/api";
+import { profileAPI } from "api/api";
 
 const ADD_POST = "PROFILE/ADD-POST" as const;
 const DELETE_POST = "PROFILE/DELETE-POST" as const;
 const SET_USER_PROFILE = "PROFILE/SET-USERS-PROFILE" as const;
 const SET_STATUS = "PROFILE/SET-STATUS" as const;
 const CHANGE_MESSAGE = "PROFILE/CHANGE-MESSAGE" as const;
+const SET_PHOTO = "PROFILE/SET-PHOTO" as const;
 
-type PhotosType = {
+export type PhotosType = {
     small: string;
     large: string;
 };
@@ -57,7 +58,7 @@ let initialState: ProfilePageType = {
         { id: 5, post: "Mark, how are you?", likeCount: 6 },
         // { id: 6, post: 'Oleg, it\'s good job!!!Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.', likeCount: 0 },
     ],
-    profile: null,
+    profile: null as ProfileType | null,
     status: "",
 };
 
@@ -94,6 +95,14 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             let newPost = copyStateWithMessage.posts.find((p) => p.id === action.id);
             if (newPost) newPost.post = action.newMessage;
             return copyStateWithMessage;
+        case SET_PHOTO:
+            if (state.profile) {
+                return {
+                    ...state,
+                    profile: { ...state.profile, photos: action.photos },
+                };
+            }
+            return state;
         default:
             return state;
     }
@@ -105,13 +114,15 @@ type SetUsersProfileType = ReturnType<typeof SetUsersProfileAC>;
 type ChangeMessageType = ReturnType<typeof ChangeMessageAC>;
 type SetStatusType = ReturnType<typeof SetStatusAC>;
 type DeletePostType = ReturnType<typeof DeletePostAC>;
+type SetPhotoType = ReturnType<typeof SetPhotoAC>;
 type ActionsTypes =
     | AddPostType
     | DeletePostType
     | UpdateNewPostType
     | SetUsersProfileType
     | ChangeMessageType
-    | SetStatusType;
+    | SetStatusType
+    | SetPhotoType;
 
 export const AddPostAC = (text: string) => {
     return {
@@ -153,6 +164,13 @@ export const SetStatusAC = (status: string) => {
     } as const;
 };
 
+export const SetPhotoAC = (photos: PhotosType) => {
+    return {
+        type: SET_PHOTO,
+        photos,
+    } as const;
+};
+
 // THUNK
 
 export const getUsersProfileThunkCreator = (userId: string) => async (dispatch: Dispatch) => {
@@ -167,5 +185,11 @@ export const updateStatusProfileThunkCreator = (status: string) => async (dispat
     let data = await profileAPI.updateStatus(status);
     if (data.resultCode === 0) {
         dispatch(SetStatusAC(status));
+    }
+};
+export const savePhotoTC = (file: File) => async (dispatch: Dispatch) => {
+    let data = await profileAPI.savePhoto(file);
+    if (data.resultCode === 0) {
+        dispatch(SetPhotoAC(data.data.photos));
     }
 };
