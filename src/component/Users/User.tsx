@@ -59,11 +59,13 @@ export const User = (props: UserPropsType) => {
             {/*    )}*/}
             {/*</div>*/}
             <Card className={s.userWrap}>
-                <CardMedia
-                    sx={{ height: 180 }}
-                    image={user.photos.small != null ? user.photos.small : userPhoto}
-                    title={user.name}
-                />
+                <NavLink to={"/Profile/" + user.id}>
+                    <CardMedia
+                        sx={{ height: 180 }}
+                        image={user.photos.small != null ? user.photos.small : userPhoto}
+                        title={user.name}
+                    />
+                </NavLink>
                 <CardContent className={s.cardContent}>
                     <Typography gutterBottom variant="h5" component="div" className={s.userName}>
                         {user.name}
