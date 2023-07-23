@@ -59,6 +59,11 @@ img {
   border-radius: 50%;
   text-align: center;
 }
+.jobDesc {
+  margin-top: 20px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
 
 .wrapContacts {
   border: 1px solid black;
