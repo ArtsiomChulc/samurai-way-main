@@ -1,8 +1,5 @@
 import React, { ChangeEvent } from "react";
-import s from "component/Profile/ProfileInfo/profileInfo.module.css";
-import PhotoUserProfile from "assets/images/userPhoto/user-icon.jpg";
-import JobTruePhoto from "img/profileUser/profileInfo/job_true.png";
-import JobFalsePhoto from "img/profileUser/profileInfo/job_false.jpg";
+import s from "component/Profile/ProfileInfo/profileInfo.module.scss";
 import Contact from "component/Profile/ProfileInfo/Contact";
 import { ProfileType } from "Redux/profile-reducer";
 
@@ -10,34 +7,31 @@ type ProfileDataPropsType = {
     profile: ProfileType | null;
     onPhotoSelected: (e: ChangeEvent<HTMLInputElement>) => void;
     isOwner: boolean;
+    setEditeMode: (x: boolean) => void;
 };
 
 const ProfileData = (props: ProfileDataPropsType) => {
     const jobDescription = props.profile?.lookingForAJobDescription;
     const contacts = props.profile?.contacts ? props.profile.contacts : "";
 
+    const onChangeInfo = () => {
+        props.setEditeMode(true);
+    };
+
     return (
         <div className={s.descWrap}>
-            <div className={s.img_name}>
-                <div className={s.wrap_img}>
-                    <img
-                        src={props.profile?.photos.small ? props.profile.photos.small : PhotoUserProfile}
-                        alt="Photo User Profile"
-                    />
-                </div>
-                <p>Name: {props.profile?.fullName}</p>
+            <div className={s.myInfo}>
+                <span>Name: {props.profile?.fullName}</span>
+                <span>About Me: {props.profile?.aboutMe}</span>
+                <span>Looking for a JOB: {jobDescription}</span>
+            </div>
+            {props.isOwner && (
                 <span>
-                    <label htmlFor="file-upload" className={s.customFileUpload}></label>
-                    {props.isOwner && <input id="file-upload" type={"file"} onChange={props.onPhotoSelected} />}
+                    <button className={s.btnChangeInfo} onClick={onChangeInfo}>
+                        change information
+                    </button>
                 </span>
-            </div>
-            <div className={s.lookJob}>
-                <span>Looking for a JOB: </span>
-                <div className={s.smileJob}>
-                    <img src={props.profile?.lookingForAJob ? JobTruePhoto : JobFalsePhoto} alt="Smile" />
-                </div>
-                <div className={s.jobDesc}>{jobDescription ? jobDescription : "No job description"}</div>
-            </div>
+            )}
             <div className={s.wrapContacts}>
                 <ul>
                     {Object.keys(contacts).map((key) => {

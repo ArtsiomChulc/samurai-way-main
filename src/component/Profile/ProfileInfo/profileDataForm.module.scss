@@ -1,0 +1,21 @@
+.formBlock {
+
+  span {
+
+  }
+  input {
+    max-width: 250px;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .wrapBtn {
+    display: inline-block;
+    margin-bottom: 20px;
+    .btnSaveInfo {
+      padding: 10px 17px;
+    }
+  }
+}
+

@@ -6,31 +6,6 @@ import { UsersPropsType } from "./MyPostContainer";
 import { useFormik } from "formik";
 
 const MyPost = React.memo((props: UsersPropsType) => {
-    // const [error, setError] = useState<string | null>(null)
-
-    // const newPostElement = React.createRef<HTMLTextAreaElement>()
-
-    // const addPost = (value: MyPostType) => {
-    //     let el = value.newPostFormik
-    //     // if (newPostElement.current?.value.trim() !== '') {
-    //     //     setError('')
-    //     // } else {
-    //     //     setError('Введите текст!!!')
-    //     // }
-    //     props.addPostCB(el)
-    // }
-
-    // const onkeydownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    //     if (e.key === "Enter") {
-    //         addPost()
-    //     }
-    // }
-
-    // const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     let newText = e.currentTarget.value
-    //     props.onChangeHandlerCB(newText)
-    // }
-
     const postElement = [...props.posts.posts].reverse().map((el) => {
         // делаем имутабельно (не меняем наш state, делаем копию)
         const onChangeMessage = (newMessage: string) => {

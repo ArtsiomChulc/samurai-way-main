@@ -1,13 +1,11 @@
-import React, { ChangeEvent } from "react";
-import s from "./profileInfo.module.css";
+import React, { ChangeEvent, useState } from "react";
+import s from "component/Profile/ProfileInfo/profileInfo.module.scss";
 import { ProfileType } from "Redux/profile-reducer";
 import Preloader from "../../common/preloader/Preloader";
 import PhotoUserProfile from "../../../assets/images/userPhoto/user-icon.jpg";
-import JobTruePhoto from "../../../img/profileUser/profileInfo/job_true.png";
-import JobFalsePhoto from "../../../img/profileUser/profileInfo/job_false.jpg";
 import { ProfileStatusWithHook } from "./ProfileStatusWithHooks";
-import Contact from "component/Profile/ProfileInfo/Contact";
 import ProfileData from "component/Profile/ProfileInfo/ProfileData";
+import ProfileDataForm from "component/Profile/ProfileInfo/ProfileDataForm";
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null;
@@ -18,6 +16,8 @@ type ProfileInfoPropsType = {
 };
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
+    const [editeMode, setEditeMode] = useState(false);
+
     if (!props.profile) {
         return <Preloader />;
     }
@@ -35,7 +35,28 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             <div className={s.status}>
                 <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus} />
             </div>
-            <ProfileData profile={props.profile} onPhotoSelected={onPhotoSelected} isOwner={props.isOwner} />
+            <div className={s.img_name}>
+                <div className={s.wrap_img}>
+                    <img
+                        src={props.profile?.photos.small ? props.profile.photos.small : PhotoUserProfile}
+                        alt="Photo User Profile"
+                    />
+                </div>
+                <span>
+                    <label htmlFor="file-upload" className={s.customFileUpload}></label>
+                    {props.isOwner && <input id="file-upload" type={"file"} onChange={onPhotoSelected} />}
+                </span>
+            </div>
+            {!editeMode ? (
+                <ProfileData
+                    profile={props.profile}
+                    onPhotoSelected={onPhotoSelected}
+                    isOwner={props.isOwner}
+                    setEditeMode={setEditeMode}
+                />
+            ) : (
+                <ProfileDataForm />
+            )}
         </div>
     );
 };

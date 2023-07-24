@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import s from "./profileInfo.module.css";
+import s from "component/Profile/ProfileInfo/profileInfo.module.scss";
 import Preloader from "../../common/preloader/Preloader";
 
 type PropsType = {
