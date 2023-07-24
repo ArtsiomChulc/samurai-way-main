@@ -71,7 +71,7 @@
         position: relative;
 
         &::before {
-          content: 'OUT?';
+          content: '';
           line-height: 30px;
           text-align: center;
           color: #b5ddd4;
@@ -84,12 +84,13 @@
           top: 0;
           left: 0;
           transition: all .5s ease-in-out;
-          border-radius: 8px;
+          border-radius: 5px;
         }
 
         &:hover:before {
+          content: 'OUT?';
           width: 100%;
-          top: 100%;
+          //top: 100%;
         }
 
       }

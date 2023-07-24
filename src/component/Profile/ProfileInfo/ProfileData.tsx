@@ -14,6 +14,8 @@ type ProfileDataPropsType = {
 
 const ProfileData = (props: ProfileDataPropsType) => {
     const jobDescription = props.profile?.lookingForAJobDescription;
+    const contacts = props.profile?.contacts ? props.profile.contacts : "";
+
     return (
         <div className={s.descWrap}>
             <div className={s.img_name}>
@@ -38,7 +40,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
             </div>
             <div className={s.wrapContacts}>
                 <ul>
-                    {Object.keys(props.profile!.contacts).map((key) => {
+                    {Object.keys(contacts).map((key) => {
                         // @ts-ignore
                         return <Contact key={key} contactTitle={key} contactValue={props.profile?.contacts[key]} />;
                     })}
