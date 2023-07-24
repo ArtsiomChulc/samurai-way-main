@@ -5,7 +5,7 @@ import Preloader from "../../common/preloader/Preloader";
 import PhotoUserProfile from "../../../assets/images/userPhoto/user-icon.jpg";
 import { ProfileStatusWithHook } from "./ProfileStatusWithHooks";
 import ProfileData from "component/Profile/ProfileInfo/ProfileData";
-import ProfileDataForm from "component/Profile/ProfileInfo/ProfileDataForm";
+import ProfileDataForm, { FormikResType } from "component/Profile/ProfileInfo/ProfileDataForm";
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null;
@@ -13,6 +13,7 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void;
     isOwner: boolean;
     savePhoto: (file: File) => void;
+    saveProfile: (x: FormikResType) => void;
 };
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -55,7 +56,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     setEditeMode={setEditeMode}
                 />
             ) : (
-                <ProfileDataForm />
+                <ProfileDataForm saveProfile={props.saveProfile} setEditeMode={setEditeMode} />
             )}
         </div>
     );

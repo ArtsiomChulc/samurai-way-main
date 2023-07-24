@@ -4,6 +4,8 @@ import s from "./profile.module.css";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import { ProfileType } from "Redux/profile-reducer";
 import Preloader from "component/common/preloader/Preloader";
+import { FormikValues } from "formik";
+import { FormikResType } from "component/Profile/ProfileInfo/ProfileDataForm";
 
 const ProfileInfo = lazy(() => import("./ProfileInfo/ProfileInfo"));
 
@@ -14,6 +16,7 @@ type ProfileInfoPropsType = {
     isAuth: boolean;
     isOwner: boolean;
     savePhoto: (file: File) => void;
+    saveProfile: (x: FormikResType) => void;
 };
 
 export const Profile = (props: ProfileInfoPropsType) => {
@@ -29,6 +32,7 @@ export const Profile = (props: ProfileInfoPropsType) => {
                     updateStatus={props.updateStatus}
                     profile={props.profile}
                     savePhoto={props.savePhoto}
+                    saveProfile={props.saveProfile}
                 />
             </Suspense>
             <MyPostContainer />

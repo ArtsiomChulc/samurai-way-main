@@ -1,7 +1,7 @@
 .formBlock {
 
   span {
-
+    font-weight: bold;
   }
 
   input {
@@ -9,6 +9,35 @@
     height: 30px;
     display: inline-block;
     margin-bottom: 20px;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #1f1d1d;
+    border-radius: 2px;
+    margin-right: 8px;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  input[type="checkbox"]:checked::after {
+    content: '\2713';
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 14px;
+  }
+
+  .wrapCheckBox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 
   .wrapBtn {

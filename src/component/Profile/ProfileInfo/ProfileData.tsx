@@ -13,6 +13,7 @@ type ProfileDataPropsType = {
 
 const ProfileData = (props: ProfileDataPropsType) => {
     const jobDescription = props.profile?.lookingForAJobDescription;
+    const LookingForAJob = props.profile?.lookingForAJob;
     const contacts = props.profile?.contacts ? props.profile.contacts : "";
 
     const onChangeInfo = () => {
@@ -22,9 +23,18 @@ const ProfileData = (props: ProfileDataPropsType) => {
     return (
         <div className={s.descWrap}>
             <div className={s.myInfo}>
-                <span>Name: {props.profile?.fullName}</span>
-                <span>About Me: {props.profile?.aboutMe}</span>
-                <span>Looking for a JOB: {jobDescription}</span>
+                <span>
+                    <b>Name</b>: {props.profile?.fullName}
+                </span>
+                <span>
+                    <b>About Me</b>: {props.profile?.aboutMe}
+                </span>
+                <span>
+                    <b>Looking for a Job description</b>: {jobDescription}
+                </span>
+                <span>
+                    <b>Looking for a Job</b>: {LookingForAJob ? "Yes" : "No"}
+                </span>
             </div>
             {props.isOwner && (
                 <span>

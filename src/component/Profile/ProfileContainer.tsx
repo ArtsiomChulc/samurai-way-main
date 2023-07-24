@@ -5,6 +5,7 @@ import {
     getUsersProfileThunkCreator,
     ProfileType,
     savePhotoTC,
+    saveProfileTC,
     updateStatusProfileThunkCreator,
 } from "Redux/profile-reducer";
 import { connect } from "react-redux";
@@ -12,6 +13,7 @@ import { AppRootStateType } from "Redux/redux-store";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { getAuthId, getIsAuthSelector, getProfileReselect, getStatus } from "Redux/selectors/selectors";
+import { FormikResType } from "component/Profile/ProfileInfo/ProfileDataForm";
 
 class ProfileContainer extends React.Component<PropsType> {
     refreshProfile() {
@@ -62,6 +64,7 @@ type MapDispatchPropsType = {
     getStatusProfile: (id: string) => void;
     updateStatusProfile: (status: string) => void;
     savePhoto: (file: File) => void;
+    saveProfile: (x: FormikResType) => void;
 };
 
 type MapStatePropsType = {
@@ -88,6 +91,7 @@ export default compose<React.ComponentType>(
         getStatusProfile: getStatusProfileThunkCreator,
         updateStatusProfile: updateStatusProfileThunkCreator,
         savePhoto: savePhotoTC,
+        saveProfile: saveProfileTC,
     }),
     // withAuthRedirect,
     withRouter,

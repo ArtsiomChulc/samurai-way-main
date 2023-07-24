@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { profileAPI } from "api/api";
+import { AppRootStateType } from "Redux/redux-store";
 
 const ADD_POST = "PROFILE/ADD-POST" as const;
 const DELETE_POST = "PROFILE/DELETE-POST" as const;
@@ -193,3 +194,14 @@ export const savePhotoTC = (file: File) => async (dispatch: Dispatch) => {
         dispatch(SetPhotoAC(data.data.photos));
     }
 };
+export const saveProfileTC =
+    (profile: ProfileType) =>
+    async (dispatch: Dispatch, getState: () => AppRootStateType): Promise<any> => {
+        const userId = getState().auth.id;
+        const data = await profileAPI.saveProfile(profile);
+        if (data.resultCode === 0) {
+            // @ts-ignore
+            dispatch(getUsersProfileThunkCreator(String(userId)));
+            return Promise.resolve({});
+        }
+    };
