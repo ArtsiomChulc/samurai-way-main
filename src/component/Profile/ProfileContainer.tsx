@@ -14,7 +14,7 @@ import { compose } from "redux";
 import { getAuthId, getIsAuthSelector, getProfileReselect, getStatus } from "Redux/selectors/selectors";
 
 class ProfileContainer extends React.Component<PropsType> {
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = this.props.authorizedUserId;
@@ -24,13 +24,17 @@ class ProfileContainer extends React.Component<PropsType> {
         }
 
         this.props.getUsersProfile(userId);
-
         this.props.getStatusProfile(userId);
+    }
 
-        // profileAPI.getProfile(userId)
-        //     .then(data => {
-        //         this.props.SetUsersProfileAC(data)
-        //     })
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId != prevProps.match.params.userId) {
+            this.refreshProfile();
+        }
     }
 
     render() {

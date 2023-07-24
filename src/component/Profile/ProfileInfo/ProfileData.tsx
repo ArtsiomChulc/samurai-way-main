@@ -38,7 +38,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
             </div>
             <div className={s.wrapContacts}>
                 <ul>
-                    {Object.keys(props.profile.contacts).map((key) => {
+                    {Object.keys(props.profile!.contacts).map((key) => {
                         // @ts-ignore
                         return <Contact key={key} contactTitle={key} contactValue={props.profile?.contacts[key]} />;
                     })}
