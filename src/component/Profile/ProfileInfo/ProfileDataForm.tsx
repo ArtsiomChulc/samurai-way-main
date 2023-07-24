@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import s from "component/Profile/ProfileInfo/profileDataForm.module.scss";
+import style from "../../common/styles/btnProfile.module.scss";
 
 type ProfileDataFormPropsType = {};
 
@@ -26,7 +27,7 @@ const ProfileData = (props: ProfileDataFormPropsType) => {
             <span>Looking for a JOB: </span> <input {...formik.getFieldProps("JOB")} />
             <br />
             <span className={s.wrapBtn}>
-                <button className={s.btnSaveInfo} type={"submit"}>
+                <button className={style.btnChangeInfo} type={"submit"}>
                     Save info
                 </button>
             </span>

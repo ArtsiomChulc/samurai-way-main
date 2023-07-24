@@ -1,0 +1,21 @@
+span {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  .btnChangeInfo {
+    padding: 10px 17px;
+    border: 1px solid;
+    background-color: #bbdcec;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color .3s ease-in-out;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: #146286;
+      color: #e4f6f0;
+    }
+  }
+}

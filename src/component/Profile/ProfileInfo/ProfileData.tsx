@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import s from "component/Profile/ProfileInfo/profileInfo.module.scss";
+import style from "../../common/styles/btnProfile.module.scss";
 import Contact from "component/Profile/ProfileInfo/Contact";
 import { ProfileType } from "Redux/profile-reducer";
 
@@ -27,7 +28,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
             </div>
             {props.isOwner && (
                 <span>
-                    <button className={s.btnChangeInfo} onClick={onChangeInfo}>
+                    <button className={style.btnChangeInfo} onClick={onChangeInfo}>
                         change information
                     </button>
                 </span>
