@@ -10,12 +10,14 @@ type PropsType = {
 type StateType = {
     editMode: boolean;
     status: string;
+    error: boolean;
 };
 
 export class ProfileStatus extends React.Component<PropsType, any> {
     state: StateType = {
         editMode: false,
         status: this.props.status,
+        error: false,
     };
 
     activateEditeMode = () => {
@@ -30,9 +32,16 @@ export class ProfileStatus extends React.Component<PropsType, any> {
         this.props.updateStatus(this.state.status);
     };
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            status: e.currentTarget.value,
-        });
+        const newStatus = e.currentTarget.value;
+        if (newStatus.length < 30) {
+            this.setState({
+                status: newStatus,
+            });
+        } else {
+            this.setState({
+                error: true,
+            });
+        }
     };
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<StateType>, snapshot?: any) {
