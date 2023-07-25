@@ -92,10 +92,10 @@ export const authMeThunkCreator = () => async (dispatch: Dispatch) => {
 };
 
 export const loginTC =
-    (email: string, password: string, rememberMe: boolean) =>
+    (email: string, password: string, rememberMe: boolean, captcha: string | null) =>
     async (dispatch: ThunkDispatch<AuthPageType, any, any>) => {
         dispatch(ToggleFetchAC(true));
-        let data = await authAPI.login(email, password, rememberMe);
+        let data = await authAPI.login(email, password, rememberMe, captcha);
         dispatch(ToggleFetchAC(false));
         if (data.resultCode === 0) {
             await dispatch(authMeThunkCreator());
@@ -118,7 +118,6 @@ export const logOutTC = () => async (dispatch: Dispatch) => {
 };
 
 export const getCaptchaTC = () => async (dispatch: Dispatch) => {
-    debugger;
     const data = await authAPI.getCaptcha();
     const captchaURL = data.url;
     dispatch(GetCaptchaAC(captchaURL));

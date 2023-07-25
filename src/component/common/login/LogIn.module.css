@@ -1,7 +1,6 @@
 .container {
   position: relative;
   width: 350px;
-  height: 500px;
   margin: 50px auto;
   border-radius: 20px;
   padding: 40px;
@@ -110,8 +109,9 @@ label:nth-of-type(2) {
 }
 
 .captcha {
-  position: absolute;
-  bottom: -120px;
+  /*position: absolute;*/
+  /*bottom: -120px;*/
+  /*left: */
 
 }
 

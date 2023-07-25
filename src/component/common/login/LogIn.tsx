@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./LogIn.module.css";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, FormProps, InjectedFormProps, reduxForm } from "redux-form";
 import { Input } from "../formControls/FormControl";
 import { mailError, required } from "utils/validators/validatorsForReduxForm";
 import { connect } from "react-redux";
@@ -9,7 +9,7 @@ import { AppRootStateType } from "Redux/redux-store";
 import { Redirect } from "react-router-dom";
 
 type LogInPropsType = {
-    loginTC: (email: string, password: string, rememberMe: boolean) => void;
+    loginTC: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void;
     isAuth: boolean;
     captchaURL: string | null;
 };
@@ -23,12 +23,20 @@ type LoginFormType = {
     login: string;
     password: string;
     rememberMe: boolean;
+    captcha: string | null;
+};
+
+type CaptchaType = {
     captchaURL: string | null;
 };
 
-export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormType, CaptchaType> & CaptchaType> = ({
+    handleSubmit,
+    error,
+    captchaURL,
+}) => {
     return (
-        <form onSubmit={props.handleSubmit} className={s.inputs}>
+        <form onSubmit={handleSubmit} className={s.inputs}>
             <label>EMAIL</label>
             <Field
                 className={s.input}
@@ -51,10 +59,21 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
                 <Field className={s.checkbox} type="checkbox" name={"rememberMe"} component={Input} />
                 <span>remember me</span>
             </div>
-            {props.error && (
+            {error && (
                 <div className={s.errorWrapper}>
-                    <span className={s.errorForm}>{props.error}</span>
+                    <span className={s.errorForm}>{error}</span>
                 </div>
+            )}
+            {captchaURL && <img className={s.captcha} src={captchaURL} alt="captcha" />}
+            {captchaURL && (
+                <Field
+                    className={s.input}
+                    type="text"
+                    placeholder="Enter this captcha code!!!"
+                    name={"captcha"}
+                    component={Input}
+                    validate={[required]}
+                />
             )}
             <button className={s.button} type="submit">
                 LOGIN
@@ -63,25 +82,23 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
     );
 };
 
-const LoginReduxForm = reduxForm<LoginFormType>({
+const LoginReduxForm = reduxForm<LoginFormType, CaptchaType>({
     form: "login",
 })(LoginForm);
 
 const LogIn = (props: LogInPropsType) => {
     const onSubmit = (formData: LoginFormType) => {
-        props.loginTC(formData.login, formData.password, formData.rememberMe);
+        props.loginTC(formData.login, formData.password, formData.rememberMe, formData.captcha);
     };
 
     if (props.isAuth) {
         return <Redirect to={"/profile"} />;
     }
-    debugger;
     return (
         <div className={s.container}>
             <div className={s.brand_logo}></div>
             <h1 className={s.brand_title}>MySN</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
-            {/*{props.captchaURL && <img className={s.captcha} src={props.captchaURL} />}*/}
+            <LoginReduxForm onSubmit={onSubmit} captchaURL={props.captchaURL} />
         </div>
     );
 };

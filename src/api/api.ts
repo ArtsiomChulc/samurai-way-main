@@ -19,14 +19,13 @@ export const authAPI = {
     getAuthMe() {
         return instance.get(`auth/me`).then((response) => response.data);
     },
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance.post(`auth/login`, { email, password, rememberMe }).then((response) => response.data);
+    login(email: string, password: string, rememberMe: boolean, captcha: string | null) {
+        return instance.post(`auth/login`, { email, password, rememberMe, captcha }).then((response) => response.data);
     },
     logOut() {
         return instance.delete(`auth/login`).then((response) => response.data);
     },
     getCaptcha() {
-        debugger;
         return instance.get("security/get-captcha-url").then((response) => response.data);
     },
 };
