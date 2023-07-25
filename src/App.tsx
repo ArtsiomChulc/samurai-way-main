@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import s from "./App.module.css";
 import { Navbar } from "component/Navbar/Navbar";
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import News from "./component/News/News";
 import Music from "./component/Music/Music";
 import Dialogs from "./component/Dialogs/Dialogs";
@@ -17,6 +17,7 @@ import Preloader from "./component/common/preloader/Preloader";
 import { loginTC } from "Redux/auth-reducer";
 import DotPreloader from "component/common/dotPreloader/DotPreloader";
 import { withSuspense } from "HOC/withSuspense";
+
 const ProfileContainer = lazy(() => import("./component/Profile/ProfileContainer"));
 const UsersContainer = lazy(() => import("./component/Users/UsersContainer"));
 
@@ -40,13 +41,16 @@ class App extends React.Component<AppPropsType> {
                 <div className={s.flexWrap}>
                     <Navbar />
                     <div className={s.profile}>
-                        <Route path="/Profile/:userId?" render={withSuspense(ProfileContainer)} />
-                        <Route path="/Dialogs" render={withSuspense(Dialogs)} />
-                        <Route path="/users" render={withSuspense(UsersContainer)} />
-                        <Route path="/news" render={() => <News />} />
-                        <Route path="/music" render={() => <Music />} />
-                        <Route path="/settings" render={() => <Settings />} />
-                        <Route path="/login" render={() => <LogIn />} />
+                        <Switch>
+                            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+                            <Route path="/Profile/:userId?" render={withSuspense(ProfileContainer)} />
+                            <Route path="/Dialogs" render={withSuspense(Dialogs)} />
+                            <Route path="/users" render={withSuspense(UsersContainer)} />
+                            <Route path="/news" render={() => <News />} />
+                            <Route path="/music" render={() => <Music />} />
+                            <Route path="/settings" render={() => <Settings />} />
+                            <Route path="/login" render={() => <LogIn />} />
+                        </Switch>
                     </div>
                 </div>
             </div>
