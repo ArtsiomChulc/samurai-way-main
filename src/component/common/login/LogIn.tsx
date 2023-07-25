@@ -11,44 +11,19 @@ import { Redirect } from "react-router-dom";
 type LogInPropsType = {
     loginTC: (email: string, password: string, rememberMe: boolean) => void;
     isAuth: boolean;
+    captchaURL: string | null;
 };
 
 type MapStateToPropsType = {
     isAuth: boolean;
+    captchaURL: string | null;
 };
-
-const LogIn = (props: LogInPropsType) => {
-    const onSubmit = (formData: LoginFormType) => {
-        props.loginTC(formData.login, formData.password, formData.rememberMe);
-    };
-
-    if (props.isAuth) {
-        return <Redirect to={"/profile"} />;
-    }
-
-    return (
-        <div className={s.container}>
-            <div className={s.brand_logo}></div>
-            <h1 className={s.brand_title}>MySN</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
-        </div>
-    );
-};
-
-const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
-    return {
-        isAuth: state.auth.isAuth,
-    };
-};
-
-export default connect(mapStateToProps, {
-    loginTC,
-})(LogIn);
 
 type LoginFormType = {
     login: string;
     password: string;
     rememberMe: boolean;
+    captchaURL: string | null;
 };
 
 export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
@@ -91,3 +66,33 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
 const LoginReduxForm = reduxForm<LoginFormType>({
     form: "login",
 })(LoginForm);
+
+const LogIn = (props: LogInPropsType) => {
+    const onSubmit = (formData: LoginFormType) => {
+        props.loginTC(formData.login, formData.password, formData.rememberMe);
+    };
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"} />;
+    }
+    debugger;
+    return (
+        <div className={s.container}>
+            <div className={s.brand_logo}></div>
+            <h1 className={s.brand_title}>MySN</h1>
+            <LoginReduxForm onSubmit={onSubmit} />
+            {/*{props.captchaURL && <img className={s.captcha} src={props.captchaURL} />}*/}
+        </div>
+    );
+};
+
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
+    return {
+        isAuth: state.auth.isAuth,
+        captchaURL: state.auth.captchaURL,
+    };
+};
+
+export default connect(mapStateToProps, {
+    loginTC,
+})(LogIn);

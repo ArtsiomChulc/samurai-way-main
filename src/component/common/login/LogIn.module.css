@@ -109,6 +109,12 @@ label:nth-of-type(2) {
   padding: 10px;
 }
 
+.captcha {
+  position: absolute;
+  bottom: -120px;
+
+}
+
 /*.errorForm::before {*/
 /*    content: '';*/
 /*    position: absolute;*/

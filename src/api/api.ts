@@ -25,6 +25,10 @@ export const authAPI = {
     logOut() {
         return instance.delete(`auth/login`).then((response) => response.data);
     },
+    getCaptcha() {
+        debugger;
+        return instance.get("security/get-captcha-url").then((response) => response.data);
+    },
 };
 
 export const profileAPI = {
