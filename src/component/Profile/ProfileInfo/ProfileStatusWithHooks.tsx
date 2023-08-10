@@ -18,7 +18,6 @@ export const ProfileStatusWithHook = (props: PropsType) => {
     const activateEditeMode = () => {
         setEditeMode(true);
     };
-
     const deActivateEditeMode = () => {
         setEditeMode(false);
         props.updateStatus(status);
